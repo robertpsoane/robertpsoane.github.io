@@ -1,14 +1,19 @@
-<!-- Footer -->
+---
+layout: page
+title: Contact Me
+description: Have questions? I have answers.
+background: '/img/bg-contact.jpg'
+---
 
-<hr>
-
-<footer>
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        {% if page.url contains 'contact' %}
-        {% else %}
-        <ul class="list-inline text-center">
+    If you would like to get in touch with me, please feel free to connect
+    via any of my social links and I will endeaver to get back to you ASAP.
+    </div>
+    <div class="row">
+    <br />
+    </div>
+<ul class="list-inline text-center">
           {% if site.email %}
           <li class="list-inline-item">
             <a href="mailto:{{ site.email | encode_email }}">
@@ -70,9 +75,5 @@
           </li>
           {% endif %}
         </ul>
-        {% endif %}
-        <p class="copyright text-muted">Copyright &copy; {{ site.author }} {{ 'now' | date: "%Y" }}</p>
-      </div>
-    </div>
-  </div>
-</footer>
+
+</div>
