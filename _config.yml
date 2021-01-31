@@ -29,7 +29,7 @@ linkedin_username: robert-soane
 github_username:  robertpsoane
 
 # Build settings
-theme: minima
+theme: jekyll-theme-clean-blog
 plugins:
   - jekyll-feed
 
