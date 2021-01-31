@@ -28,8 +28,6 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 linkedin_username: robert-soane
 github_username:  robertpsoane
 
-# Add your google-analytics ID here to activate google analytics
-google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
 
 # Build settings
 markdown:           kramdown
