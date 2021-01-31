@@ -1,10 +1,10 @@
 ---
 layout: project
-title: "Project Title Here!"
-subtitle: "Subtitle here"
-author: "Robert"
-date: 2020-01-26 23:45:13 -0000 # Date and time
-background: '/img/posts/01.jpg' # Image for header
+title: "Sample Project"
+subtitle: "Sample" # This forms the basis of a description of the project
+date: 2021-01-31 13:14:13 -0000
+
+project-img: '/img/default-background.png'
 ---
 
 <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>

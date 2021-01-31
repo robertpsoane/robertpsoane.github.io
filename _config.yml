@@ -20,6 +20,7 @@
 
 title: Robert Soane
 email: rpsoane@gmail.com
+author: Robert
 description: >- # this means to ignore newlines until "baseurl:"
   I'm a postgraduate student at the University of Nottingham, currently 
   studying for an MSc in Computer Science.  I graduated with a BSc (Hons)
@@ -27,17 +28,28 @@ description: >- # this means to ignore newlines until "baseurl:"
   methods and applied maths.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+default-background: '/img/default-background.png'
+
 linkedin_username: robert-soane
 github_username:  robertpsoane
 
 
 # Build settings
 markdown:           kramdown
-# paginate:           5
-# paginate_path:      "/posts/page:num/"
+paginate_multiple:
+  - paginate:           5
+    paginate_path: "/posts/page:num/"
+    sub_dir: "posts"
+  - paginate:           5
+    paginate_path: "/projects/page:num/"
+    sub_dir: "projects"
+  - paginate:           5
+    paginate_path: "/page:num/"
+    sub_dir: "projects"
 plugins:
   - jekyll-feed
   - jekyll-paginate
+  - jekyll-paginate-multiple
   - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
 
 

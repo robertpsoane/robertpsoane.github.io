@@ -4,24 +4,30 @@ title: Projects
 background: '/img/bg-post.jpg'
 ---
 
-{% for post in paginator.projects %}
-
+{% for post in paginator.posts %}
+        
 <article class="post-preview">
   <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-    <h2 class="post-title">{{ post.title }}</h2>
-    {% if post.subtitle %}
-    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-    {% else %}
-    <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+    {% if post.project-img %}
+    <img src="{{ post.project-img | prepend: site.baseurl | replace: '//', '/' }}" style="display: block; margin-left: auto; margin-right: auto; width: 75%;">
+    
     {% endif %}
+    <h2 class="post-title">{{ post.title }}</h2>
   </a>
+    {% if post.subtitle %}
+    <p style="margin-top: 15px;margin-bottom: 10px;"><em>{{ post.subtitle }}</em></p>
+    {% else %}
+    <p style="margin-top: 15px;margin-bottom: 10px;"><em>{{ post.excerpt | strip_html | truncatewords: 15 }}</em></p>
+    {% endif %}
+  
   <p class="post-meta">Posted by
     {% if post.author %}
     {{ post.author }}
     {% else %}
     {{ site.author }}
     {% endif %}
-    on {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}
+    on
+    {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}            
   </p>
 </article>
 
