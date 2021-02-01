@@ -8,7 +8,7 @@ background: '/img/bg-contact.jpg'
 <div class="container">
     <div class="row">
     If you would like to get in touch with me, please feel free to connect
-    via any of my social links and I will endeaver to get back to you ASAP.
+    via any of my social links and I will endeavor to get back to you ASAP.
     </div>
     <div class="row">
     <br />
