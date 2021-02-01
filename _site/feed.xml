@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-02-01T18:08:39+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robert Soane</title><subtitle>I'm a postgraduate student at the University of Nottingham, currently  studying for an MSc in Computer Science.  I graduated with a BSc (Hons) in Mathematics in 2020, having spent three years studying numerical  methods and applied maths.</subtitle><author><name>Robert</name></author><entry><title type="html">Site Under Construction</title><link href="http://localhost:4000/2021/01/31/construction.html" rel="alternate" type="text/html" title="Site Under Construction" /><published>2021-01-31T13:14:13+00:00</published><updated>2021-01-31T13:14:13+00:00</updated><id>http://localhost:4000/2021/01/31/construction</id><content type="html" xml:base="http://localhost:4000/2021/01/31/construction.html">&lt;h1 id=&quot;welcome&quot;&gt;Welcome&lt;/h1&gt;
+&lt;p&gt;Welcome to my new website. This site is currently under construction.
+For the time being, please see robertsoane.me&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">Welcome Welcome to my new website. This site is currently under construction. For the time being, please see robertsoane.me</summary></entry><entry><title type="html">Pyfighter</title><link href="http://localhost:4000/2020/12/18/Pyfighter.html" rel="alternate" type="text/html" title="Pyfighter" /><published>2020-12-18T13:14:13+00:00</published><updated>2020-12-18T13:14:13+00:00</updated><id>http://localhost:4000/2020/12/18/Pyfighter</id><content type="html" xml:base="http://localhost:4000/2020/12/18/Pyfighter.html">&lt;p&gt;&lt;em&gt;A long time ago in a galaxy far, far away there existed in person tuition.  But in the year 2020, COVID struck.  All semester modules have been 100% online and you haven’t seen your professors.  So do they exist?  Are they just a figment of your imagination?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;To cut costs, the university created AI professors to deliver your lectures and set your coursework.  Exam season approaches and the evil Darth Virus has hacked your professors, multiplying them and making your exams harder.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Only you can save your degree…&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;center&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/cAWdl9GXIeg&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/center&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;the-game&quot;&gt;The Game&lt;/h2&gt;
+&lt;p&gt;Pyfighter is an 8-bit side scrolling, infinite level platform game, produced in python using PyGame as part on an MSc by R. Soane, R. Danevicius, and S. Mistry.  Inspired by super street fighter, super smash bros and Mario, they created a customisable and addictive game that gets progressively harder.  Pyfighter was &lt;a src=&quot;https://github.com/robertpsoane/py-fighter/blob/master/runner_up_certificate.pdf&quot;&gt;ranked second of all games&lt;/a&gt; submitted and graded &lt;em&gt;distinction&lt;/em&gt; - 89%.&lt;/p&gt;
+
+&lt;h4 id=&quot;main-menu&quot;&gt;Main Menu&lt;/h4&gt;
+&lt;p&gt;On loading the game, you are met with the main menu.  The play button will lead you to an intro cutscene followed by the game, while settings opens the settings menu.  You can quit game from here, and the about button leads to this web page.&lt;/p&gt;
+&lt;h4 id=&quot;gameplay&quot;&gt;Gameplay&lt;/h4&gt;
+&lt;p&gt;Gameplay is relatively simple, use the WASD keys to move your character and the space bar to attack. When all the characters in the level have been defeated a message will appear that the level is complete, and press e to move to the next level.&lt;/p&gt;
+
+&lt;p&gt;The game can be paused by pressing the escape key at any time, which will load the pause menu. From here you can continue gameplay, quit game or quit to main menu.&lt;/p&gt;
+
+&lt;p&gt;The score is calculated based on number of health points taken by the character, vs number of health points the character takes. Each point the character takes equates to 1 point, and every 5 health points the character loses loses them 1 point.&lt;/p&gt;
+
+&lt;h4 id=&quot;settings&quot;&gt;Settings&lt;/h4&gt;
+
+&lt;p&gt;In the settings menu you can change the key bindings to your preferred set.  To do this simply press the change button next to the corresponding action.  The action text will highlight in red.  Press the key on your keyboard that you would like to set the action to and the binding will be updated.  To change the background track, simply press the music button at the bottom and it will iterate through the available tracks.  To return to the default settings, press the reset button.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;The source code be downloaded free of charge from &lt;a href=&quot;http://download.pyfighter.xyz&quot;&gt;download.pyfighter.xyz&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The windows installer can be found &lt;a href=&quot;https://github.com/robertpsoane/py-fighter/releases/download/v1.0.0/pyfighter_installer.exe&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;installation-and-requirements&quot;&gt;Installation and Requirements&lt;/h2&gt;
+&lt;p&gt;To play Pyfighter you need the following installations on your system&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Python 3, with version &amp;gt;= 3.8.5&lt;/li&gt;
+  &lt;li&gt;PyGame version &amp;gt;= 2.0.0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;windows&quot;&gt;Windows&lt;/h4&gt;
+&lt;p&gt;Download python from the downloads page of the python website.&lt;/p&gt;
+
+&lt;p&gt;To install pygame (required to play the game), run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip install pygame&lt;/code&gt; from the command line. This will install the latest version of pygame.&lt;/p&gt;
+
+&lt;p&gt;If you already have an older version of pygame installed on your computer you will need to upgrade it to play.  To do this, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip install pygame==2.0.0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The game can then be run by running pyfighter.py from the projects root directory, or by double clicking the pyfighter.py icon from within Windows explorer.&lt;/p&gt;
+
+&lt;h4 id=&quot;linux&quot;&gt;Linux&lt;/h4&gt;
+&lt;p&gt;Pyfighter has been tested on Ubuntu 20.04, but should run on other flavours of linux.&lt;/p&gt;
+
+&lt;p&gt;Ensure python3 is installed on your system, if it is not installed, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt-get install python3&lt;/code&gt;, or use your favourite package manager.&lt;/p&gt;
+
+&lt;p&gt;To install pygame, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip3 install pygame&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To give execute permissions, make sure to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chmod +x pyfighter.py&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python3 pyfighter.py&lt;/code&gt; from the projects root directory.&lt;/p&gt;
+
+&lt;h4 id=&quot;mac-os&quot;&gt;Mac OS&lt;/h4&gt;
+&lt;p&gt;We have been unable to test this project on Mac OS, however as it has been tested on various flavours of Linux we see no reason why it should fail on a mac.
+Ensure python3 and pygame 2 are installed.&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">A long time ago in a galaxy far, far away there existed in person tuition. But in the year 2020, COVID struck. All semester modules have been 100% online and you haven’t seen your professors. So do they exist? Are they just a figment of your imagination?</summary></entry></feed>
