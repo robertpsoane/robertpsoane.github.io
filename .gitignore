@@ -1,6 +1,14 @@
-_site
-.sass-cache
-node_modules
+# Global
+*.DS_Store
+Desktop.ini
+Thumbs.db
+
+# Project
+!.keep
+*.sass-cache
+/_assets/yarn/
+/_site/
+/.jekyll-cache/
 Gemfile.lock
-*.gem
-.jekyll-cache
+yarn.lock
+.sass-cache
