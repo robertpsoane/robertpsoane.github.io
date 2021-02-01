@@ -1,6 +1,6 @@
 body { font-size: 20px; color: #212529; font-family: 'Lora', 'Times New Roman', serif; }
 
-p { line-height: 1.5; margin: 30px 0; }
+p { line-height: 1.5; margin: 30px 0; text-align: justify; }
 
 p a { text-decoration: underline; }
 
@@ -27,6 +27,16 @@ blockquote { font-style: italic; color: #868e96; }
 img::selection { color: #fff; background: transparent; }
 
 img::-moz-selection { color: #fff; background: transparent; }
+
+.home-grid-container { display: grid; align-items: center; grid-template-columns: 2fr 1fr; gap: 0px 0px; grid-template-areas: "Title Picture" "txt Picture"; }
+
+.profile-grid-container { display: grid; align-items: center; grid-template-columns: 1fr 2fr; gap: 0px 0px; grid-template-areas: "Picture Title" "txt txt"; }
+
+.Title { grid-area: Title; padding: 10px; }
+
+.Picture { grid-area: Picture; }
+
+.Text { grid-area: txt; padding: 10px; margin-right: 10px; }
 
 #mainNav { position: absolute; border-bottom: 1px solid #e9ecef; background-color: white; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 

@@ -9,7 +9,7 @@ background: '/img/bg-post.jpg'
 <article class="post-preview">
   <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
     {% if post.project-img %}
-    <img src="{{ post.project-img | prepend: site.baseurl | replace: '//', '/' }}" style="display: block; margin-left: auto; margin-right: auto; width: 75%;">
+    <img src="{{ post.project-img | prepend: site.baseurl | replace: '//', '/' }}" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
     
     {% endif %}
     <h2 class="post-title">{{ post.title }}</h2>
@@ -42,11 +42,11 @@ background: '/img/bg-post.jpg'
 
   {% if paginator.previous_page %}
   <a class="btn btn-primary float-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr;
-    Newer<span class="d-none d-md-inline"> Posts</span></a>
+    Newer<span class="d-none d-md-inline"> Projects</span></a>
   {% endif %}
 
   {% if paginator.next_page %}
-  <a class="btn btn-primary float-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older<span class="d-none d-md-inline"> Posts</span> &rarr;</a>
+  <a class="btn btn-primary float-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older<span class="d-none d-md-inline"> Projects</span> &rarr;</a>
   {% endif %}
 
 </div>

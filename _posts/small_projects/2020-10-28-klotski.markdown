@@ -1,0 +1,15 @@
+---
+layout: project
+title: "Klotksi Problem"
+subtitle: "A recursive solution to the Klotski problem written in python. Searches all possible moves (which don't result in a repeat) and finds a solution to the problem. Takes approx 2:40 to find first solution on my pc." # This forms the basis of a description of the project
+date: 2020-10-28 13:14:13 -0000
+
+githuburl: "https://github.com/robertpsoane/hangman-cli"
+
+#project-img: '/img/projects/hangman/hangman.png'
+---
+As part of my Masters degree I implemented a breadth first search algorithm to solve the Klotski problem.  The <a href="https://www.schoolarchimedes.com/klotski">Klotski</a> problem is a problem where you are given a 5x4 grid, with 4 types of piece.  The aim of the puzzle is to remove the one large centre-piece from the board, while removing no others.  An example of this puzzle can be found here.
+
+My solution uses a recursive search to find all possible moves for any given board.  It implements each move, then searches for any further moves for each new board.  This continues until a solution is found.
+
+To find the solution in this way, we need to make 116 individual moves, and analyse 23,118 distinct board layouts. It takes my PC approximately 2.5 minutes to run.

@@ -1,0 +1,12 @@
+---
+layout: project
+title: "Hangman"
+subtitle: "A CLI based Hangman game in Python.  Contains a library of over 90,000 words.  Used as an opportunity to learn Git." # This forms the basis of a description of the project
+date: 2020-09-14 13:14:13 -0000
+
+githuburl: "https://github.com/robertpsoane/hangman-cli"
+
+project-img: '/img/projects/hangman/hangman.png'
+---
+
+I built this game as a quick project for fun.  It is a CLI based Hangman game.  It has a large library of over 90,000 words to chose from (random words assigned each time) along with two difficulty settings.  I coded this in about a day, using it as an opportunity to learn more about Git.

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-01T19:07:16+00:00</updated><id>/feed.xml</id><title type="html">Robert Soane</title><subtitle>I'm a postgraduate student at the University of Nottingham, currently  studying for an MSc in Computer Science.  I graduated with a BSc (Hons) in Mathematics in 2020, having spent three years studying numerical  methods and applied maths.</subtitle><author><name>Robert</name></author><entry><title type="html">Pyfighter</title><link href="/2020/12/18/Pyfighter.html" rel="alternate" type="text/html" title="Pyfighter" /><published>2020-12-18T13:14:13+00:00</published><updated>2020-12-18T13:14:13+00:00</updated><id>/2020/12/18/Pyfighter</id><content type="html" xml:base="/2020/12/18/Pyfighter.html">&lt;p&gt;&lt;em&gt;A long time ago in a galaxy far, far away there existed in person tuition.  But in the year 2020, COVID struck.  All semester modules have been 100% online and you haven’t seen your professors.  So do they exist?  Are they just a figment of your imagination?&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-01T22:16:35+00:00</updated><id>/feed.xml</id><title type="html">Robert Soane</title><subtitle>I'm a postgraduate student at the University of Nottingham, currently  studying for an MSc in Computer Science.  I graduated with a BSc (Hons) in Mathematics in 2020, having spent three years studying numerical  methods and applied maths.</subtitle><author><name>Robert</name></author><entry><title type="html">Pyfighter</title><link href="/2020/12/18/Pyfighter.html" rel="alternate" type="text/html" title="Pyfighter" /><published>2020-12-18T13:14:13+00:00</published><updated>2020-12-18T13:14:13+00:00</updated><id>/2020/12/18/Pyfighter</id><content type="html" xml:base="/2020/12/18/Pyfighter.html">&lt;p&gt;&lt;em&gt;A long time ago in a galaxy far, far away there existed in person tuition.  But in the year 2020, COVID struck.  All semester modules have been 100% online and you haven’t seen your professors.  So do they exist?  Are they just a figment of your imagination?&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;To cut costs, the university created AI professors to deliver your lectures and set your coursework.  Exam season approaches and the evil Darth Virus has hacked your professors, multiplying them and making your exams harder.&lt;/em&gt;&lt;/p&gt;
 
@@ -63,4 +63,642 @@
 
 &lt;h4 id=&quot;mac-os&quot;&gt;Mac OS&lt;/h4&gt;
 &lt;p&gt;We have been unable to test this project on Mac OS, however as it has been tested on various flavours of Linux we see no reason why it should fail on a mac.
-Ensure python3 and pygame 2 are installed.&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">A long time ago in a galaxy far, far away there existed in person tuition. But in the year 2020, COVID struck. All semester modules have been 100% online and you haven’t seen your professors. So do they exist? Are they just a figment of your imagination?</summary></entry></feed>
+Ensure python3 and pygame 2 are installed.&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">A long time ago in a galaxy far, far away there existed in person tuition. But in the year 2020, COVID struck. All semester modules have been 100% online and you haven’t seen your professors. So do they exist? Are they just a figment of your imagination?</summary></entry><entry><title type="html">Othello (GUI)</title><link href="/2020/12/02/Othello_gui.html" rel="alternate" type="text/html" title="Othello (GUI)" /><published>2020-12-02T13:14:13+00:00</published><updated>2020-12-02T13:14:13+00:00</updated><id>/2020/12/02/Othello_gui</id><content type="html" xml:base="/2020/12/02/Othello_gui.html">&lt;p&gt;This side project was to produce a fully functional GUI Othello engine. This was initially set as a challenge during an MSc tutorial to produce an Othello engine using minimax. I built a working engine (initially in the command line) and have since produced a GUI for it.&lt;/p&gt;
+
+&lt;p&gt;When I redesigned it using a GUI, I decided to attempt to implement MVC, as a way of learning MVC. This could also make it easier to further extend the game in future.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-play&quot;&gt;How To Play&lt;/h2&gt;
+&lt;p&gt;The aim and of the game is simple - to have the most discs of your colour on the board at the end of the game.
+The rules are also relatively simple.  On your turn you can play one disc on any square which is adjacent to an opponents disc, providing it is possible to ‘draw a straight line’ between your disc, and another of your discs, with all squares inbetween the two discs of your colour occupied by your opponents colour.&lt;/p&gt;
+
+&lt;h3 id=&quot;tactics&quot;&gt;Tactics&lt;/h3&gt;
+&lt;p&gt;While this sounds relatively simple, there are some general strategy points worth considering:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The corners are the strongest positions, as they cannot be taken.  If you can place a piece on a corner, do so.&lt;/li&gt;
+  &lt;li&gt;The next strongest positions are the squares along the edges.&lt;/li&gt;
+  &lt;li&gt;Avoid placing any pieces one step in from a corner if you can help it, as this often makes it easier for your opponents to claim the corner&lt;/li&gt;
+  &lt;li&gt;Try to minimise the number of moves your opponent can make, while maximising the number of moves you can make.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;game-modes&quot;&gt;Game Modes&lt;/h3&gt;
+&lt;p&gt;This game comes with 3 game modes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Play as Black: Play as black against the computer playing as white&lt;/li&gt;
+  &lt;li&gt;Play as White: Play as white against the computer playing as black&lt;/li&gt;
+  &lt;li&gt;Play PvP: Two players playing at the same board at the same computer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-engine&quot;&gt;The engine&lt;/h2&gt;
+&lt;p&gt;The engine is playing using a minimax strategy (currently set at depth 5).
+It attempts to follow the tactics listed above.  It does this by minimising future moves for its opponent, while maximising them for itself, then applying a points-based grading strategy to the board for each leaf of the tree.
+The grading strategy is as follows:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[   [10, -2, 2, 2, 2, 2, -2, 10],
+    [-2, -2, 1, 1, 1, 1, 1, -2],
+    [2, 1, 1, 1, 1, 1, 1, 2],
+    [2, 1, 1, 1, 1, 1, 1, 2],
+    [2, 1, 1, 1, 1, 1, 1, 2],
+    [2, 1, 1, 1, 1, 1, 1, 2],
+    [-2, -2, 1, 1, 1, 1, -2, -2],
+    [10, -2, 2, 2, 2, 2, -2, 10]]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The points are centered around 0, with a positive score meaning the engine has
+the advantage, and a negative score meaning the player has an advantage.&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">This side project was to produce a fully functional GUI Othello engine. This was initially set as a challenge during an MSc tutorial to produce an Othello engine using minimax. I built a working engine (initially in the command line) and have since produced a GUI for it.</summary></entry><entry><title type="html">A Brief History of Encryption</title><link href="/2020/10/29/cyber_report.html" rel="alternate" type="text/html" title="A Brief History of Encryption" /><published>2020-10-29T13:14:13+00:00</published><updated>2020-10-29T13:14:13+00:00</updated><id>/2020/10/29/cyber_report</id><content type="html" xml:base="/2020/10/29/cyber_report.html">&lt;p&gt;As an assignment for one of my MSc modules I had to produce a report on cyber security. I chose to focus on encryption methods.
+This is the report I produced. It was graded &lt;em&gt;distinction&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+&lt;p&gt;Throughout history there have been necessities for people to send sensitive data, be that battle plans on a
+road, or their credit card number online. In many instances the users do not want a third party to intercept 
+the data they are sending. This is where encryption comes in.&lt;/p&gt;
+
+&lt;p&gt;As it happens, there are records of encryption and
+concealed secret messages being sent long before the
+existance of internets and computers. These date as
+far back as 1900 B.C., when early civilisations would
+conceal messages pictorially [1], or by use of a scytale.
+Also used was a class of cipher still discussed today -
+the Substitution cipher.
+This report discusses a few of the various uses of
+encryption throughout history, how the method works,
+and how it can be broken.
+In section 2 we discuss prehistoric encryption, which
+although no longer useful to secure information still
+provide a good introduction to encryption. This is
+followed by a discussion of the Enigma device used
+by the Germans in the 1930’s and 1940’s in section 3.
+We delve into how it works, and how it was cracked.
+Finally in section 4 we discuss modern day encryption
+methods, how they work, and their vulnerabilities.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-pre-historic-networks&quot;&gt;2. Pre-Historic Networks&lt;/h2&gt;
+&lt;p&gt;Suppose a Roman General wished to invade a city. His
+regiment is approaching from the north, while another
+is approaching from the south. Suppose also that he
+was required to make a last minute change to his battle
+plan. &lt;em&gt;How should he alert the other regiment of the new
+plan?&lt;/em&gt;. If he sent a messgenger with the now plans how
+would he ensure that if his messenger was captured the
+plans wouldn’t fall into enemy hands? He would need
+a way to encrypt the information such that only he and
+the other regiment can understand what is written.&lt;/p&gt;
+
+&lt;p&gt;While this may seem irrelevant to 21st computer
+networks and vulnerabilities, it forms one of the earliest
+examples of encryption (and potentially unwanted
+decryption). This scenario could also model a simple
+computer network. The General and his regiments can
+be modelled as two communicating hosts, his battle
+plans some sensitive information, and his messenger
+on the open road, the signal on a wire. As such, it forms
+a useful starting point for a discussion on encryption.&lt;/p&gt;
+
+&lt;h3 id=&quot;21-the-scytale&quot;&gt;2.1. The Scytale&lt;/h3&gt;
+&lt;p&gt;The scytale is a cipher often attributed to the Ancient
+Greeks [2]. It is a cylindrical rod around which paper
+was wrapped before writing across multiple folds of
+paper [3].&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/projects/cyber_report/scytale.jpg&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 75%;&quot; /&gt;
+&lt;span class=&quot;caption text-muted&quot;&gt;&lt;b&gt;Figure 1:&lt;/b&gt; A Scytale [4]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;This would transpose the message on the paper such
+that it could only be read if wrapped around a rod of
+the same diameter.&lt;/p&gt;
+
+&lt;p&gt;While easy to encode a message in this way, it is not
+particularly secure. A third party can see by the nature
+of the medium used (a long strip of paper) how the
+message was encoded, and by trial and error decrypt
+the message.&lt;/p&gt;
+
+&lt;h3 id=&quot;22-substitution-ciphers&quot;&gt;2.2. Substitution Ciphers&lt;/h3&gt;
+&lt;p&gt;According to Merriam-Webster, a substitution cipher
+is ‘a cipher in which the letters of the plaintext are
+systematically replaced by substitute letters’ [5]. These
+substitute letters are generally referred to as ciphertext.
+A prominent example of a substitution cipher is the
+Caesar cipher. This cipher was allegedly used by Julius
+Caesar to encode sensitive military information [6],
+hence its name.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/projects/cyber_report/caesar.jpg&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 75%;&quot; /&gt;
+&lt;span class=&quot;caption text-muted&quot;&gt;&lt;b&gt;Figure 2:&lt;/b&gt; A Caesar Cipher with &lt;em&gt;key = 2&lt;/em&gt;, based on Figure 1
+from Three-Pass Protocol Implementation in Caesar
+Cipher Classic Cryptography [7]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;As shown in figure 2, a Caesar cipher works by shifting
+ each letter k spaces in the alphabet. This produces
+a mapping which could easily and methodically be
+applied to the message, the outcome looking like a
+jumbled string of text. The number of characters by
+which the message has been shifted is referred to as
+the ‘key’. Any recipient of the message, could easily
+reverse the mapping by that number of spaces.&lt;/p&gt;
+
+&lt;p&gt;A result of its relative simplicity, is that the Caesar cipher
+ is relatively simple to crack, and certainly isn’t sophisticated
+  enough for modern day needs. As the cipher
+is cyclical, there are only 25 possible keys. An obvious
+and simple brute force method would be to attempt a
+decryption using each key k = 1, k = 2, …k = 25 and
+select whichever solution seems most realistic given
+the circumstances. Any moderm computer could crack
+this quite quickly.&lt;/p&gt;
+
+&lt;p&gt;Simple knowledge of the given language, can speed
+up this significantly, for example if we wished to decode
+the following ‘K co vjg dguv fwem’, and we know that
+‘I’ and ‘a’ are the most likely one letter words in English,
+we could guess the key is probably +2 or +102
+If we
+guessed +10, and decrypted using −10, we would get
+‘A se lzw twkl vmuc’, which is nonsense, however if
+we decrypted using −2, we would get ‘I am the best
+duck’. With one assumption, we have decrypted this
+message in two attempts.&lt;/p&gt;
+
+&lt;p&gt;Any data encrypted with this method is relatively
+easy to crack manually. With a computer, we would be
+able to crack it in seconds. In section 3, a more complex
+encryption method (with significant consequences) is
+discussed.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-the-enigma-and-the-bombe&quot;&gt;3. The Enigma and The Bombe&lt;/h2&gt;
+&lt;p&gt;In the Second World War, similar to our Roman exam-
+ple in section 2, the Germans were required to send&lt;/p&gt;
+
+&lt;p&gt;information across long distances, however they didn’t
+use messengers, they used telegraph. Telegraph is a
+form of communcation developed in the mid 1800’s by
+Samuel Morse which relies on sending long and short
+pulses in morse code [8]. Due to the unencrypted
+nature of a telegraph signal, its use for transmitting
+sensitive military information was only viable if there
+was a way of reliably encrypting the data being sent,
+and transmitting. As discussed in section 3.1, this is
+exactly what the Germans did.&lt;/p&gt;
+
+&lt;h3 id=&quot;31-the-working-of-the-enigma&quot;&gt;3.1. The Working of The Enigma&lt;/h3&gt;
+&lt;p&gt;The Enigma machine was invented in 1919 by Hugo
+Koch [9], and adopted by the German armed forces
+to encode all messages before transmitting them. The
+Germans believed this system to be unbreakable, and
+that any Enigma-encrypted messages couldn’t be read
+others.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/projects/cyber_report/enigma.jpg&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 75%;&quot; /&gt;
+&lt;span class=&quot;caption text-muted&quot;&gt;&lt;b&gt;Figure 3:&lt;/b&gt;A labelled photograph of an Enigma machine [10]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The enigma machine has four main parts. The keyboard,
+ lampboard, plugboard, and the rotors (labelled
+in figure 3). The working of an Enigma is simple. When
+you press a button on the keyboard, a light on the
+lampboard for a different letter is illuminated. One
+would type the message they wished to encode into the
+keyboard, recording each letter in the process. These
+encrypted letters could then be transmitted by telegraph.&lt;/p&gt;
+
+&lt;p&gt;Despite the device’s foreboding reputation, the inner
+workings of the Enigma machine is relatively simple.
+Each time a letter button is pressed, a signal travels
+through the plugboard (a board where all letters in the
+alphabet are paired with one other) transforming it to a
+second letter, through the rotors where it is scrambled
+to a third letter, back through that letters wire on the
+plugboard where it is transformed to a fourth letter,
+which then lights up. To complicate matters further,
+each time a letter is pressed, the rotors increment one
+step - if you press a letter multiple times in a row, you
+would get different outputs each time (for this reason
+the code couldn’t be broken as in section 2.2) [11]. The
+recipient could input the coded output into a machine
+set up the same (and operating in reverse) and they
+would be able to read the message.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/projects/cyber_report/RSA.jpg&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 75%;&quot; /&gt;
+&lt;span class=&quot;caption text-muted&quot;&gt;&lt;b&gt;Figure 4:&lt;/b&gt;A diagram showing how the electrical signal travels
+in an Enigma machine based on image on Crypto
+Museum [12]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;To crack this code, and read messages being transmitted by the German military, all the Allies needed
+was to guess the set-up of the machine. However there
+were a few problems:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;There were approximately 150∗10&lt;sup&gt;12&lt;/sup&gt; possible com-
+binations&lt;/li&gt;
+  &lt;li&gt;The Germans changed the setup on a daily basis&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Simply guessing the starting position of the enigma
+was not a reliable method of cracking the code. A
+systematic approach was needed.&lt;/p&gt;
+
+&lt;h3 id=&quot;32-the-bombe&quot;&gt;3.2. The Bombe&lt;/h3&gt;
+&lt;p&gt;While impractical to crack manually by brute force, the
+enigma had 2 significant vulnerabilities which were
+exploited by British and Polish codebreakers:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;No letter ever mapped to itself&lt;/li&gt;
+  &lt;li&gt;Messages sent by the Germans frequently included
+standard strings of text, (such as greetings and
+weather reports)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These two vulnerabilities could be used in tandem
+to systematically crack the code. By positioning the
+standard string such that no letter mapped to itself, the
+codebreakers could take the known string, compared
+with the intercepted string to find a possible position
+for the weather report within the ciphertext [13].&lt;/p&gt;
+
+&lt;p&gt;Given their initial mapping, they could choose an
+ansatz for the rotors, and proceed to systematically
+work through the permeatations of the plugboard and
+rotors until they have cracked the code. This process is
+explained very well in the Numberphile YouTube video
+Flaw in the Enigma Code.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/V4V2bpZlqx8&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;This method would still be impractical to complete
+every day in time to decrypt all intercepted telegraphs.
+To break the code on a daily basis, Alan Turing built
+a machine which used electrical current to simulate
+each possible setup permeatation of the plugboard and
+drums which would act as rotors on the enigma [14].
+In the internet age, encryption messages such as
+the Enigma in this section, and the caesar cipher from
+the previous section are unsuitable to send information
+ securely. Section 4 discusses internet age uses of
+encryption, and its vulnerabilities and controversies.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-internet-age-encryption&quot;&gt;4. Internet Age Encryption&lt;/h2&gt;
+&lt;p&gt;So far, we have discussed critical uses of encryption
+in the past, and the significant effects vulnerabilities
+have had. This section focuses on modern day uses of
+encryption on the internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;41-why-encrypt&quot;&gt;4.1. Why Encrypt?&lt;/h3&gt;
+&lt;p&gt;The following two scenarios present examples of how
+unencrypted data can introduce severe vulnerabilities
+in systems, leaving systems open to attack.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Suppose an online shopper wishes to make a purchase.
+They input their debit card details into a
+form, and click pay. Their details are sent across
+the internet to the shop. Suppose someone was
+listening, and could read the message being sent
+from the shopper to the shop. They would then
+have the customers details, and be able to steal
+the customers money.&lt;/li&gt;
+  &lt;li&gt;Suppose an email account provider stores all their
+users passwords in plaintext. Suppose an SQL
+injection attack is carried out revealing all user
+details on the database. The attacker would then
+have access to all usernames and passwords in the
+database. They would be able to log in to any users
+email address, and access their personal details.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Both of these scenarios could be avoided if the
+providers had encrypted the data they were using.&lt;/p&gt;
+
+&lt;h3 id=&quot;42-advanced-encryption-standard&quot;&gt;4.2. Advanced Encryption Standard&lt;/h3&gt;
+&lt;p&gt;The Advanced Encryption Standard (AES) has been
+the standard algorithm for encrypting data in the US
+since 2001 [16]. The AES algorithm uses a 128, 192,
+or 256 bit key to encrypt 128-bit blocks of text prior to
+sending them. The AES algorithm is an extremely fast
+algorithm for a computer to carry out, and would take
+an average of 100 trillion years to crack by brute force
+[17].&lt;/p&gt;
+
+&lt;p&gt;The AES algorithm works by splitting a 128-bit (16
+byte) message into a 4x4 matrix. This undergoes several
+rounds of substitution and permeatation operations,
+between which parts of the key are added to the
+the matrix. The reciever knows the key, and reverses
+the algorithm on each block of data [18].&lt;/p&gt;
+
+&lt;p&gt;While the algorithm is extremely secure, and cannot
+be cracked by brute force, it has one major flaw. It is
+symmetric. This means that both the sender and the
+receiver need to know the same key. For a shopper to
+encrypt their bank details, they would need a way of
+getting the key from the online shop. Again, if someone
+were listening and intercepted the key, they would have
+access to the data being sent. The customers bank
+details would no longer be secure. So how can we
+solve this problem? We need an asymmetric encryption
+method.&lt;/p&gt;
+
+&lt;h3 id=&quot;43-rivest-shamir-alderman&quot;&gt;4.3. Rivest-Shamir-Alderman&lt;/h3&gt;
+&lt;p&gt;The Rivest-Shamir-Alderman (RSA) algorithm is one of
+the oldest and most well-known encryption algorithms.
+It was released in 1977 by Ron Rivest, Adi Shamir and
+Leonard Adleman [19]. The advantage of RSA of AES is
+that RSA is an asymmetric method of encryption. That
+is, data can be encrypted by one party, and decrypted
+by the other without them both knowing the key. While
+this sounds somewhat like magic or telepathy, the algorithm
+ is in fact underpinned by number theory. In a
+process which will be explained in section 4.3.1, two
+keys are generated, a public, and a private key. The
+public key is shared and used to encrypt the data, and
+the private key is used to decrypt the data. Crucial to
+RSA is that the encryption process cannot be reversed
+with the public key - the private key is needed [20].&lt;/p&gt;
+
+&lt;p&gt;While RSA has a significant advantage over AES - it
+is computationally more complex, and thus adds more
+overheads to a data transfer. It is useful when small
+amounts of data (such as a credit card number) need
+transmitting, however for a long sessions it reduces
+speed. It is however often used together with AES to
+allow secure encrypted communication [21]. In figure
+5, client A generates RSA keys, and sends the public key
+to client B. Client B generates an AES key, which they
+encrypt with the RSA public key. This can then be sent
+to client A securely. Client A can decrypt the message
+to find the AES key, which is then used throughout the
+session.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 75%;&quot; /&gt;
+&lt;span class=&quot;caption text-muted&quot;&gt;&lt;b&gt;Figure 5:&lt;/b&gt;5: A diagram depicting RSA and AES being used to-
+gether for secure communication, based on informa-
+tion in RSA vs AES - A Primer [21]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;421-the-algorithm&quot;&gt;4.2.1. The Algorithm&lt;/h4&gt;
+&lt;p&gt;The RSA algorithm relies on two simple mathematical
+facts [22]:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Multiplication is easy&lt;/li&gt;
+  &lt;li&gt;Factorisation is hard
+The algorithm relies on modular arithmetic.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;A public
+and private key are generated from two sufficiently
+large prime numbers using the following process [24]:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Choose large &lt;em&gt;p, q&lt;/em&gt; ∈ &lt;em&gt;P&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Let n = pq&lt;/li&gt;
+  &lt;li&gt;Let &amp;amp;straightphi;&lt;em&gt;(p, q) = (p − 1)(q − 1)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Choose e such that e is coprime to &amp;amp;straightphi;&lt;em&gt;(p, q). e&lt;/em&gt; is
+usually chosen to be &lt;em&gt;65537&lt;/em&gt;, and &lt;em&gt;p&lt;/em&gt; and &lt;em&gt;q&lt;/em&gt; are usually
+chosen such that &amp;amp;straightphi;&lt;em&gt;(p, q)&lt;/em&gt; is coprime to &lt;em&gt;65537&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Calculate d such that &lt;em&gt;de&lt;/em&gt; ≡ &lt;em&gt;1&lt;/em&gt; &lt;em&gt;(mod&lt;/em&gt; &amp;amp;straightphi;&lt;em&gt;(p, q))&lt;/em&gt;, that is
+the modular inverse of &lt;em&gt;e&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;The public key is &lt;em&gt;(n, e)&lt;/em&gt; and the secret key is &lt;em&gt;d&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A numerically encoded message be encrypted using
+the public key, yet it can only be decrypted using the
+private key. The following process is used to encrypt,
+send, and decrypt a message using RSA keys[22]:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Assume we have a numerically encoded message &lt;em&gt;m&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Assume further we have a public key &lt;em&gt;(n, e)&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Compute &lt;em&gt;c&lt;/em&gt; ≡ &lt;em&gt;me (mod n)&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Send c, our cyphertext.&lt;/li&gt;
+  &lt;li&gt;To decrypt, compute &lt;em&gt;c&lt;/em&gt;&lt;sup&gt;&lt;em&gt;d&lt;/em&gt;&lt;/sup&gt; ≡ &lt;em&gt;m (mod n)&lt;/em&gt; where &lt;em&gt;m&lt;/em&gt; is
+the original message, and &lt;em&gt;d&lt;/em&gt; our private key.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The only known method to crack an RSA key is to
+attempt to factorise our public key, to find d. This
+is computationally complex. To give an example, in
+2010 the record for cracking a 786-bit RSA key (that
+is, a 232-digit number) was 2 years. They researchers
+claim the amount of CPU time spent is equivalent to
+2,000 years on a standard PC at the time [25]. It is
+worth noting that the longer the key, the longer the
+calculation take, but also the longer it takes to crack.&lt;/p&gt;
+
+&lt;h3 id=&quot;44-hashing&quot;&gt;4.4. Hashing&lt;/h3&gt;
+&lt;p&gt;So far in this section we have considered methods of
+encryption where the encryptor wants a reciever to be
+able to read the original data. Suppose we return to
+example 2 in section 4.1. If the company had encrypted
+their passwords, no attacker could get them. However,
+if they had used a method we have discussed, and
+attacker could find the key, they would still be able
+to decrypt the passwords. Instead, they should use
+hashing.&lt;/p&gt;
+
+&lt;p&gt;Hashing is a one way algorithm is used to convert
+data into a hashed string. It is not possible to get back
+to the original data from the hashed string. A hashed
+password would be stored in the database, and when
+the user tries to login, their input is hashed by the same
+algorithm. If it matches the one stored on file they are
+allowed in [26].&lt;/p&gt;
+
+&lt;h4 id=&quot;441-plain-text-passwords&quot;&gt;4.4.1. Plain Text Passwords&lt;/h4&gt;
+&lt;p&gt;It may surprise the reader to learn that even some major businesses 
+have neglected to encrypt passwords and
+users passwords have been leaked as a consequence.
+Some notable organisations who have fallen foul of
+this include the IEEE (2011) [27], Yahoo (2012) and
+Hotmail (2009) [28]. This makes it particularly easy
+for an attacker to access people personal information
+should they find access to the database.&lt;/p&gt;
+
+&lt;h3 id=&quot;45-significant-vulnerabilities&quot;&gt;4.5. Significant Vulnerabilities&lt;/h3&gt;
+&lt;p&gt;While the methods in this section are strong, they still
+have vulnerabilities. Suppose an attacker gets hold of
+the private key, they would be able to decrypt all data
+being transmitted.&lt;/p&gt;
+
+&lt;p&gt;It is expected in the not too distant future a new
+technology (a quantum computer) would be able to
+break 2048-bit RSA encryption 8 hours. While this
+isn’t a threat now, there is a risk that once a computer
+is capable of breaking RSA in such a short period of time
+RSA would no longer be a useful form of encryption.
+Should this be the case, we would need newer and
+faster algorithms to encrypt our data [29].&lt;/p&gt;
+
+&lt;p&gt;Returning to hashing, as discussed in the previous
+subsection. While it is not possible to reverse the algorithm,
+ there is still a vulnerability. Suppose an attacker
+got hold of a list of hashed passwords, and knew the
+algorithm used. They could uncover the passwords by
+brute force. If the attacker hashed all possible commbinations,
+and for each output checked the list of hashed
+strings, whenever they find a match they would know
+that they have found the password used to generate
+that hash. By doing this they would be able to slowly
+crack a list of hashed passwords [30].&lt;/p&gt;
+
+&lt;h2 id=&quot;5-conclusion&quot;&gt;5. Conclusion&lt;/h2&gt;
+&lt;p&gt;In this report, we have considerd a selection of key
+encryption methods, some of which are in use today,
+and some of which are no longer sufficiently secure.&lt;/p&gt;
+
+&lt;p&gt;It is clear that over time, as computers get faster and
+more advanced, existing encryption methods become
+easier to crack. However, at a similar rate more layers of
+complexity can be added to existing methods without
+increasing computation time, more methods can be
+strung together, and methods emerge.&lt;/p&gt;
+
+&lt;p&gt;It is likely that for the forseeable future the encryption
+ landscape will remain the same, with algorithms
+being phased out and replaced by newer algorithms,
+and keys getting longer, as computers get faster. It is
+likely that the only significant encryption vulnerabilities
+ will arise from poor practice, and failing to encrypt
+data.&lt;/p&gt;
+
+&lt;p&gt;However, there is a concern that if a fully working
+quantum computer could be developed too soon, keys
+could be cracked too quickly. It is possible that standard
+non-quantum computers would be unable encrypt data
+with sufficiently long keys using the current methods
+without adding significant time overheads. If this were
+to happen, it wouldn’t spell an end to secure communication,
+however it would make the tradeoff between security and efficiency more obvious.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;[1] Icitsuser, “The ancient cryptography history,” Feb 2017. [Online]. Available: http://www.icits2015.net/ancient-cryptography-history/&lt;/li&gt;
+  &lt;li&gt;[2] J. M. Norman, “The skytale: An early greek cryptographic device used in warfare: History of information.” [Online]. Available: https://www.historyofinformation.com/detail.php?d=4168&lt;/li&gt;
+  &lt;li&gt;[3] [Online]. Available: http://mathcenter.oxford.emory.edu/site/math125/transpositionCiphers/&lt;/li&gt;
+  &lt;li&gt;[4] C. Paar and J. Pelzl, Understanding cryptography: a textbook for students and practitioners. Springer, 2011.&lt;/li&gt;
+  &lt;li&gt;[5] “Substitution cipher.” [Online]. Available: https://www.merriam-webster.com/dictionary/substitution%20cipher&lt;/li&gt;
+  &lt;li&gt;[6] C. Suetonius Tranquillus, A. Thomson, and T. Forester, The Lives of the twelve Caesars. G. Bell and Sons, 1893.&lt;/li&gt;
+  &lt;li&gt;[7] B. Oktaviana and A. P. U. Siahaan, “Three-pass protocol implementation in caesar cipher classic cryptography,” IOSR Journal of Computer Engineering, vol. 18, pp. 2278–0661, 07 2016.&lt;/li&gt;
+  &lt;li&gt;[8] H. Editors, “Morse code and the telegraph,” Nov 2009. [Online]. Available: https://www.history.com/topics/inventions/telegraph&lt;/li&gt;
+  &lt;li&gt;[9] ——, “Enigma key broken,” Nov 2009. [Online]. Available: https://www.history.com/this-day-in-history/enigma-key-broken&lt;/li&gt;
+  &lt;li&gt;[10] D. NG, “Enigma machine from world war ii finds unlikely home in beverly hills,” Jan 2015. [Online]. Available: https://www.latimes.com/entertainment/arts/culture/la-et-cm-imitation-game-enigma-machine-david-bohnett-20150122-story.html&lt;/li&gt;
+  &lt;li&gt;[11] S. Singh and W. S. Festival, “The enigma machine explained,” May 2013. [Online]. Available:https://youtu.be/ASfAPOiq_eQ&lt;/li&gt;
+  &lt;li&gt;[12] Simplified circuit diagram of a 3-wheel Service Enigma. [Online]. Available: cryptomuseum.com/crypto/enigma/working.htm&lt;/li&gt;
+  &lt;li&gt;[13] Flaw in the Enigma Code. Numberphile, Jan 2013. [Online]. Available: https://youtu.be/V4V2bpZlqx8&lt;/li&gt;
+  &lt;li&gt;[14] T. Sale, The US 6812 Bombe Report 1944 - DECODING GERMAN ENIGMA MACHINE MESSAGES. SIGNAL SECURITY DETACHMENT, 1944. [Online]. Available: https://www.codesandciphers.org.uk/documents/bmbrpt/usbmbrpt.pdf&lt;/li&gt;
+  &lt;li&gt;[15] “What is sql injection? tutorial and examples: Web security academy.” [Online]. Available: https://portswigger.net/web-security/sql-injection&lt;/li&gt;
+  &lt;li&gt;[16] “Announcing the advanced encryption standard,” Nov 2001. [Online]. Available: http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf&lt;/li&gt;
+  &lt;li&gt;[17] R. Franklin, P. Editor, and T. Security, “Aes vs. rsa encryption: What are the differences?” Jul 2020. [Online]. Available: https://www.precisely.com/blog/data-security/aes-vs-rsa-encryption-differences&lt;/li&gt;
+  &lt;li&gt;[18] AES Explained (Advanced Encryption Standard). YouTube, Nov 2019. [Online]. Available: https://www.youtube.com/watch?v=O4xNJsjtN6E&lt;/li&gt;
+  &lt;li&gt;[19] “Leonard adleman made rsa encryption history with his invention.” [Online]. Available:https://www.invent.org/inductees/leonard-adleman&lt;/li&gt;
+  &lt;li&gt;[20] Sam., “A complete explanation of rsa asymmetric encryption,” Feb 2020. [Online]. Available: https://medium.com/curiositypapers/a-complete-explanation-of-rsa-asymmetric-encryption-742c5971e0f&lt;/li&gt;
+  &lt;li&gt;[21] P. Townsend. [Online]. Available: https://info.townsendsecurity.com/rsa-vs-aes-encryption-a-primer&lt;/li&gt;
+  &lt;li&gt;[22] “Rsa encryption.” [Online]. Available: https://brilliant.org/wiki/rsa-encryption/&lt;/li&gt;
+  &lt;li&gt;[23] “Modular arithmetic,” Oct 2020. [Online]. Available: https://en.wikipedia.org/wiki/Modular_arithmetic&lt;/li&gt;
+  &lt;li&gt;[24] G. J. Simmons, “Rsa encryption,” Aug 2012. [Online]. Available: https://www.britannica.com/topic/RSA-encryption&lt;/li&gt;
+  &lt;li&gt;[25] T. Kleinjung, K. Aoki, J. Franke, A. Lenstra, E. Thomé, J. Bos, P. Gaudry, A. Kruppa, P. Montgomery, D. A. Osvik, H. te Riele, A. Timofeev, and P. Zimmermann, “Factorization of a 768-bit rsa modulus,” Cryptology ePrint Archive, Report 2010/006, 2010, https://eprint.iacr.org/2010/006.&lt;/li&gt;
+  &lt;li&gt;[26] D. Arias, “Hashing passwords: One-way road to security,” Sep 2019. [Online]. Available: https://auth0.com/blog/hashing-passwords-one-way-road-to-security/&lt;/li&gt;
+  &lt;li&gt;[27] O. Williams, “Ieee data breach: 100k passwords leak in plain text [update],” Sep 2012. [Online]. Available: https://www.neowin.net/news/ieee-data-breach-100k-passwords-leak-in-plain-text&lt;/li&gt;
+  &lt;li&gt;[28] E. Bauman, Y. Lu, and Z. Lin, “Half a century of practice: Who is still storing plaintext passwords?” Ph.D. dissertation, 0AD. [Online]. Available: https://web.cse.ohio-state.edu/ lin.3021/file/ISPEC15.pdf&lt;/li&gt;
+  &lt;li&gt;[29] C. Gidney and M. Ekerå, “How to factor 2048 bit rsa integers in 8 hours using 20 million noisy qubits,” 2019.&lt;/li&gt;
+  &lt;li&gt;[30] B. Haran, Password Cracking. YouTube, Jul 2016. [Online]. Available: https://www.youtube.com/watch?v=7U-RbOKanYs&lt;/li&gt;
+  &lt;li&gt;[31] F. Wenneker, “Wenneker article latex template,” LaTeXTemplates. [Online]. Available: https://www.latextemplates.com/template/wenneker-article&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Robert</name></author><summary type="html">As an assignment for one of my MSc modules I had to produce a report on cyber security. I chose to focus on encryption methods. This is the report I produced. It was graded distinction.</summary></entry><entry><title type="html">Klotksi Problem</title><link href="/2020/10/28/klotski.html" rel="alternate" type="text/html" title="Klotksi Problem" /><published>2020-10-28T13:14:13+00:00</published><updated>2020-10-28T13:14:13+00:00</updated><id>/2020/10/28/klotski</id><content type="html" xml:base="/2020/10/28/klotski.html">&lt;p&gt;As part of my Masters degree I implemented a breadth first search algorithm to solve the Klotski problem.  The &lt;a href=&quot;https://www.schoolarchimedes.com/klotski&quot;&gt;Klotski&lt;/a&gt; problem is a problem where you are given a 5x4 grid, with 4 types of piece.  The aim of the puzzle is to remove the one large centre-piece from the board, while removing no others.  An example of this puzzle can be found here.&lt;/p&gt;
+
+&lt;p&gt;My solution uses a recursive search to find all possible moves for any given board.  It implements each move, then searches for any further moves for each new board.  This continues until a solution is found.&lt;/p&gt;
+
+&lt;p&gt;To find the solution in this way, we need to make 116 individual moves, and analyse 23,118 distinct board layouts. It takes my PC approximately 2.5 minutes to run.&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">As part of my Masters degree I implemented a breadth first search algorithm to solve the Klotski problem. The Klotski problem is a problem where you are given a 5x4 grid, with 4 types of piece. The aim of the puzzle is to remove the one large centre-piece from the board, while removing no others. An example of this puzzle can be found here.</summary></entry><entry><title type="html">Othello (CLI)</title><link href="/2020/10/20/Othello_cli.html" rel="alternate" type="text/html" title="Othello (CLI)" /><published>2020-10-20T14:14:13+01:00</published><updated>2020-10-20T14:14:13+01:00</updated><id>/2020/10/20/Othello_cli</id><content type="html" xml:base="/2020/10/20/Othello_cli.html">&lt;p&gt;I built this simple Othello game with a mini-max ‘AI’ player after a conversation with a lecturer about the algorithm.  It is text based, and has a very basic, very simple interface, however it seems relatively good at beating me at 8x8 or 6x6 Othello.  That said, I have no experience playing Othello so that isn’t necessarily a great achievement.&lt;/p&gt;
+
+&lt;p&gt;Some future improvements which could be made include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A GUI&lt;/li&gt;
+  &lt;li&gt;Difficulty levels for the ‘AI’&lt;/li&gt;
+  &lt;li&gt;Refactoring the code - it was very much hacked together in a couple of days, and I do not claim for one minute that the code is any good.  If I take this further I would definitely give it a re-write.  I would probably use OOP, and structure it in a way that I could set 2 ‘AI’s against each other if I wanted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This project is complete and has been replaced by a GUI project using pygame.&lt;/p&gt;
+
+&lt;h2 id=&quot;play&quot;&gt;Play&lt;/h2&gt;
+
+&lt;p&gt;Game can be played in 8x8 and 6x6 mode.  6x6 is faster.  Simply change the line &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DIMS = &lt;/code&gt; (line 40 in the code) between 6 and 8 to change the board size.&lt;/p&gt;
+
+&lt;p&gt;Basic Welcome Screen:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Welcome to Othello.  Please select an option:
+A - Play against the computer
+B - Play against a friend
+Q - Quit Game
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Board and move selection screen for the 6x6 game.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Black's turn:
+  A B C D E F
+1 . . . . . .
+2 . . . . . .
+3 . . b w . .
+4 . . w b . .
+5 . . . . . .
+6 . . . . . .
+Please input a move in the following form: A1, or P for pass
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Note, the game is not case sensitive.&lt;/p&gt;
+
+&lt;h2 id=&quot;play-vs-computer&quot;&gt;Play vs Computer&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Computer uses minimax algorithm to play the game.&lt;/li&gt;
+  &lt;li&gt;Currently scored based on number of available moves, with a weighting given to certain squares:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def scoreBoard(board, player, opponent):
+  player_score = len(generateMoveList(board, player, opponent))*3
+  opponent_score = len(generateMoveList(board, opponent, player))*3
+
+  if (player_score == 0) and (opponent_score == 0):
+      # Have reached game end
+      winner = decideWinner(board)
+      winner = winner[0]
+      if winner[0].lower() == player:
+          return 300
+      elif winner[0].lower == opponent:
+          return -300
+      else:
+          return 0
+
+  for i in range(DIMS):
+      for j in range(DIMS):
+          if board[i][j] == player:
+              player_score += GRADING_STRATEGY[i][j]
+          if board[i][j] == opponent:
+              opponent_score += GRADING_STRATEGY[i][j]
+
+  return player_score - opponent_score
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;Using the following grading strategy (for 6x6, similar matrix produced for 8x8):&lt;/p&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[10, -2, 1, 1, -2, 10],
+[-2, -2, 1, 1, 1, -2],
+[1, 1, 1, 1, 1, 1],
+[1, 1, 1, 1, 1, 1],
+[-2, -2, 1, 1, -2, -2],
+[10, -2, 1, 1, -2, 10]]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-player-mode&quot;&gt;2 Player Mode&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Two player mode allows two players on same computer to play&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Robert</name></author><summary type="html">I built this simple Othello game with a mini-max ‘AI’ player after a conversation with a lecturer about the algorithm. It is text based, and has a very basic, very simple interface, however it seems relatively good at beating me at 8x8 or 6x6 Othello. That said, I have no experience playing Othello so that isn’t necessarily a great achievement.</summary></entry><entry><title type="html">Hangman</title><link href="/2020/09/14/hangman.html" rel="alternate" type="text/html" title="Hangman" /><published>2020-09-14T14:14:13+01:00</published><updated>2020-09-14T14:14:13+01:00</updated><id>/2020/09/14/hangman</id><content type="html" xml:base="/2020/09/14/hangman.html">&lt;p&gt;I built this game as a quick project for fun.  It is a CLI based Hangman game.  It has a large library of over 90,000 words to chose from (random words assigned each time) along with two difficulty settings.  I coded this in about a day, using it as an opportunity to learn more about Git.&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">I built this game as a quick project for fun. It is a CLI based Hangman game. It has a large library of over 90,000 words to chose from (random words assigned each time) along with two difficulty settings. I coded this in about a day, using it as an opportunity to learn more about Git.</summary></entry><entry><title type="html">Chess</title><link href="/2020/06/10/chess.html" rel="alternate" type="text/html" title="Chess" /><published>2020-06-10T14:14:13+01:00</published><updated>2020-06-10T14:14:13+01:00</updated><id>/2020/06/10/chess</id><content type="html" xml:base="/2020/06/10/chess.html">&lt;p&gt;As a summer project I decided to build a GUI chess game using pygame.  With the exception of a Checkmate function, the 2 player local game works perfectly.&lt;/p&gt;
+
+&lt;p&gt;The intention of this project was to learn pygame, and develop my programming skills, improve at Python, as well as learning a bit about OOP.  For this reason, the programming style develops throughout the project.&lt;/p&gt;
+
+&lt;p&gt;I would like to revisit this in future and re-write it in a better style.&lt;/p&gt;
+
+&lt;p&gt;A future direction would be adding network functionaliy, and potentially an AI chess engine to play against.&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">As a summer project I decided to build a GUI chess game using pygame. With the exception of a Checkmate function, the 2 player local game works perfectly.</summary></entry><entry><title type="html">Simulations to Demonstrate Mathematics</title><link href="/2019/12/15/tech-in-education.html" rel="alternate" type="text/html" title="Simulations to Demonstrate Mathematics" /><published>2019-12-15T13:14:13+00:00</published><updated>2019-12-15T13:14:13+00:00</updated><id>/2019/12/15/tech-in-education</id><content type="html" xml:base="/2019/12/15/tech-in-education.html">&lt;p&gt;These were a set of tools using JSXGraph for use in teaching Maths.
+These tools were produced as part of a third year university project working towards a BSc.&lt;/p&gt;
+
+&lt;p&gt;The tools are as follows:&lt;/p&gt;
+
+&lt;h3 id=&quot;trig-graphs&quot;&gt;Trig graphs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Demonstrate the link between sin and cos functions and a circle&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;taylor-series&quot;&gt;Taylor Series&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;plots a taylor series for a given function alongside the actual graph&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;double-pendulum&quot;&gt;Double Pendulum&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Simulation of a double pendulum with any sets of initial conditions.  Using an implementation of 4th order Runge Kutta method to solve Hamiltons equations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The tools in their submitted form can be found &lt;a href=&quot;https://robertpsoane.github.io/javascript-maths-tools/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Robert</name></author><summary type="html">These were a set of tools using JSXGraph for use in teaching Maths. These tools were produced as part of a third year university project working towards a BSc.</summary></entry></feed>
