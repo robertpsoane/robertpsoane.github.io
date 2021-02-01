@@ -5,39 +5,50 @@ layout: default
 <!-- Page Header -->
 {% if page.background %}
 <header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
-  {% else %}
-  <header class="masthead">
-    {% endif %}
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>{{ site.title }}</h1>
-          </div>
+{% else %}
+<header class="masthead" style="background-image: url('{{ site.default-background | prepend: site.baseurl | replace: '//', '/' }}')">
+{% endif %}
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>{{ site.title }}</h1>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
         {{ content }}
+        <br />
+        <br />
+        <hr />
+        <h1 class="post-title">Recent Projects</h1>
+        <hr />
 
         <!-- Home Post List -->
-        {% for post in site.posts limit : 5 %}
-
+        {% for post in paginator.posts limit : 4 %}
+        
         <article class="post-preview">
           <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-            <h2 class="post-title">{{ post.title }}</h2>
-            {% if post.subtitle %}
-            <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-            {% else %}
-            <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+            
+            {% if post.project-img %}
+            <img src="{{ post.project-img | prepend: site.baseurl | replace: '//', '/' }}" style="display: block; margin-left: auto; margin-right: auto; width: 75%;">
+            
             {% endif %}
+            <h2 class="post-title">{{ post.title }}</h2>
           </a>
+            {% if post.subtitle %}
+            <p style="margin-top: 15px;margin-bottom: 10px;"><em>{{ post.subtitle }}</em></p>
+            {% else %}
+            <p style="margin-top: 15px;margin-bottom: 10px;"><em>{{ post.excerpt | strip_html | truncatewords: 15 }}</em></p>
+            {% endif %}
+          
           <p class="post-meta">Posted by
             {% if post.author %}
             {{ post.author }}
@@ -55,7 +66,7 @@ layout: default
 
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{"/posts" | relative_url }}">View All Posts &rarr;</a>
+          <a class="btn btn-primary float-right" href="{{"/projects" | relative_url }}">View All Projects &rarr;</a>
         </div>
 
       </div>
