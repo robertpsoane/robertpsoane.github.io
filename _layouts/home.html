@@ -32,7 +32,7 @@ layout: default
         <hr />
 
         <!-- Home Post List -->
-        {% for post in paginator.posts limit : 4 %}
+        {% for post in site.posts limit : 4 %}
         
         <article class="post-preview">
           <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
