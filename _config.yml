@@ -39,17 +39,17 @@ markdown:           kramdown
 # paginate_multiple:
 #   - paginate:           5
 #     paginate_path: "/posts/page:num/"
-#     sub_dir: "posts"
+#     sub_dir: "Posts"
 #   - paginate:           5
 #     paginate_path: "/projects/page:num/"
-#     sub_dir: "projects"
+#     sub_dir: "Projects"
 #   - paginate:           5
 #     paginate_path: "/page:num/"
-#     sub_dir: "projects"
+#     sub_dir: "Projects"
 
 paginate:           5
 paginate_path: "/projects/page:num/"
-sub_dir: "projects"
+sub_dir: "Projects"
 
 
 plugins:
@@ -57,7 +57,7 @@ plugins:
   - jekyll-paginate
   - jekyll-paginate-multiple
   - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
-  - kickster
+
 
 
 

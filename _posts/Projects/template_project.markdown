@@ -4,7 +4,9 @@ title: "Sample Project"
 subtitle: "Sample" # This forms the basis of a description of the project
 date: 2021-01-31 13:14:13 -0000
 
-project-img: '/img/default-background.png'
+githuburl: "https://github.com/robertpsoane/py-fighter"
+
+project-img: '/img/projects/pyfighter/pyfighter.png'
 ---
 
 <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>

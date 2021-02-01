@@ -4,6 +4,8 @@ title: "Pyfighter"
 subtitle: "Pyfighter is an 8-bit side scrolling, infinite level platform game, produced in python using PyGame as part on an MSc by R. Soane, R. Danevicius, and S. Mistry.  Inspired by super street fighter, super smash bros and Mario, they created a customisable and addictive game that gets progressively harder." # This forms the basis of a description of the project
 date: 2020-12-18 13:14:13 -0000
 
+githuburl: "https://github.com/robertpsoane/py-fighter"
+
 project-img: '/img/projects/pyfighter/pyfighter.png'
 ---
 
