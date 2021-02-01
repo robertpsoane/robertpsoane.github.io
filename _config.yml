@@ -54,31 +54,8 @@ plugins:
   - jekyll-paginate-multiple
   - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
   - kickster
-  - jekyll-assets
 
 
 
 
-
-
-
-assets:
-  plugins:
-    css: { autoprefixer: {}}
-    img: { optim: {}}
-  source_maps: false
-  sources:
-    - _assets/javascripts
-    - _assets/stylesheets
-    - _assets/yarn
-
-exclude:
-  - .travis.yml
-  - bin/*
-  - circle.yml
-  - Gemfile
-  - Gemfile.lock
-  - package.json
-  - README.md
-  - yarn.lock
 

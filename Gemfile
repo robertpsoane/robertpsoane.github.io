@@ -1,24 +1,13 @@
 source "https://rubygems.org"
 
-gem "autoprefixer-rails"
-gem "html-proofer"
-gem "image_optim"
-gem "jekyll"
-gem "jekyll-assets"
-gem "jemoji"
-gem "mini_magick"
-gem "sass"
-gem "sprockets", "4.0.0.beta6"
-gem "uglifier"
-gem "kramdown-parser-gfm"
+gem "jekyll", ">= 3.8.5"
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
   gem "jekyll-paginate", "~> 1.1.0"
   gem "jekyll-paginate-multiple"
   gem "jekyll-sitemap"
-  gem "kickster"
-
+  gem 'kickster', '~> 2.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
