@@ -8,7 +8,7 @@ githuburl: "https://github.com/robertpsoane/game-of-life/"
 liveurl: "https://robertpsoane.github.io/game-of-life/"
 project-img: "/img/projects/game-of-life/GameofLife.png"
 
-img-1: "/img/projects/game-of-life/semifinal.png"
+img-1: "/img/projects/game-of-life/semfinal.png"
 ---
 
 ## Conway's Game of Life
