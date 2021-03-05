@@ -11,6 +11,7 @@ project-img: "/img/projects/game-of-life/GameofLife.png"
 img-1: "/img/projects/game-of-life/semfinal.png"
 ---
 
+<br />
 ## Conway's Game of Life
 
 Conway's Game of Life (aka Life) was a zero player game created by John Conway. The idea is to simulate life in a 2d grid with a set of simple rules:
