@@ -24,7 +24,7 @@ Conway's Game of Life (aka Life) was a zero player game created by John Conway. 
 ## The Game
 
 <img src="{{ page.img-1 | prepend: site.baseurl | replace: '//', '/' }}" style="display: block; margin-left: auto; margin-right: auto; width: 75%;">
-<span class="caption text-muted"><b>Figure 1:</b>The game depicting a <em>Gosper Glider Gun</em></span>
+<span class="caption text-muted"><b>Figure 1:</b> The game depicting a <em>Gosper Glider Gun</em></span>
 
 The game can be found <a href="https://robertpsoane.github.io/game-of-life/"> here</a>. I built it in React over the course of the weekend, initially as a very simple game embedded in a basic web page, after which I redesigned the UI to look a bit more modern. The original version of the game can be found <a href="https://robertpsoane.github.io/game-of-life-v1">here</a>.
 
