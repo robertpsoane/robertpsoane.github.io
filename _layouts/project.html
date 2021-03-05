@@ -32,8 +32,9 @@ layout: default
       <div class="col-lg-8 col-md-10 mx-auto">
         
         {% if page.project-img %}
+        {% if page.liveurl %}<a href="{{page.liveurl}}">{% elsif page.githuburl %}<a href="{{page.githuburl}}">{% endif %}
         <img src="{{ page.project-img | prepend: site.baseurl | replace: '//', '/' }}" style="display: block; margin-left: auto; margin-right: auto; width: 75%;">
-
+        {% if page.liveurl or page.githuburl %}</a>{% endif %}
         {% endif %}
 
         {{ content }}
