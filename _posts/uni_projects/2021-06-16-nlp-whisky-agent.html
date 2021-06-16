@@ -1,0 +1,3681 @@
+---
+layout: project
+title: "An NLP-Based Scotch Whisky Recommender Agent"
+subtitle: "As a piece of coursework for my MSc I produced a Scotch whisky recommender agent in Python.
+This was evaluated via a survey, and at the p=0.05 is an improvement over a baseline random recommender." # This forms the basis of a description of the project
+date: 2021-06-15 11:17:00 -0000
+
+githuburl: "https://github.com/robertpsoane/scotch-recommender"
+
+
+img-report0x: "/img/projects/whisky-rec/latex/report0x.png"
+img-report1x: "/img/projects/whisky-rec/latex/report1x.png"
+img-report2x: "/img/projects/whisky-rec/latex/report2x.png"
+img-report3x: "/img/projects/whisky-rec/latex/report3x.png"
+img-report4x: "/img/projects/whisky-rec/latex/report4x.png"
+img-report5x: "/img/projects/whisky-rec/latex/report5x.png"
+img-report6x: "/img/projects/whisky-rec/latex/report6x.png"
+img-report7x: "/img/projects/whisky-rec/latex/report7x.png"
+img-report8x: "/img/projects/whisky-rec/latex/report8x.png"
+img-report9x: "/img/projects/whisky-rec/latex/report9x.png"
+img-report10x: "/img/projects/whisky-rec/latex/report10x.png"
+img-report11x: "/img/projects/whisky-rec/latex/report11x.png"
+img-report12x: "/img/projects/whisky-rec/latex/report12x.png"
+img-report13x: "/img/projects/whisky-rec/latex/report13x.png"
+img-report14x: "/img/projects/whisky-rec/latex/report14x.png"
+img-allrec: "/img/projects/whisky-rec/all_recommendations.png"
+img-avgrec: "/img/projects/whisky-rec/avg_recommendations.png"
+
+css: "/img/projects/whisky-rec/report.css"
+---
+
+<link rel="stylesheet" type="text/css" href="{{ page.css | prepend: site.baseurl | replace: '//', '/' }}" />
+
+ <body>
+ <br />
+ <p>
+    As a piece of coursework for my MSc I produced a Scotch whisky recommender agent in Python. This agent builds a Bag of Words (BoW) model of each whisky's tasting notes. From this model, cosine similarity is used to make recommendations based on a user's input.
+    This was evaluated via a survey, and at the p=0.05 is an improvement over a baseline random recommender.
+</p>
+<p>
+  The following report was submitted as part of the project. The original report
+  can be found TODO link
+</p>
+<br />
+
+<pr />
+<hr />
+    <h3 class="sectionHead">
+      <span class="titlemark">1 </span> <a id="x1-20001"></a>Introduction
+    </h3>
+    <!--l. 2-->
+    <p class="noindent">
+      Scotch whisky has been produced as early as 1494 by distilling grains to
+      produce a high proof spirit
+      <span class="cite"
+        >[<a href="#XJacques2003">1</a>,&#x00A0;<a href="#XPyke1965">2</a
+        >]</span
+      >. According to the Scotch Whisky Association, prior to COVID-19 pandemc
+      the industry &#8220;accounted for 75% of Scotland&#8217;s food and drink
+      exports&#8221;, and had a year on year growth of 4.4%
+      <span class="cite"
+        >[<a href="#Xswa2">3</a>,&#x00A0;<a href="#Xswa">4</a>]</span
+      >. With over 130 distilleries, each producing very different flavour
+      profiles, choosing the next whisky to try could be challenging, enthusiast
+      and beginner alike
+      <span class="cite"
+        >[<a href="#Xn_distilleries">5</a>,&#x00A0;<a href="#Xpowell_2021">6</a
+        >]</span
+      >.
+      <!--l. 10-->
+    </p>
+
+    <p class="indent">
+      Limited attempts have been made to apply AI methods to create recommender
+      agents for whiskies. These focus on customer trend data (which this report
+      argues is not the best strategy), or predominantly use discrete attributes
+      about whiskies (distillery, ABV etc) on which to base their
+      recommendations
+      <span class="cite"
+        >[<a href="#XOmidzohoor">7</a>,&#x00A0;<a href="#XColdevin2005">8</a
+        >]</span
+      >.
+      <!--l. 15-->
+    </p>
+
+    <p class="indent">
+      This project sought to apply NLP techniques to produce a recommender agent
+      and ascertain whether NLP techniques applied to whisky tasting notes can
+      power an effective recommender agent.
+      <!--l. 18-->
+    </p>
+
+    <p class="indent">
+      In <a href="#x1-30002">section&#x00A0;2</a> we discuss the production
+      process of Scotch and it&#8217;s lexicon. Section
+      <a href="#x1-60003">3<!--tex4ht:ref: sec:lit --></a> covers relevant
+      literature. Sections
+      <a href="#x1-150004">4<!--tex4ht:ref: sec:approach --></a> &amp;
+      <a href="#x1-230005">5<!--tex4ht:ref: sec:imp --></a> describe the
+      approach and implementation of the agent, and in
+      <a href="#x1-350006">section&#x00A0;6<!--tex4ht:ref: sec:imp --></a> the
+      agent is evaluated via a questionnaire.
+      <!--l. 1-->
+    </p>
+
+    <p class="noindent"></p>
+    <hr />
+    <h3 class="sectionHead">
+      <span class="titlemark">2 </span> <a id="x1-30002"></a>Scotch: Distilled
+    </h3>
+    <!--l. 2-->
+    <p class="noindent">
+      This project concerns itself with the specific domain of Scotch. To fully
+      understand the problem at hand, a basic understanding of the drink is
+      required. In this section I present a brief overview of Scotch, and a
+      summary of its lexicon.
+      <!--l. 6-->
+    </p>
+
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">2.1 </span> <a id="x1-40002.1"></a>A Brief
+      Overview of Scotch
+    </h4>
+    <!--l. 7-->
+    <p class="noindent">
+      Scotch whisky refers to whisky produced in Scotland fulfilling a set of
+      legal requirements set by the UK Government. Grains are allowed to malt
+      (germinate) to develop their sugars, after which sugars are extracted
+      producing a syrup, which is fermented producing a sweet hop-free beer.
+      This is distilled in
+      <span class="cmti-10x-x-109">pot stills </span>to increase the alcohol
+      content making <span class="cmti-10x-x-109">new-make spirit</span>. This
+      is matured in oak casks for a minimum of 3 years, prior to bottling. At
+      this stage the distiller may choose to dilute the whisky to an ABV of no
+      less than 40%
+      <span class="cite"
+        >[<a href="#XJacques2003">1</a>,&#x00A0;<a href="#XPyke1965">2</a
+        >]</span
+      >.
+    </p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">2.2 </span> <a id="x1-50002.2"></a>Whisky and
+      Words
+    </h4>
+    <!--l. 16-->
+    <p class="noindent">
+      The flavours present in Scotch come from a number of sources, in turn
+      influencing how various whisky flavour profiles are described. To stop the
+      grain germinating, it is heated. Some distilleries use a peat fire to do
+      this. This imparts a smokey flavour onto the grain, which carries through
+      to the end spirit. This smokey flavour is described as
+      <span class="cmti-10x-x-109">peated </span
+      ><span class="cite"
+        >[<a href="#XJacques2003">1</a>,&#x00A0;<a href="#XBathgate2019">10</a
+        >]</span
+      >.
+      <!--l. 21-->
+    </p>
+
+    <p class="indent">
+      Maturation provides another opportunity to add flavour to the drink. Age
+      all Scotch in oak casks is resource intensive, and has lead to
+      distilleries purchasing used casks from other drinks manufacturers.
+      Traditionally the sherry industry has supplied used casks to distilleries.
+      More recently, bourbon casks have been used. Any cask which has previously
+      held any drink can be used, be it for the entire maturation process, or at
+      the end such as a <span class="cmti-10x-x-109">sherry cask finish</span>.
+      These all add their own flavours to the drink, which is reflected in
+      tasting notes
+      <span class="cite"
+        >[<a href="#XJacques2003">1</a>,&#x00A0;<a href="#XMosedale1998">11</a
+        >]</span
+      >.
+
+      <!--l. 1-->
+    </p>
+
+    <p class="noindent"></p>
+    <hr />
+    <h3 class="sectionHead">
+      <span class="titlemark">3 </span> <a id="x1-60003"></a>Background and
+      Literature
+    </h3>
+    <!--l. 3-->
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">3.1 </span> <a id="x1-70003.1"></a>Language Models
+    </h4>
+    <!--l. 4-->
+    <p class="noindent">
+      In general, Natural Language Processing (NLP) tasks require a language
+      model of some form or another. Artificial Intelligence (AI) based methods
+      cannot process text in its native unstructured form, but need to convert
+      the raw text to a structured form suitable for computer understanding.
+      This is often referred to as
+      <span class="cmti-10x-x-109">embedding</span>.
+      <!--l. 8-->
+    </p>
+
+    <p class="indent">
+      The two dominant model types are
+      <span class="cmti-10x-x-109">syntactic </span>and
+      <span class="cmti-10x-x-109">semantic </span>models. Syntactic models
+      transform text to a set of &#8216;symbols&#8217; which carry no inherent
+      meaning, but can be compared across instances in a dataset, whereas
+      semantic methods (such as those described in
+      <a href="#x1-120003.1.3"
+        >subsubsection&#x00A0;3.1.3<!--tex4ht:ref: sec:imp --></a
+      >) retain a contextual understanding of text
+      <span class="cite">[<a href="#XCambria2014">12</a>]</span>.
+      <!--l. 13-->
+    </p>
+
+    <p class="indent">
+      A dominant syntactic method for transforming unstructured text into a
+      computer-analysable form is the Bag-of-words (BoW) model. The dataset is
+      tokenized (split into individual words), lemmatized (see
+      <a href="#x1-80003.1.1"
+        >subsubsection&#x00A0;3.1.1<!--tex4ht:ref: sec:imp --></a
+      >) and <span class="cmmi-10x-x-109">k </span>keywords are extracted (see
+      <a href="#x1-90003.1.2"
+        >subsubsection&#x00A0;3.1.2<!--tex4ht:ref: sec:imp --></a
+      >) to form our bag of words
+      <img
+        src=""{{ page.img-report0x | prepend: site.baseurl | replace: '//', '/' }}""
+        alt="^b"
+        class="mathpalette"
+      /><span class="cmsy-10x-x-109">&#x2208; </span
+      ><span class="msbm-10x-x-109">&#x211D;</span
+      ><sup><span class="cmmi-8">k</span></sup
+      >. Each document is transformed to a vector
+      <img
+        src="{{ page.img-report1x | prepend: site.baseurl | replace: '//', '/' }}"
+        alt="v
+
+^"
+class="mathpalette"
+/><span class="cmsy-10x-x-109">&#x2208; </span
+      ><span class="msbm-10x-x-109">&#x211D;</span
+      ><sup><span class="cmmi-8">k</span></sup> such that
+<span class="cmmi-10x-x-109">v</span
+      ><sub><span class="cmmi-8">i</span></sub> is the frequency of the word
+<span class="cmmi-10x-x-109">b</span
+      ><sub><span class="cmmi-8">i</span></sub> occuring in the document
+<span class="cite"
+        >[<a href="#XCambria2014">12</a>,&#x00A0;<a
+href="#XStevenBirdEwanKlein2009"
+
+> 13</a
+> ,&#x00A0;<a href="#XZhang2010">14</a>]</span
+> .
+
+</p>
+<p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">3.1.1 </span> <a id="x1-80003.1.1"></a>Stemming
+      and lemmatization
+    </h5>
+    <!--l. 22-->
+    <p class="noindent">
+      When dealing with text data, it is not uncommon to have multiple forms of
+      the same word. A syntactic model would view the words &#8216;cat&#8217;
+      and &#8216;cats&#8217; as two different discrete symbols. A method is
+      needed to reduce words to a normal form.
+      <!--l. 25-->
+    </p>
+
+    <p class="indent">
+      Porter <span class="cite">[<a href="#XPorter1980">15</a>]</span> proposed
+      an algorithm for removing word suffixes to aim for a normal form, this is
+      called <span class="cmti-10x-x-109">stemming</span>. With no semantic
+      understanding, the algorithm matches specific suffix patterns and removes
+      them until it is unable to.
+      <!--l. 29-->
+    </p>
+
+    <p class="indent">
+      A more semantic approach would be
+      <span class="cmti-10x-x-109">lemmatization</span>. Instead of
+      algorithmically removing word endings, lemmatization normalises words to a
+      real word root - the dictionary form of the word
+      <span class="cite">[<a href="#XJayakodi2016">16</a>]</span>. One
+      lemmatizer implementation in Python is the WordNetLemmatizer in
+      Python&#8217;s Natural Language Tool Kit (NLTK), which queries the WordNet
+      corpus to find the root word
+      <span class="cite"
+        >[<a href="#XStevenBirdEwanKlein2009">13</a>,&#x00A0;<a
+          href="#Xprincetonuniversity_2010"
+          >17</a
+        >]</span
+      >.
+      <!--l. 35-->
+    </p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">3.1.2 </span> <a id="x1-90003.1.2"></a>Keyword
+      extraction
+    </h5>
+    <!--l. 36-->
+    <p class="noindent">
+      For syntactic methods, keyword extraction (KE) is key. For the purposes of
+      this report, a keyword is a word of particular relevance or importance,
+      and from which we might extract useful information. KE refers to
+      strategies based on which those important words can be ranked, keeping the
+      most relevant.
+      <!--l. 40-->
+    </p>
+
+    <p class="noindent">
+      <span class="paragraphHead"
+        ><a id="x1-100003.1.2"></a
+        ><span class="cmbx-10x-x-109">TF-IDF</span></span
+      >
+      Onesuch method, is Term Frequency Inverse Document Frequency (TF-IDF).
+      This is commonly used with BoW, and is implemented in Scikit-Learn
+      <span class="cite">[<a href="#XBarupal2011">18</a>]</span>. TF-IDF is a
+      statistic for scoring a words importance based on how frequently they
+      occur in a document, and in the dataset
+      <span class="cite">[<a href="#XRamos2003">19</a>]</span>.
+      <!--l. 46-->
+    </p>
+
+    <p class="indent">
+      Scoring as such aims to penalise words that occur too frequently across a
+      document, boosting scores of words in an individual document which appear
+      with disproportionately high frequency.
+
+      <!--l. 49-->
+    </p>
+
+    <p class="noindent">
+      <span class="paragraphHead"
+        ><a id="x1-110003.1.2"></a
+        ><span class="cmbx-10x-x-109">Graph based KE</span></span
+      >
+      Another approach for KE is the use of graph-based ranking methods. These
+      methods model words as nodes on a mathematical network graph. A popular
+      example is
+      <span class="cmti-10x-x-109">Rapid Automatic Keyword Extraction </span
+      >(RAKE), which finds a set of candidate keywords, and models them as a
+      co-occurence graph. Each node represents a candidate, each edge
+      co-occurence, and it&#8217;s weight the number of co-occurences.
+      Candidates are ranked according to frequency and degree&#x00A0;<span
+        class="cite"
+        >[<a href="#XRose2010">21</a>]</span
+      >.
+      <!--l. 59-->
+    </p>
+
+    <p class="indent">
+      Beliga et al. <span class="cite">[<a href="#XBeliga2015">22</a>]</span>,
+      survey a wide range of graph based KE techniques, many of which rely on
+      different centrality measures . Onesuch centrality measure is
+      eigencentrality
+      <span class="cite">[<a href="#XBonacich2007">23</a>]</span>.
+      Eigencentrality scores each node as a proportion of the sum of the scores
+      of all nodes to which it is connected. Suppose we have a graph, with an
+      adjacency matrix <span class="cmmi-10x-x-109">A</span>, we would set
+    </p>
+
+    <table class="equation">
+      <tr>
+        <td>
+          <a id="x1-11002r1"></a>
+          <div class="math-display">
+            <img
+            src="{{ page.img-report2x | prepend: site.baseurl | replace: '//', '/' }}"
+            alt="xi = &#x03BB; Aijxj"
+            class="math-display"
+            />
+
+</div>
+</td>
+<td class="equation-label">(1)</td>
+</tr>
+</table>
+<!--l. 66-->
+<p class="nopar">
+using the summation convention, where <span class="cmmi-10x-x-109">x</span
+      ><sub><span class="cmmi-8">i</span></sub> is the centrality of the
+<span class="cmmi-10x-x-109">i</span
+      ><sup><span class="cmmi-8">th</span></sup> node. This reduces to the
+eigenvector equation
+</p>
+
+    <table class="equation">
+      <tr>
+        <td>
+          <a id="x1-11003r2"></a>
+          <div class="math-display">
+            <img
+              src="{{ page.img-report3x | prepend: site.baseurl | replace: '//', '/' }}"
+              alt="A &#x22C5;x = &#x03BB;x
+
+^ ^
+"
+class="math-display"
+/>
+
+</div>
+</td>
+<td class="equation-label">(2)</td>
+</tr>
+</table>
+<!--l. 70-->
+<p class="nopar">
+This is given with more detail in
+<span class="cite">[<a href="#XNewman2010">24</a>]</span>.
+</p>
+<p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">3.1.3 </span> <a id="x1-120003.1.3"></a>Word2vec
+    </h5>
+    <!--l. 73-->
+    <p class="noindent">
+      <span class="cmti-10x-x-109">Word2vec </span>is a semantic language model
+      developed by Google. Instead of encoding each word as a discrete symbol as
+      with BoW, word2vec embeddings retain similarity between similar words.
+      This is achieved by training an
+      <span class="cmti-10x-x-109">Artificial Neural Network </span>(ANN) to
+      predict surrounding words for each given word. The hidden layer&#8217;s
+      weights represent probabilities of respective surrounding words. These
+      probability vectors are used as embeddings for each word. As a words
+      embedding now reflects likely surrounding words, synonyms are mapped to
+      similar vectors.
+      <span class="cite"
+        >[<a href="#XMikolov2013">25</a>,&#x00A0;<a href="#XMcCormick2017">26</a
+        >,&#x00A0;<a href="#XLiu2020">27</a>]</span
+      >
+      <!--l. 80-->
+    </p>
+
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">3.2 </span> <a id="x1-130003.2"></a>Recommender
+      Agents
+    </h4>
+    <!--l. 81-->
+    <p class="noindent">
+      Collaborative filtering (CF) is perhaps the most common recommender engine
+      method. CF treats each user as an entity, and provides recommendations to
+      users based on the behaviours of users it considers similar
+      <span class="cite"
+        >[<a href="#XMelville2010">28</a>,&#x00A0;<a href="#XHerlocker2000"
+          >29</a
+        >]</span
+      >. A simple, less abstract, example would be an online shopping site
+      recommending product <span class="cmmi-10x-x-109">B </span>to someone who
+      has bought product <span class="cmmi-10x-x-109">A </span>on the basis that
+      a significant proportion of shoppers who buy product
+      <span class="cmmi-10x-x-109">A</span> go on to purchase
+      <span class="cmmi-10x-x-109">B</span>. It produces a simple filter, making
+      predictions with no product knowledge, just user patterns.
+      <!--l. 88-->
+    </p>
+
+    <p class="indent">
+      Content based (CB) recommender engines are the opposite. Instead of
+      focussing on user patterns they make predictions on the basis of specific
+      attributes of each entity being recommended
+      <span class="cite"
+        >[<a href="#XMelville2010">28</a>,&#x00A0;<a href="#XMooney2000">30</a
+        >]</span
+      >. While such a system may use user details, the main knowledge source is
+      the entities being recommended.
+      <!--l. 92-->
+    </p>
+
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">3.3 </span> <a id="x1-140003.3"></a>AI
+      Applications to Whisky
+    </h4>
+    <!--l. 94-->
+    <p class="noindent">
+      There is a large gap in the research regarding Artificial Intelligence
+      (AI) applications to whisky. Coldevin built an agent based whisky
+      recommender, choosing to use a CB design
+      <span class="cite">[<a href="#XColdevin2005">8</a>]</span>. He built a
+      system using specific attributes about the whisky to recommend based on
+      consumer likes or dislikes. Omid-Zohoor and Eghtesadi built another such
+      hybrid (using both CB and CF) agent
+      <span class="cite">[<a href="#XOmidzohoor">7</a>]</span>, however again
+      they relied on specific categorical and ratio features. An interesting
+      design choice was to recommend on the basis of a user&#8217;s entire
+      profile, and the ratings they give. Perhaps unsurprisingly their CB model
+      performed poorly with users who gave large numbers of reviews. The more
+      reviews the more noise.
+      <!--l. 103-->
+    </p>
+
+    <p class="indent">
+      I think an agent would be more effective if it takes specific user
+      preferences at a given point in time, and makes a recommendation on that
+      basis. Instead of attempting to offer users a whisky which best matches
+      all varied whiskies they like, users get recommendations of the style they
+      want at the time. This is closer to Coldevin&#8217;s approach.
+      <!--l. 109-->
+    </p>
+
+    <p class="indent">
+      Wishart completed what seems to be the only study of whisky which uses NLP
+      <span class="cite">[<a href="#XWishart2000">31</a>]</span>. Working with
+      industry experts he selected 84 different whiskies and extracted
+      descriptors from their tasting notes. These were coded and used to cluster
+      the whiskies. These clusters were reviewed and evaluated by industry
+      experts. He later proposed a set of 12 flavour dimensions for Scotch
+      whisky <span class="cite">[<a href="#XWishart2009">32</a>]</span>.
+      <!--l. 114-->
+    </p>
+
+    <p class="indent">
+      While groundbreaking, Whisharts work differs somewhat from that carried
+      out in this project. Where Wishart aimed to find key flavours in Scotch,
+      working with industry experts, I aim to produce an agent which exhibits
+      intelligence as an industry expert by suggesting whiskies, based only on
+      their tasting notes.
+      <!--l. 1-->
+    </p>
+
+    <p class="noindent"></p>
+    <hr />
+    <h3 class="sectionHead">
+      <span class="titlemark">4 </span> <a id="x1-150004"></a>Approach
+    </h3>
+    <!--l. 2-->
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">4.1 </span> <a id="x1-160004.1"></a>Requirements
+    </h4>
+    <!--l. 3-->
+    <p class="noindent">The following broad requirements were defined:</p>
+    <ul class="itemize1">
+      <li class="itemize">
+        <span class="cmbx-10x-x-109">Agent and Environment </span>- The
+        recommender should be an agent acting in an environment. The environment
+        being the contents of the Master of Malt (MoM) website, and an interface
+        with a user. The agent could be considered as part of a backend of a web
+        app with outputs in a Python dictionary/JSON format.
+      </li>
+      <li class="itemize">
+        <span class="cmbx-10x-x-109">Speed </span>- The agent should be able to
+        recommend within a couple of seconds.
+      </li>
+      <li class="itemize">
+        <span class="cmbx-10x-x-109">Customisable </span>- An end user should be
+        able to filter by price, volume and ABV.
+      </li>
+      <li class="itemize">
+        <span class="cmbx-10x-x-109">Updateable </span>- The agent should be
+        able to automatically update it&#8217;s database, and retrain its
+        models.
+      </li>
+      <li class="itemize">
+        <span class="cmbx-10x-x-109">Input Types </span>- The agents should
+        recommend based on <span class="cmti-10x-x-109">likes </span>&amp;
+        <span class="cmti-10x-x-109">dislikes </span>of whiskies supplied by a
+        user, or from a user&#8217;s written tasting notes.
+      </li>
+    </ul>
+    <!--l. 20-->
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">4.2 </span> <a id="x1-170004.2"></a>The Data
+    </h4>
+    <!--l. 21-->
+    <p class="noindent">
+      In order to build a whisky specific language model (discussed further in
+      <a href="#x1-190004.4">subsection&#x00A0;4.4<!--tex4ht:ref: sec:imp --></a
+      >), a large corpus of tasting notes was required.
+      <!--l. 24-->
+    </p>
+
+    <p class="indent">
+      Product data for a large range of scotch whiskies was scraped from
+      <a href="http://masterofmalt.com/">masterofmalt.com</a>, this dataset
+      contains a selection of attributes for each whisky. Names and URLs are
+      hashed together using MD5 to provide an ID.
+      <!--l. 29-->
+    </p>
+
+    <p class="indent">
+      It was observed that whiskies which are discontinued tend to be listed
+      without a price, whereas those which are out of stock are listed with a
+      price. For this reason, simplicity&#8217;s sake, price was taken as an
+      indication of stock. Those without a price were still recorded for two
+      reasons; users may wish to make recommendations based on liking or
+      disliking them, and they add to the corpus of tasting notes.
+    </p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">4.3 </span> <a id="x1-180004.3"></a>Choice of
+      Recommender Method
+    </h4>
+    <!--l. 37-->
+    <p class="noindent">
+      While an online spirits shop may use CF recommenders to recommend products
+      based on those being viewed (such as recommending gin to customers who
+      like gin etc.), a CF system may fail for recommending whiskies based on
+      tastes.
+
+      <!--l. 41-->
+    </p>
+
+    <p class="indent">
+      It is not unlikely that a whisky drinker may wish to buy two very
+      different whiskies in one order, just to compare them, or they might enjoy
+      a large range of whiskies. One might like a large variety of whiskies, and
+      purchase many different styles frequently. It seems unlikely that the
+      shopping habits of whisky enthusiasts is sufficient to recommend a whisky
+      based on specific tastes.
+      <!--l. 47-->
+    </p>
+
+    <p class="indent">
+      For that reason, a CB recommender model was chosen, using tasting note
+      data.
+      <!--l. 49-->
+    </p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">4.4 </span> <a id="x1-190004.4"></a>NLP Methods
+    </h4>
+    <!--l. 50-->
+    <p class="noindent">
+      Word2vec and BoW were both considered as language models. While there are
+      many pretrained models available, these are likely unsuitable due to
+      whisky&#8217;s lexicon.
+      <!--l. 53-->
+    </p>
+
+    <p class="indent">
+      Word2vec encapsulates far more semantic data, however re-training word2vec
+      regularly with new data would be expensive. As a quicker model to train
+      BoW was chosen. TF-IDF, RAKE and an eigencentrality ranking measure
+      discussed in
+      <a href="#x1-220004.4.3"
+        >subsubsection&#x00A0;4.4.3<!--tex4ht:ref: sec:imp --></a
+      >
+      were considered for KE.
+      <!--l. 58-->
+    </p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">4.4.1 </span> <a id="x1-200004.4.1"></a>The ideal
+      vector and similarity
+    </h5>
+    <!--l. 59-->
+    <p class="noindent">
+      BoW maps each input to a vector. To make recommendations, the agent must
+      map user input to a vector in the same space as the BoW model. This
+      <span class="cmti-10x-x-109">Ideal Vector </span>(IV) represents a
+      hypothetical whisky which best represents the input. Cosine similarity can
+      be used to ascertain which whiskies in the database best match the input.
+      Cosine similarity indicates the angle between vectors
+      <span class="cite">[<a href="#XMelville2010">28</a>]</span>. As
+    </p>
+
+    <table class="equation">
+      <tr>
+        <td>
+          <a id="x1-20001r3"></a>
+          <div class="math-display">
+            <img
+              src="{{ page.img-report4x | prepend: site.baseurl | replace: '//', '/' }}"
+              alt="u^&#x22C5;^v:= |u^ ||v^|cos&#x03B8;
+
+"
+class="math-display"
+/>
+
+</div>
+</td>
+<td class="equation-label">(3)</td>
+</tr>
+</table>
+<!--l. 67-->
+<p class="nopar">
+for
+<img
+        src="{{ page.img-report5x | prepend: site.baseurl | replace: '//', '/' }}"
+        alt="u
+^"
+        class="mathpalette"
+      /><span class="cmmi-10x-x-109">,</span
+      ><img
+        src="{{ page.img-report6x | prepend: site.baseurl | replace: '//', '/' }}"
+        alt=" v
+^"
+        class="mathpalette"
+      /><span class="cmsy-10x-x-109">&#x2208; </span
+      ><span class="msbm-10x-x-109">&#x211D;</span
+      ><sup><span class="cmmi-8">k</span></sup
+      >, by keeping all vectors normalised, this reduces such that the cosine
+similarity of
+<img
+        src="{{ page.img-report7x | prepend: site.baseurl | replace: '//', '/' }}"
+        alt="u
+^"
+        class="mathpalette"
+      />
+&amp;
+<img
+        src="{{ page.img-report8x | prepend: site.baseurl | replace: '//', '/' }}"
+        alt="v
+^"
+        class="mathpalette"
+      />
+is their scalar product.
+<!--l. 71-->
+</p>
+
+    <p class="indent">
+      Calculating cosine similarity for a large dataset is straightforward.
+      Consider our dataset of <span class="cmmi-10x-x-109">m </span>whiskies as
+    </p>
+
+    <table class="equation">
+      <tr>
+        <td>
+          <a id="x1-20002r4"></a>
+          <div class="math-display">
+            <img
+              src="{{ page.img-report9x | prepend: site.baseurl | replace: '//', '/' }}"
+              alt="D &#x2208; &#x211D;m &#x00D7;n
+
+"
+class="math-display"
+/>
+
+</div>
+</td>
+<td class="equation-label">(4)</td>
+</tr>
+</table>
+<!--l. 75-->
+<p class="nopar">
+with each row representing the corresponding whisky&#8217;s vector, and
+our IV
+<img
+        src="{{ page.img-report10x | prepend: site.baseurl | replace: '//', '/' }}"
+        alt="v
+^"
+        class="mathpalette"
+      /><span class="cmsy-10x-x-109">&#x2208; </span
+      ><span class="msbm-10x-x-109">&#x211D;</span
+      ><sup><span class="cmmi-8">n</span></sup
+      >. The product of
+</p>
+
+    <table class="equation">
+      <tr>
+        <td>
+          <a id="x1-20003r5"></a>
+          <div class="math-display">
+            <img
+              src="{{ page.img-report11x | prepend: site.baseurl | replace: '//', '/' }}"
+              alt="D &#x22C5;v = c
+
+^ ^
+"
+class="math-display"
+/>
+
+</div>
+</td>
+<td class="equation-label">(5)</td>
+</tr>
+</table>
+<!--l. 80-->
+<p class="nopar">or</p>
+
+    <table class="equation">
+      <tr>
+        <td>
+          <a id="x1-20004r6"></a>
+          <div class="math-display">
+            <img
+              src="{{ page.img-report12x | prepend: site.baseurl | replace: '//', '/' }}"
+              alt="(                   )  ( v1)    ( c1)
+
+d11 d12 ... d1n | v2| | c2|
+|| d21 d22 ... d2n|| &#x22C5;|| v || = || c ||
+( ... ... &#x22C5;&#x22C5;&#x22C5; ...) |( 3|) |( 3|)
+dm1 dm2 ... dmn ... ...
+vn cn
+"
+class="math-display"
+/>
+
+</div>
+</td>
+<td class="equation-label">(6)</td>
+</tr>
+</table>
+<!--l. 97-->
+<p class="nopar">
+gives cosine similarities between IV and each whisky in
+<span class="cmmi-10x-x-109">D</span>, where
+<img src="{{ page.img-report13x | prepend: site.baseurl | replace: '//', '/' }}" alt="c^" class="mathpalette" /> is
+our vector of cosine similarities.
+<!--l. 103-->
+</p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">4.4.2 </span> <a id="x1-210004.4.2"></a>Tasting
+      notes
+    </h5>
+    <!--l. 104-->
+    <p class="noindent">
+      As shown in table
+      <a href="#x1-21002r1">1<!--tex4ht:ref: tab:tnotes --></a>, whisky tasting
+      notes are keyword dense. Most words are candidate keywords, however some
+      KE techniques (such as RAKE) aim to find keywords from far less keyword
+      dense text. This must be considered when choosing a KE method.
+    </p>
+
+    <div class="table">
+      <!--l. 110-->
+      <p class="indent"></p>
+      <hr class="float" />
+      <div class="float">
+        <a id="x1-21002r1"></a>
+        <a id="x1-21003"></a>
+        <div class="caption">
+          <span class="id"> Table&#x00A0;1: </span
+          ><span class="content"
+            >A selection of whisky tasting notes from Master of Malt
+          </span>
+        </div>
+        <!--tex4ht:label?: x1-21002r4 -->
+        <div class="tabular">
+          <table id="TBL-2" class="tabular">
+            <colgroup id="TBL-2-1g">
+              <col id="TBL-2-1" />
+              <col id="TBL-2-2" />
+            </colgroup>
+            <tr style="vertical-align: baseline" id="TBL-2-1-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-2-1-1"
+                class="td11"
+              >
+                <!--l. 114-->
+                <p class="noindent">Whisky</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-2-1-2"
+                class="td11"
+              >
+                <!--l. 114-->
+                <p class="noindent">Tasting Notes</p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-2-2-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-2-2-1"
+                class="td11"
+              >
+                <!--l. 116-->
+                <p class="noindent">Laphroaig 10 Year Old</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-2-2-2"
+                class="td11"
+              >
+                <div class="minipage">
+                  <!--l. 117-->
+                  <p class="noindent">
+                    <span class="cmbx-10x-x-109">Nose: </span
+                    ><span class="cmti-10x-x-109"
+                      >&#x00A0;&#8220;This opens on big, smoky muscular peat
+                      notes. There are spices,</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >and liquorice, as well as a big dose of salt. This whisky
+                      has become slightly</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >sweeter in recent years, and it appears beautifully on
+                      the nose, amidst the classic</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >iodine/sticking plasters and cool wood smoke we
+                      love.&#8221;</span
+                    ><br class="newline" /><span class="cmbx-10x-x-109"
+                      >Palate:</span
+                    ><span class="cmti-10x-x-109"
+                      >&#x00A0;&#8220;Seaweed-led, with a hint of vanilla ice
+                      cream and more than a whiff of</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >notes from the first aid box (TCP, plasters etc). The oak
+                      is big, and muscles its</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >way into the fore as you hold this whisky over your
+                      tongue. An upsurge of spices</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >develop &#8211; cardamom/black pepper/chilli.&#8221; </span
+                    ><br class="newline" /><span class="cmbx-10x-x-109"
+                      >Finish:</span
+                    ><span class="cmti-10x-x-109"
+                      >&#x00A0;&#8220;Big and drying, as the savoury, tarry
+                      notes build up with an iodine</span
+                    >
+                    <span class="cmti-10x-x-109">complexity.&#8221;</span>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-2-3-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-2-3-1"
+                class="td11"
+              >
+                <!--l. 128-->
+                <p class="noindent">Talisker 10 Year Old</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-2-3-2"
+                class="td11"
+              >
+                <div class="minipage">
+                  <!--l. 129-->
+                  <p class="noindent">
+                    <span class="cmbx-10x-x-109">Nose: </span
+                    ><span class="cmti-10x-x-109"
+                      >&#x00A0;&#8220;A fresh and fragrant nose. Through thick,
+                      pungent smoke comes sweet</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >pear and apple peels, with pinches of maritime salt from
+                      kippers, seaweed.&#8221; </span
+                    ><br class="newline" /><span class="cmbx-10x-x-109"
+                      >Palate:</span
+                    ><span class="cmti-10x-x-109"
+                      >&#x00A0;&#8220;It&#8217;s a bonfire of peat crackling
+                      with black pepper, with a touch of brine</span
+                    >
+                    <span class="cmti-10x-x-109"
+                      >and dry barley. A welcome delivery of orchard fruit
+                      provides a delicate and beautiful</span
+                    >
+                    <span class="cmti-10x-x-109">balance.&#8221; </span
+                    ><br class="newline" /><span class="cmbx-10x-x-109"
+                      >Finish:</span
+                    >&#x00A0;<span class="cmti-10x-x-109"
+                      >&#8220;In a long finish, bonfire embers toast malt and
+                      crystallise a sugary</span
+                    >
+                    <span class="cmti-10x-x-109">underlay&#8221;</span>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-2-4-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-2-4-1"
+                class="td11"
+              ></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <hr class="endfloat" />
+    </div>
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">4.4.3 </span>
+      <a id="x1-220004.4.3"></a>Eigencentrality based Rapid Automatic Keyword
+      Extraction (eRAKE)
+    </h5>
+    <!--l. 143-->
+    <p class="noindent">
+      As discussed in section
+      <a href="#x1-110003.1.2">3.1.2<!--tex4ht:ref: sssec:gbkwe --></a>,
+      co-occurrence graphs can be useful for KE. RAKE is one such method where
+      primitive centrality measures are used to rank nodes. Another method uses
+      eigencentrality. This steps beyond words which themselves have a high
+      co-occurrence and rewards words with significantly edges to words with
+      high co-occurrences. This could be a compromise for retaining semantic
+      data. While losing full semantic data we are at least stepping beyond
+      merely looking at frequencies, selecting descriptors with larger amounts
+      of influence across the dataset.
+      <!--l. 150-->
+    </p>
+
+    <p class="indent">
+      As the graph is undirected, our adjacency matrix is hermitian and thus
+      finding it&#8217;s eigenvectors is trivial, SciPy&#8217;s
+      <span class="cmmi-10x-x-109">eigh</span>() function can be used
+      <span class="cite"
+        >[<a href="#Xhubbard_2020">33</a>,&#x00A0;<a href="#X2020NumPy">34</a
+        >]</span
+      >.
+      <!--l. 1-->
+    </p>
+
+    <p class="noindent"></p>
+    <hr />
+    <h3 class="sectionHead">
+      <span class="titlemark">5 </span> <a id="x1-230005"></a>Implementation
+    </h3>
+    <!--l. 3-->
+    <p class="noindent">
+      Implementation was split into the following two broad phases:
+    </p>
+    <ul class="itemize1">
+      <li class="itemize">
+        <span class="cmbx-10x-x-109">Data exploration: </span>Exploring the
+        dataset, and potential prototypical methods in a Jupyter Notebook
+        <span class="cite">[<a href="#XKluyver2016jupyter">35</a>]</span>.
+        Choosing a method to implement.
+      </li>
+      <li class="itemize">
+        <span class="cmbx-10x-x-109">Agent design: </span>Designing an agent in
+        Python based on work from previous phase.
+      </li>
+    </ul>
+    <!--l. 9-->
+    <p class="noindent">
+      These are discussed in sections
+      <a href="#x1-240005.1">5.1<!--tex4ht:ref: ssec:phase1 --></a> &amp;
+      <a href="#x1-280005.2">5.2<!--tex4ht:ref: ssec:phase2 --></a>
+      respectively.
+      <!--l. 11-->
+    </p>
+
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">5.1 </span> <a id="x1-240005.1"></a>Data
+      Exploration
+    </h4>
+    <!--l. 12-->
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.1.1 </span> <a id="x1-250005.1.1"></a>Effective
+      lemmatizing
+    </h5>
+    <!--l. 13-->
+    <p class="noindent">
+      Given whisky&#8217;s specific lexicon, an interesting problem occurs when
+      trying to use gerneral purpose lemmatizers. In whisky &#8216;peated&#8217;
+      is a verb describing how the grain was processed, and thus the
+      &#8216;peaty&#8217; (smokey) flavour has been imparted on the finished
+      spirit. In English, peat refers to a natural fuel made from dead plant
+      matter, and &#8216;peated&#8217; does not exist
+      <span class="cite">[<a href="#Xold">36</a>]</span>. &#8216;Peated&#8217;
+      and &#8216;peaty&#8217; should both reduce to &#8216;peat&#8217;, however
+      as they are not considered as verbs in WordNet. For this reason a separate
+      custom whisky lemmatizer was built.
+      <!--l. 20-->
+    </p>
+
+    <p class="indent">
+      The <span class="cmti-10x-x-109">WhiskyLemmatizer </span>was built on top
+      of scikit-learn&#8217;s WordNet lemmatizer
+      <span class="cite">[<a href="#XBarupal2011">18</a>]</span>. I manually
+      created a dictionary of whisky-specific words and corresponding root
+      forms. For each input, the lemmatizer first checks the dictionary. If the
+      word is not in the dictionary it then uses scikit-learn&#8217;s
+      lemmatizer. As WordNet can be slow, every result from WordNet is cached in
+      the dictionary.
+      <!--l. 25-->
+    </p>
+
+    <p class="indent">
+      After experimentation with this WhiskyLemmatizer, words in the cache which
+      are mapped to words which further reduce were automatically updated to map
+      to the leaf word. A set of stopwords was manually produced in an iterative
+      process based on the lemmatizer&#8217;s outputs.
+
+      <!--l. 29-->
+    </p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.1.2 </span> <a id="x1-260005.1.2"></a>Comparing
+      KE strategies
+    </h5>
+    <!--l. 30-->
+    <p class="noindent">
+      As over time the lexicon may change, the agent should perform KE with each
+      training cycle. KE takes a significant proportion of time for model
+      building. For this reason time and accuracy are of equal importance.
+      Perfect KE is of little use if it takes forever.
+      <!--l. 34-->
+    </p>
+
+    <p class="indent">
+      An adapted implementation of TF-IDF
+      <span class="cite">[<a href="#Xtf_idf_imp">37</a>]</span> the
+      <span class="cmti-10x-x-109">rake-nltk </span>python package
+      <span class="cite">[<a href="#Xsharmer_2018">38</a>]</span>, and a new
+      implementation eRAKE were applied to the dataset with a range of
+      lemmatizers to extract the top 300 keywords. The methods were timed, and
+      the top 20 keywords recorded. These can be found in tables
+      <a href="#x1-26001r2">2<!--tex4ht:ref: tab:times --></a> and
+      <a href="#x1-26003r3">3<!--tex4ht:ref: tab:top20 --></a>.
+    </p>
+
+    <div class="table">
+      <!--l. 40-->
+      <p class="indent"></p>
+      <hr class="float" />
+      <div class="float">
+        <a id="x1-26001r2"></a>
+        <div class="tabular">
+          <a id="x1-26002"></a>
+          <div class="caption">
+            <span class="id"> Table&#x00A0;2: </span
+            ><span class="content"
+              >Times of TF-IDF, RAKE and eRAKE with various lemmatizers in
+              seconds.
+            </span>
+          </div>
+          <!--tex4ht:label?: x1-26001r5 -->
+
+          <table id="TBL-3" class="tabular">
+            <colgroup id="TBL-3-1g">
+              <col id="TBL-3-1" />
+              <col id="TBL-3-2" />
+              <col id="TBL-3-3" />
+              <col id="TBL-3-4" />
+            </colgroup>
+            <tr style="vertical-align: baseline" id="TBL-3-1-">
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-1-1"
+                class="td11"
+              ></td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-1-2"
+                class="td11"
+              >
+                TF-IDF
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-1-3"
+                class="td11"
+              >
+                RAKE
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-1-4"
+                class="td11"
+              >
+                eRAKE
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-3-2-">
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-2-1"
+                class="td11"
+              >
+                Unlemmatized
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-2-2"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">1247 </span>
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-2-3"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">0.441 </span>
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-2-4"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">- </span>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-3-3-">
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-3-1"
+                class="td11"
+              >
+                WordNet Lemmatized
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-3-2"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">1461 </span>
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-3-3"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">130.2 </span>
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-3-4"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">- </span>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-3-4-">
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-4-1"
+                class="td11"
+              >
+                WhiskyLemmatizer
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-4-2"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">1209 </span>
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-4-3"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">4.947 </span>
+              </td>
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-4-4"
+                class="td11"
+              >
+                <span class="cmti-10x-x-109">47.6 </span>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-3-5-">
+              <td
+                style="white-space: nowrap; text-align: left"
+                id="TBL-3-5-1"
+                class="td11"
+              ></td>
+            </tr>
+          </table>
+          <!--l. 51-->
+          <p class="noindent"></p>
+        </div>
+
+        <sup class="textsuperscript"></sup> <span class="cmbx-10">Note: </span
+        ><span class="cmr-10"
+          >eRAKE was only applied to the WhiskyLemmatized corpus as the eRake
+          implementation included</span
+        >
+        <span class="cmr-10">the WhiskyLemmatizer.</span>
+      </div>
+      <hr class="endfloat" />
+    </div>
+    <!--l. 60-->
+    <p class="indent">
+      As is clear, TF-IDF KE took orders of magnitude longer than RAKE and
+      eRAKE. Qualitatively evaluating the keywords extracted by RAKE vs eRAKE,
+      eRAKE produces more useful keywords. This is perhaps unsurprising, as RAKE
+      aims to find keywords from a corpus with both a relatively high frequency
+      of each keyword, and a higher frequency of stopwords. By applying it to
+      tasting notes it is perhaps being misused. As highlighted in
+      <a href="#x1-210004.4.2"
+        >subsubsection&#x00A0;4.4.2<!--tex4ht:ref: tab:top20 --></a
+      >, tasting notes are very feature dense, however different tasting notes
+      have different features characterising them. It is likely that the most
+      frequent features are penalised due to stopword potential. It is
+      interesting to see that WordNet lemmatizing had little impact in terms of
+      which words were extracted.
+    </p>
+
+    <div class="table">
+      <!--l. 69-->
+      <p class="indent"></p>
+      <hr class="float" />
+      <div class="float">
+        <a id="x1-26003r3"></a>
+        <a id="x1-26004"></a>
+        <div class="caption">
+          <span class="id"> Table&#x00A0;3: </span
+          ><span class="content"
+            >Top 20 keywords from each of TF-IDF, RAKE and eRAKE with various
+            lemmatizers.
+          </span>
+        </div>
+        <!--tex4ht:label?: x1-26003r5 -->
+        <div class="tabular">
+          <table id="TBL-4" class="tabular">
+            <colgroup id="TBL-4-1g">
+              <col id="TBL-4-1" />
+              <col id="TBL-4-2" />
+              <col id="TBL-4-3" />
+            </colgroup>
+            <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-6-1"
+                class="td11"
+              >
+              
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-2-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-2-1"
+                class="td11"
+              >
+                <!--l. 74-->
+                <p class="noindent">Keyword Extraction</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-2-2"
+                class="td11"
+              >
+                <!--l. 74-->
+                <p class="noindent">Lemmatizer</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-2-3"
+                class="td11"
+              >
+                <!--l. 74-->
+                <p class="noindent">Keywords</p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-3-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-3-1"
+                class="td11"
+              >
+                <!--l. 76-->
+                <p class="noindent"></p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-3-2"
+                class="td11"
+              >
+                <!--l. 76-->
+                <p class="noindent">None</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-3-3"
+                class="td11"
+              >
+                <!--l. 76-->
+                <p class="noindent">
+                  <span class="cmti-10x-x-109"
+                    >vanilla, quite, juicy, jam, zest, liquorice, cr</span
+                  ><span class="cmti-10x-x-109">ï¿½me, waxy, mixed,</span>
+                  <span class="cmti-10x-x-109"
+                    >oak, zesty, smoke, marzipan, drizzle, hazelnut,
+                    beeswax,</span
+                  >
+                  <span class="cmti-10x-x-109">joined, juice, br</span
+                  ><span class="cmti-10x-x-109">ï¿½l</span
+                  ><span class="cmti-10x-x-109">ï¿½e, box</span>
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-4-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-4-1"
+                class="td11"
+              >
+                <!--l. 77-->
+                <p class="noindent">TF-IDF</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-4-2"
+                class="td11"
+              >
+                <!--l. 77-->
+                <p class="noindent">Wordnet</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-4-3"
+                class="td11"
+              >
+                <!--l. 77-->
+                <p class="noindent">
+                  <span class="cmti-10x-x-109"
+                    >vanilla, quite, juicy, jam, zest, liquorice, cr</span
+                  ><span class="cmti-10x-x-109">ï¿½me, waxy, mixed,</span>
+                  <span class="cmti-10x-x-109"
+                    >oak, zesty, smoke, marzipan, drizzle, hazelnut,
+                    beeswax,</span
+                  >
+                  <span class="cmti-10x-x-109">joined, juice, br</span
+                  ><span class="cmti-10x-x-109">ï¿½l</span
+                  ><span class="cmti-10x-x-109">ï¿½e, box</span>
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-5-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-5-1"
+                class="td11"
+              >
+                <!--l. 78-->
+                <p class="noindent"></p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-5-2"
+                class="td11"
+              >
+                <!--l. 78-->
+                <p class="noindent">Whisky</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-5-3"
+                class="td11"
+              >
+                <!--l. 78-->
+                <p class="noindent">
+                  <span class="cmti-10x-x-109"
+                    >vanilla, zest, jam, quite, juicy, sweet, fruit, waxy,
+                    liquorice,</span
+                  >
+                  <span class="cmti-10x-x-109">cr</span
+                  ><span class="cmti-10x-x-109"
+                    >ï¿½me, smoke, develop, oak, mixed, drizzle, hazelnut,</span
+                  >
+                  <span class="cmti-10x-x-109"
+                    >marzipan, join, dry, beeswax</span
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-6-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-6-1"
+                class="td11"
+              >
+                <!--l. 80-->
+                <p class="noindent"></p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-6-2"
+                class="td11"
+              >
+                <!--l. 80-->
+                <p class="noindent">None</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-6-3"
+                class="td11"
+              >
+                <!--l. 80-->
+                <p class="noindent">
+                  <span class="cmti-10x-x-109"
+                    >with, winesky, while, touch, torten, time, theres,
+                    saucepan,</span
+                  >
+                  <span class="cmti-10x-x-109"
+                    >salty, pan, or, nose, musty, muscular, more,
+                    marketplace,</span
+                  >
+                  <span class="cmti-10x-x-109">little, like, just, its</span>
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-7-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-7-1"
+                class="td11"
+              >
+                <!--l. 81-->
+                <p class="noindent">RAKE</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-7-2"
+                class="td11"
+              >
+                <!--l. 81-->
+                <p class="noindent">Wordnet</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-7-3"
+                class="td11"
+              >
+                <!--l. 81-->
+                <p class="noindent">
+                  <span class="cmti-10x-x-109"
+                    >with, winesky, while, touch, torten, time, theres,
+                    saucepan,</span
+                  >
+                  <span class="cmti-10x-x-109"
+                    >salty, pan, or, nose, musty, muscular, more,
+                    marketplace,</span
+                  >
+                  <span class="cmti-10x-x-109">little, like, just, its</span>
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-8-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-8-1"
+                class="td11"
+              >
+                <!--l. 82-->
+                <p class="noindent"></p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-8-2"
+                class="td11"
+              >
+                <!--l. 82-->
+                <p class="noindent">Whisky</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-8-3"
+                class="td11"
+              >
+                <!--l. 82-->
+                <p class="noindent">-</p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-9-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-9-1"
+                class="td11"
+              >
+                <!--l. 84-->
+                <p class="noindent">eRAKE</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-9-2"
+                class="td11"
+              >
+                <!--l. 84-->
+                <p class="noindent">Whisky</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-9-3"
+                class="td11"
+              >
+                <!--l. 84-->
+                <p class="noindent">
+                  <span class="cmti-10x-x-109"
+                    >fruit, sweet, spice, oak, vanilla, smoke, honey, malt,
+                    chocolate,</span
+                  >
+                  <span class="cmti-10x-x-109"
+                    >apple, dry, pepper, orange, cream, butter, fresh, nut,
+                    peel,</span
+                  >
+                  <span class="cmti-10x-x-109">rich, barley</span>
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-4-10-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-4-10-1"
+                class="td11"
+              ></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <hr class="endfloat" />
+    </div>
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.1.3 </span> <a id="x1-270005.1.3"></a>Clustering
+    </h5>
+    <div class="table">
+      <!--l. 92-->
+      <p class="indent"></p>
+      <hr class="float" />
+      <div class="float">
+        <a id="x1-27001r4"></a>
+        <a id="x1-27002"></a>
+        <div class="caption">
+          <span class="id"> Table&#x00A0;4: </span
+          ><span class="content"
+            >Whiskies considered in clustering evaluation.
+          </span>
+        </div>
+        <!--tex4ht:label?: x1-27001r5 -->
+        <div class="tabular">
+          <table id="TBL-5" class="tabular">
+            <colgroup id="TBL-5-1g">
+              <col id="TBL-5-1" />
+            </colgroup>
+            <tr style="vertical-align: baseline" id="TBL-5-1-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-5-1-1"
+                class="td11"
+              >
+                <!--l. 96-->
+                <p class="noindent">
+                  Highland Park 12 Year Old, Bowmore 15 Year Old, Arran 10 Year
+                  Old, Edradour 10 Year Old, Old Pulteney 12 Year OId, Laphroaig
+                  10 Year Old, Ardbeg 10 Year Old, Blair Athol 12 Year Old -
+                  Flora and Fauna, Talisker 10 Year Old, GlenAllachie 15 Year
+                  Old, Aberlour A&#8217;Bunadh Batch 68
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-5-2-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-5-2-1"
+                class="td11"
+              ></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <hr class="endfloat" />
+    </div>
+    <!--l. 102-->
+    <p class="noindent"><a id="x1-27003r5"></a></p>
+
+    <div class="tabular">
+      <a id="x1-27004"></a>
+      <div class="caption">
+        <span class="id"> Table&#x00A0;5: </span
+        ><span class="content"
+          >Clustering of whiskies from each BoW model.
+        </span>
+      </div>
+      <!--tex4ht:label?: x1-27003r5 -->
+
+      <table id="TBL-6" class="tabular">
+        <colgroup id="TBL-6-1g">
+          <col id="TBL-6-1" />
+          <col id="TBL-6-2" />
+          <col id="TBL-6-3" />
+        </colgroup>
+        <colgroup id="TBL-6-4g">
+          <col id="TBL-6-4" />
+          <col id="TBL-6-5" />
+          <col id="TBL-6-6" />
+        </colgroup>
+        <tr style="vertical-align: baseline" id="TBL-6-1-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-1-1"
+            class="td11"
+          >
+            <!--l. 107-->
+            <p class="noindent">KE</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-1-2"
+            class="td11"
+          >
+            <!--l. 107-->
+            <p class="noindent">Cluster Features</p>
+          </td>
+          <td
+            style="white-space: nowrap; text-align: left"
+            id="TBL-6-1-3"
+            class="td11"
+          >
+            <div
+              class="multicolumn"
+              style="white-space: nowrap; text-align: left"
+            >
+              Whiskies
+            </div>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-1-4"
+            class="td11"
+          >
+            <!--l. 107-->
+            <p class="noindent">KE</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-1-5"
+            class="td11"
+          >
+            <!--l. 107-->
+            <p class="noindent">Cluster Features</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-1-6"
+            class="td11"
+          >
+            <!--l. 107-->
+            <p class="noindent">Whiskies</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-2-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-2-1"
+            class="td11"
+          >
+            <!--l. 109-->
+            <p class="noindent">TF-IDF</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-2-2"
+            class="td11"
+          >
+            <!--l. 109-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">spice, vanilla,</span>
+              <span class="cmti-10x-x-109">sweet</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-2-3"
+            class="td11"
+          >
+            <!--l. 109-->
+            <p class="noindent">Highland Park, Bowmore</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-2-4"
+            class="td11"
+          >
+            <!--l. 109-->
+            <p class="noindent">TF-IDF*</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-2-5"
+            class="td11"
+          >
+            <!--l. 109-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">fruit, malt,</span>
+              <span class="cmti-10x-x-109">spice</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-2-6"
+            class="td11"
+          >
+            <!--l. 109-->
+            <p class="noindent">Highland Park, Bowmore</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-3-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-3-1"
+            class="td11"
+          >
+            <!--l. 110-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-3-2"
+            class="td11"
+          >
+            <!--l. 110-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">malt, honey,</span>
+              <span class="cmti-10x-x-109">sweet</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-3-3"
+            class="td11"
+          >
+            <!--l. 110-->
+            <p class="noindent">Arran</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-3-4"
+            class="td11"
+          >
+            <!--l. 110-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-3-5"
+            class="td11"
+          >
+            <!--l. 110-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">malt, fruit, oak</span>
+            </p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-3-6"
+            class="td11"
+          >
+            <!--l. 110-->
+            <p class="noindent">Arran</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-4-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-4-1"
+            class="td11"
+          >
+            <!--l. 111-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-4-2"
+            class="td11"
+          >
+            <!--l. 111-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">fruit, malt,</span>
+              <span class="cmti-10x-x-109">spice</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-4-3"
+            class="td11"
+          >
+            <!--l. 111-->
+            <p class="noindent">Edradour</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-4-4"
+            class="td11"
+          >
+            <!--l. 111-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-4-5"
+            class="td11"
+          >
+            <!--l. 111-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">fruit, malt,</span>
+              <span class="cmti-10x-x-109">spice</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-4-6"
+            class="td11"
+          >
+            <!--l. 111-->
+            <p class="noindent">-</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-5-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-5-1"
+            class="td11"
+          >
+            <!--l. 112-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-5-2"
+            class="td11"
+          >
+            <!--l. 112-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">oak, malt,</span>
+              <span class="cmti-10x-x-109">vanilla</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-5-3"
+            class="td11"
+          >
+            <!--l. 112-->
+            <p class="noindent">Old Pulteney</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-5-4"
+            class="td11"
+          >
+            <!--l. 112-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-5-5"
+            class="td11"
+          >
+            <!--l. 112-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">oak, malt,</span>
+              <span class="cmti-10x-x-109">vanilla</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-5-6"
+            class="td11"
+          >
+            <!--l. 112-->
+            <p class="noindent">Old Pulteney</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-6-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-6-1"
+            class="td11"
+          >
+            <!--l. 113-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-6-2"
+            class="td11"
+          >
+            <!--l. 113-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">smoke, peat,</span>
+              <span class="cmti-10x-x-109">malt</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-6-3"
+            class="td11"
+          >
+            <!--l. 113-->
+            <p class="noindent">Laphroaig, Ardbeg, Blair Athol, Talisker</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-6-4"
+            class="td11"
+          >
+            <!--l. 113-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-6-5"
+            class="td11"
+          >
+            <!--l. 113-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">smoke, peat,</span>
+              <span class="cmti-10x-x-109">malt</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-6-6"
+            class="td11"
+          >
+            <!--l. 113-->
+            <p class="noindent">Laphroaig, Ardbeg, Talisker</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-7-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-7-1"
+            class="td11"
+          >
+            <!--l. 114-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-7-2"
+            class="td11"
+          >
+            <!--l. 114-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">chocolate,</span>
+              <span class="cmti-10x-x-109">malt, sherry</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-7-3"
+            class="td11"
+          >
+            <!--l. 114-->
+            <p class="noindent">GlenAllachie, Aberlour A&#8217;Bunadh</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-7-4"
+            class="td11"
+          >
+            <!--l. 114-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-7-5"
+            class="td11"
+          >
+            <!--l. 114-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">sherry, malt,</span>
+              <span class="cmti-10x-x-109">fruit</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-7-6"
+            class="td11"
+          >
+            <!--l. 114-->
+            <p class="noindent">
+              GlenAllachie, Blair Athol, Aberlour A&#8217;Bunadh, Edradour
+            </p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-8-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-8-1"
+            class="td11"
+          >
+            <!--l. 116-->
+            <p class="noindent">RAKE</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-8-2"
+            class="td11"
+          >
+            <!--l. 116-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">musty,</span>
+              <span class="cmti-10x-x-109">muscular, fire</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-8-3"
+            class="td11"
+          >
+            <!--l. 116-->
+            <p class="noindent">
+              Laphroaig, Ardbeg, Highland Park, Old Pulteney, GlenAllachie,
+              Blair Athol, Bowmore, Aberlour A&#8217;Bunadh, Edradour
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-8-4"
+            class="td11"
+          >
+            <!--l. 116-->
+            <p class="noindent">eRAKE</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-8-5"
+            class="td11"
+          >
+            <!--l. 116-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">malt, vanilla,</span>
+              <span class="cmti-10x-x-109">sweet</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-8-6"
+            class="td11"
+          >
+            <!--l. 116-->
+            <p class="noindent">Highland Park, Bowmore</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-9-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-9-1"
+            class="td11"
+          >
+            <!--l. 117-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-9-2"
+            class="td11"
+          >
+            <!--l. 117-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">little, musty,</span>
+              <span class="cmti-10x-x-109">fire</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-9-3"
+            class="td11"
+          >
+            <!--l. 117-->
+            <p class="noindent">-</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-9-4"
+            class="td11"
+          >
+            <!--l. 117-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-9-5"
+            class="td11"
+          >
+            <!--l. 117-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">sherry, malt,</span>
+              <span class="cmti-10x-x-109">fruit</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-9-6"
+            class="td11"
+          >
+            <!--l. 117-->
+            <p class="noindent">
+              GlenAllachie, Blair Athol, Aberlour A&#8217;Bunadh, Edradour
+            </p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-10-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-10-1"
+            class="td11"
+          >
+            <!--l. 118-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-10-2"
+            class="td11"
+          >
+            <!--l. 118-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">little, like,</span>
+              <span class="cmti-10x-x-109">musty</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-10-3"
+            class="td11"
+          >
+            <!--l. 118-->
+            <p class="noindent">-</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-10-4"
+            class="td11"
+          >
+            <!--l. 118-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-10-5"
+            class="td11"
+          >
+            <!--l. 118-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">malt, fruit, oak</span>
+            </p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-10-6"
+            class="td11"
+          >
+            <!--l. 118-->
+            <p class="noindent">Arran</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-11-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-11-1"
+            class="td11"
+          >
+            <!--l. 119-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-11-2"
+            class="td11"
+          >
+            <!--l. 119-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">time, like, fire</span>
+            </p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-11-3"
+            class="td11"
+          >
+            <!--l. 119-->
+            <p class="noindent">Talisker</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-11-4"
+            class="td11"
+          >
+            <!--l. 119-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-11-5"
+            class="td11"
+          >
+            <!--l. 119-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">fruit, malt,</span>
+              <span class="cmti-10x-x-109">spice</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-11-6"
+            class="td11"
+          >
+            <!--l. 119-->
+            <p class="noindent">-</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-12-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-12-1"
+            class="td11"
+          >
+            <!--l. 120-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-12-2"
+            class="td11"
+          >
+            <!--l. 120-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">like, muscular,</span>
+              <span class="cmti-10x-x-109">musty</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-12-3"
+            class="td11"
+          >
+            <!--l. 120-->
+            <p class="noindent">Arran</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-12-4"
+            class="td11"
+          >
+            <!--l. 120-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-12-5"
+            class="td11"
+          >
+            <!--l. 120-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">smoke, peat,</span>
+              <span class="cmti-10x-x-109">vanilla</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-12-6"
+            class="td11"
+          >
+            <!--l. 120-->
+            <p class="noindent">Laphroaig, Ardbeg, Talisker</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-13-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-13-1"
+            class="td11"
+          >
+            <!--l. 121-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-13-2"
+            class="td11"
+          >
+            <!--l. 121-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">little, time, like</span>
+            </p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-13-3"
+            class="td11"
+          >
+            <!--l. 121-->
+            <p class="noindent">-</p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-13-4"
+            class="td11"
+          >
+            <!--l. 121-->
+            <p class="noindent"></p>
+          </td>
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-13-5"
+            class="td11"
+          >
+            <!--l. 121-->
+            <p class="noindent">
+              <span class="cmti-10x-x-109">oak, malt,</span>
+              <span class="cmti-10x-x-109">vanilla</span>
+            </p>
+          </td>
+
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-13-6"
+            class="td11"
+          >
+            <!--l. 121-->
+            <p class="noindent">Old Pulteney</p>
+          </td>
+        </tr>
+        <tr style="vertical-align: baseline" id="TBL-6-14-">
+          <td
+            style="white-space: normal; text-align: left"
+            id="TBL-6-14-1"
+            class="td11"
+          ></td>
+        </tr>
+      </table>
+      <!--l. 123-->
+      <p class="noindent"></p>
+    </div>
+
+    <sup class="textsuperscript"></sup>
+    <span class="cmr-10"
+      >TF-IDF and RAKE refer to these extractions applied both WordNet and
+      unlemmatized. They produced the same results.</span
+    >
+    <span class="cmr-10">TF-IDF* is TF-IDF used with WhiskyLemmatizer</span>
+    <sup class="textsuperscript"></sup>
+    <span class="cmr-10"
+      >Cluster Features refers to the three most prominent features at the
+      centers of the cluster. </span
+    ><br class="newline" />
+    <!--l. 132-->
+    <p class="indent">
+      For the purpose of sanity checking, and ensuring sufficient information is
+      retained in each BoW, k-means clustering was applied on a BoW model based
+      on 300 keywords from each KE. The clusters of whiskies in
+      <a href="#x1-27001r4">Table&#x00A0;4<!--tex4ht:ref: tab:top20 --></a> were
+      considered, the corresponding clusters are shown in
+
+      <!--l. 139-->
+    </p>
+
+    <p class="indent">
+      There is little difference between TF-IDF and TF-IDF*, apart from Edradour
+      being clustered with GlenAllachie and Aberlour (two heavily sherried
+      expressions) in TF-IDF*, and Blair Athol. Blair Athol is a relatively
+      sherried expression, and thus appearing in a peat heavy cluster
+      (Laphroaig, Ardbeg, Talisker) seems strange. It&#8217;s TF-IDF* placement
+      seems far more sensible.
+      <!--l. 144-->
+    </p>
+
+    <p class="indent">
+      When considering tasting notes, Blair Athol is described as
+      <span class="cmti-10x-x-109"
+        >&#8220;Nutty with sherried notes. Gentle peat.</span
+      >
+      <span class="cmti-10x-x-109"
+        >Crisp. ... Peat smoke, syrup ...&#8221; </span
+      ><span class="cite">[<a href="#Xmom_ba">39</a>]</span>. This highlights a
+      limitation of BoW and its applications to this problem. By three mentions
+      of peat and smoke, Blair Athol was grouped with peat and smoke heavy
+      whiskyies.
+      <!--l. 149-->
+    </p>
+
+    <p class="indent">
+      RAKE&#8217;s clusters are clearly nonsense, however this isn&#8217;t
+      surprising considering it&#8217;s main keywords. The eRAKE clusters are
+      very similar to those in TF-IDF*. On the basis of this, and the data in
+      subsubsection&#x00A0;<a href="#x1-260005.1.2"
+        >5.1.2<!--tex4ht:ref: sssec:kwecomp --></a
+      >, eRAKE was chosen to move forward with.
+    </p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">5.2 </span> <a id="x1-280005.2"></a>Agent Design
+    </h4>
+    <!--l. 154-->
+    <p class="noindent">
+      The agent was designed as a single Python class, with a few helper classes
+      and functions. All inputs/outputs use Python dictionaries. While this may
+      seem strange, this is with the view that a web frontend could be designed
+      to send data in JSON formats.
+      <!--l. 158-->
+    </p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.2.1 </span> <a id="x1-290005.2.1"></a>The
+      database
+    </h5>
+    <!--l. 159-->
+    <p class="noindent">
+      An SQLite database is used to store all whisky data and models. This is
+      included in Python and allows multiple agents to access the data at the
+      same time. This also allows one agent to update the models and all other
+      agents will use the up to date model. It was observed that SQLite runs
+      faster than Pandas
+      <span class="cite">[<a href="#Xreback2020pandas">40</a>]</span>, however
+      Pandas is still used for some manipulations once data is loaded from the
+      database.
+      <!--l. 165-->
+    </p>
+
+    <p class="indent">
+      When loaded, the agent checks if there&#8217;s a database. If there
+      isn&#8217;t, it is built from the pre-existing
+      <span class="cmti-10x-x-109">scotch.csv </span>file.
+      <!--l. 167-->
+    </p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.2.2 </span> <a id="x1-300005.2.2"></a>Web
+      scraping
+    </h5>
+    <!--l. 168-->
+    <p class="noindent">
+      The initial dataset was collected using a rough script using Python and
+      <span class="cmti-10x-x-109">Beautiful Soup</span>&#x00A0;<span
+        class="cite"
+        >[<a href="#Xrichardson2007beautiful">41</a>]</span
+      >. The agent was designed using this dataset of
+      <span class="cmsy-10x-x-109">~</span>14,000 whiskies. As per the
+      requirements, and to ensure the agent&#8217;s autonomy, a method was
+      written to fetch new whiskies. If the initial dataset is not present, the
+      agent will automatically fetch all data.
+      <!--l. 173-->
+    </p>
+
+    <p class="indent">
+      The &#8216;new whiskies&#8217; page on MoM&#8217;s website is parsed and
+      each listing is checked to confirm it is Scotch. When each ID is created,
+      it is checked against those already in the database. If three consecutive
+      listings are already in the database, the agent stops, assuming all new
+      products have been included. Sometimes one or two re-stocked whiskies are
+      listed in succession. Setting three as the threshold reduces the risk of
+      stopping prematurely.
+      <!--l. 179-->
+    </p>
+
+    <p class="indent">
+      While this function could be set to run periodically, this hasn&#8217;t
+      been implemented to avoid unnecessarily using MoM&#8217;s server.
+
+      <!--l. 182-->
+    </p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.2.3 </span> <a id="x1-310005.2.3"></a>Model
+      training
+    </h5>
+    <!--l. 183-->
+    <p class="noindent">
+      eRAKE is used to lemmatize all tasting notes, and extract 300 keywords for
+      each model. These are then vectorised and the dataset is transformed to a
+      matrix <span class="cmbx-10x-x-109">M</span>
+      <span class="cmsy-10x-x-109">&#x2208; </span
+      ><span class="msbm-10x-x-109">&#x211D;</span
+      ><sup
+        ><span class="cmmi-8">m</span><span class="cmsy-8">&#x00D7;</span
+        ><span class="cmmi-8">n</span></sup
+      >, with each row a normalised vector on a 300-dimensional hypersphere.
+      Each <span class="cmbx-10x-x-109">M</span> is stored with each
+      whisky&#8217;s corresponding ID. Four models are created, described in
+      <a href="#x1-31001r6">Table&#x00A0;6<!--tex4ht:ref: sssec:kwecomp --></a>.
+    </p>
+
+    <div class="table">
+      <!--l. 189-->
+      <p class="indent"></p>
+      <hr class="float" />
+      <div class="float">
+        <a id="x1-31001r6"></a>
+        <a id="x1-31002"></a>
+        <div class="caption">
+          <span class="id"> Table&#x00A0;6: </span
+          ><span class="content"
+            >Description of models created for agent.
+          </span>
+        </div>
+        <!--tex4ht:label?: x1-31001r5 -->
+        <div class="tabular">
+          <table id="TBL-7" class="tabular">
+            <colgroup id="TBL-7-1g">
+              <col id="TBL-7-1" />
+              <col id="TBL-7-2" />
+            </colgroup>
+            <tr style="vertical-align: baseline" id="TBL-7-1-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-1-1"
+                class="td11"
+              >
+                <!--l. 193-->
+                <p class="noindent">Model</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-1-2"
+                class="td11"
+              >
+                <!--l. 193-->
+                <p class="noindent">Description</p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-7-2-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-2-1"
+                class="td11"
+              >
+                <!--l. 194-->
+                <p class="noindent">Nose</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-2-2"
+                class="td11"
+              >
+                <!--l. 194-->
+                <p class="noindent">
+                  Model based purely on keywords extracted from
+                  <span class="cmti-10x-x-109">nose </span>tasting notes
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-7-3-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-3-1"
+                class="td11"
+              >
+                <!--l. 195-->
+                <p class="noindent">Palate</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-3-2"
+                class="td11"
+              >
+                <!--l. 195-->
+                <p class="noindent">
+                  Model based purely on keywords extracted from
+                  <span class="cmti-10x-x-109">palate </span>tasting notes
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-7-4-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-4-1"
+                class="td11"
+              >
+                <!--l. 196-->
+                <p class="noindent">Finish</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-4-2"
+                class="td11"
+              >
+                <!--l. 196-->
+                <p class="noindent">
+                  Model based purely on keywords extracted from
+                  <span class="cmti-10x-x-109">finish </span>tasting notes
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-7-5-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-5-1"
+                class="td11"
+              >
+                <!--l. 197-->
+                <p class="noindent">General</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-5-2"
+                class="td11"
+              >
+                <!--l. 197-->
+                <p class="noindent">
+                  Model based on keywords extracted from all tasting notes.
+                  Vectorising description as well as tasting notes for each
+                  whisky. This reflects some whiskies being listed without
+                  tasting notes, but taste indications in main description.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-7-6-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-7-6-1"
+                class="td11"
+              ></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <hr class="endfloat" />
+    </div>
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.2.4 </span> <a id="x1-320005.2.4"></a>Producing
+      recommendations
+    </h5>
+    <!--l. 203-->
+    <p class="noindent">
+      As discussed in section
+      <a href="#x1-200004.4.1">4.4.1<!--tex4ht:ref: sssec:cossim --></a>, cosine
+      similarity is used to provide recommendations. Where recommendations are
+      made based on more than one model, the mean of the similarities is used.
+      As Pandas can be quite slow due to its single-threaded nature, especially
+      when converting a long list of entries into a dataframe. To minimise this
+      effect, the user&#8217;s filtering input (price, ABV etc.) is used to get
+      the set of all IDs from which a recommendation can be made. Only these
+      whiskies are queried from the database.
+      <!--l. 210-->
+    </p>
+
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">5.3 </span> <a id="x1-330005.3"></a>User Reviews
+    </h4>
+    <!--l. 211-->
+    <p class="noindent">
+      The agent accepts user reviews which can be incorporated when training.
+      Acknowledging that expert notes may be better, only the tasting notes are
+      used for KE. When including reviews, the IV is calculated by
+    </p>
+
+    <table class="equation">
+      <tr>
+        <td>
+          <a id="x1-33001r7"></a>
+          <div class="math-display">
+            <img
+              src="{{ page.img-report14x | prepend: site.baseurl | replace: '//', '/' }}"
+              alt="                -n-
+
+IV = |t^+ r^ &#x22C5;min(W ,1)|
+^
+"
+class="math-display"
+/>
+
+</div>
+</td>
+<td class="equation-label">(7)</td>
+</tr>
+</table>
+<!--l. 215-->
+<p class="nopar">
+where <span class="cmmi-10x-x-109">t </span>and
+<span class="cmmi-10x-x-109">r </span>are the vectorised tasting notes and
+reviews, and <span class="cmmi-10x-x-109">n </span>and
+<span class="cmmi-10x-x-109">W </span>are the number of reviews and
+minimum weight for the tasting notes.
+<!--l. 219-->
+</p>
+
+    <p class="noindent"></p>
+    <h5 class="subsubsectionHead">
+      <span class="titlemark">5.3.1 </span> <a id="x1-340005.3.1"></a>Dream Dram
+    </h5>
+    <!--l. 220-->
+    <p class="noindent">
+      An interesting feature implemented is the
+      <span class="cmti-10x-x-109">Dream Dram </span>recommender. This takes
+      unstructured text describing a &#8216;dream&#8217; whisky and makes a
+      recommendation on that basis. This works in much the same way as the other
+      recommendations, however the IV is generated on the basis of the text
+      input instead of by querying for specific whiskies. This option could be
+      incorporated into a Whisky chat bot at a later date.
+      <!--l. 1-->
+    </p>
+
+    <p class="noindent"></p>
+    <hr />
+    <h3 class="sectionHead">
+      <span class="titlemark">6 </span> <a id="x1-350006"></a>Evaluation
+    </h3>
+
+    <!--l. 2-->
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">6.1 </span> <a id="x1-360006.1"></a>Survey
+    </h4>
+    <!--l. 3-->
+    <p class="noindent">
+      To evaluate the performance of the agent, a sample dataset of potential
+      user inputs and agent outputs was produced. A description of each input
+      can be found in
+      <a href="#x1-36002r7">Table&#x00A0;7<!--tex4ht:ref: sssec:cossim --></a>.
+      Random sampling was used to produce baseline recommendations. These were
+      used in a survey which 30 whisky enthusiasts completed. They were asked to
+      rate each recommendation on the basis of the corresponding input. While
+      the agent recommends 10 whiskies by default, only 3 recommendations were
+      given from the baseline and agent to avoid making the survey too
+      cumbersome.
+    </p>
+
+    <div class="table">
+      <!--l. 13-->
+      <p class="indent"></p>
+      <hr class="float" />
+      <div class="float">
+        <a id="x1-36002r7"></a>
+        <a id="x1-36003"></a>
+        <div class="caption">
+          <span class="id"> Table&#x00A0;7: </span
+          ><span class="content"
+            >Description of inputs in evaluation dataset.
+          </span>
+        </div>
+        <!--tex4ht:label?: x1-36002r6 -->
+        <div class="tabular">
+          <table id="TBL-8" class="tabular">
+            <colgroup id="TBL-8-1g">
+              <col id="TBL-8-1" />
+              <col id="TBL-8-2" />
+            </colgroup>
+            <tr style="vertical-align: baseline" id="TBL-8-1-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-1-1"
+                class="td11"
+              >
+                <!--l. 17-->
+                <p class="noindent">Input Reference</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-1-2"
+                class="td11"
+              >
+                <!--l. 17-->
+                <p class="noindent">Rationale</p>
+              </td>
+            </tr>
+            <tr class="hline">
+              <td><hr /></td>
+              <td><hr /></td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-2-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-2-1"
+                class="td11"
+              >
+                <!--l. 19-->
+                <p class="noindent">ATN1</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-2-2"
+                class="td11"
+              >
+                <!--l. 19-->
+                <p class="noindent">
+                  Replicating a user who has tried and developed tastes for a
+                  variety of whiskies available at supermarkets, but
+                  hasn&#8217;t tried much beyond.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-3-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-3-1"
+                class="td11"
+              >
+                <!--l. 20-->
+                <p class="noindent">ATN2</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-3-2"
+                class="td11"
+              >
+                <!--l. 20-->
+                <p class="noindent">
+                  Replicating a significant partiality towards heavily peated
+                  whiskies.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-4-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-4-1"
+                class="td11"
+              >
+                <!--l. 21-->
+                <p class="noindent">ATN3</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-4-2"
+                class="td11"
+              >
+                <!--l. 21-->
+                <p class="noindent">
+                  Replicating an enjoyment of both peated and sherried whiskies.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-5-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-5-1"
+                class="td11"
+              >
+                <!--l. 22-->
+                <p class="noindent">ATN4</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-5-2"
+                class="td11"
+              >
+                <!--l. 22-->
+                <p class="noindent">
+                  A user with niche and specific whisky tastes.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-6-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-6-1"
+                class="td11"
+              >
+                <!--l. 23-->
+                <p class="noindent">GC</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-6-2"
+                class="td11"
+              >
+                <!--l. 23-->
+                <p class="noindent">
+                  Producing recommendations based on general inputs without
+                  considering specific tasting notes.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-7-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-7-1"
+                class="td11"
+              >
+                <!--l. 24-->
+                <p class="noindent">DD1</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-7-2"
+                class="td11"
+              >
+                <!--l. 24-->
+                <p class="noindent">
+                  Dream Dram recommendation from a very peat heavy input.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-8-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-8-1"
+                class="td11"
+              >
+                <!--l. 25-->
+                <p class="noindent">DD2</p>
+              </td>
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-8-2"
+                class="td11"
+              >
+                <!--l. 25-->
+                <p class="noindent">
+                  Dream Dram recommendation describing a very oily and fruity
+                  whisky.
+                </p>
+              </td>
+            </tr>
+            <tr style="vertical-align: baseline" id="TBL-8-9-">
+              <td
+                style="white-space: normal; text-align: left"
+                id="TBL-8-9-1"
+                class="td11"
+              ></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <hr class="endfloat" />
+    </div>
+    <!--l. 30-->
+    <p class="indent">
+      Participants were given all information available to the agent for each
+      output including description and tasting notes (and some information the
+      agent does not use such as ABV, Price etc), however they were instructed
+      not to factor price in their ratings as price parameters were set by the
+      hypothetical user. There was an option to leave text feedback.
+    </p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">6.2 </span> <a id="x1-370006.2"></a>Results
+    </h4>
+    <!--l. 37-->
+    <p class="noindent">
+      As can be seen in figures
+      <a href="#x1-37001r1">1<!--tex4ht:ref: fig:allrec --></a> and
+      <a href="#x1-37003r2">2<!--tex4ht:ref: fig:avgrec --></a>, most
+      recommendations were rated higher than the mean baseline.
+      <!--l. 40-->
+    </p>
+
+    <p class="indent">
+      A paired one-tailed t-test was conducted on the baseline scores and
+      corresponding recommender scores for each sample input. There was a
+      significant increase in scores from the recommender (<span
+        class="cmmi-10x-x-109"
+        >M </span
+      >= 6<span class="cmmi-10x-x-109">.</span>28,
+      <span class="cmmi-10x-x-109">SD </span>= 1<span class="cmmi-10x-x-109"
+        >.</span
+      >13) compared with the baseline (<span class="cmmi-10x-x-109">M </span>=
+      4<span class="cmmi-10x-x-109">.</span>71,
+      <span class="cmmi-10x-x-109">SD </span>= 1<span class="cmmi-10x-x-109"
+        >.</span
+      >15), <span class="cmmi-10x-x-109">t</span>(12) = 2<span
+        class="cmmi-10x-x-109"
+        >.</span
+      >22, <span class="cmmi-10x-x-109">p &#x003C; </span>0<span
+        class="cmmi-10x-x-109"
+        >.</span
+      >05. There was a mean increase of 1<span class="cmmi-10x-x-109">.</span>57
+      points.
+      <!--l. 45-->
+    </p>
+
+    <p class="indent"></p>
+    <hr class="figure" />
+    <div class="figure">
+      <!--l. 47-->
+      <p class="noindent">
+        <img src="{{ page.img-allrec | prepend: site.baseurl | replace: '//', '/' }}" alt="PIC" height="387" />
+        <a id="x1-37001r1"></a>
+        <a id="x1-37002"></a>
+        <br />
+      </p>
+
+      <div class="caption">
+        <span class="id"> Figure&#x00A0;1: </span
+        ><span class="content"
+          >Boxplots of participant ratings for each recommendation, grouped by
+          sample input. The grey line indicates the mean baseline rating.
+        </span>
+      </div>
+      <!--tex4ht:label?: x1-37001r6 -->
+
+      <!--l. 50-->
+      <p class="indent"></p>
+    </div>
+
+    <hr class="endfigure" />
+    <!--l. 52-->
+    <p class="indent"></p>
+    <hr class="figure" />
+    <div class="figure">
+      <!--l. 54-->
+      <p class="noindent">
+        <img src="{{ page.img-avgrec | prepend: site.baseurl | replace: '//', '/' }}" alt="PIC" height="387" />
+        <a id="x1-37003r2"></a>
+        <a id="x1-37004"></a>
+        <br />
+      </p>
+
+      <div class="caption">
+        <span class="id"> Figure&#x00A0;2: </span
+        ><span class="content"
+          >Boxplots of participant ratings for each sample input. The grey line
+          indicates the mean baseline rating.
+        </span>
+      </div>
+      <!--tex4ht:label?: x1-37003r6 -->
+
+      <!--l. 57-->
+      <p class="indent"></p>
+    </div>
+
+    <hr class="endfigure" />
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">6.3 </span> <a id="x1-380006.3"></a>Discussion
+    </h4>
+    <!--l. 60-->
+    <p class="noindent">
+      Despite promising results, it is clear that some recommendations received
+      a large range of ratings. The small samples used, both of enthusiasts and
+      inputs/recommendations, are far from ideal.
+      <!--l. 64-->
+    </p>
+
+    <p class="indent">
+      On reading the free-text responses, it&#8217;s clear that some
+      participants weren&#8217;t confident in their whisky knowledge. Some
+      participants hadn&#8217;t followed the instructions, for example one
+      participant stated they had penalised recommendations with high prices.
+      <!--l. 68-->
+    </p>
+
+    <p class="indent">
+      A few interesting points were made which are worth considering. One
+      participant suggested that the input for ATN1 was contradictory, perhaps
+      explaining its low score. This suggests that (as intended) this
+      recommender method is not ideal for taking a users entire taste profile,
+      rather recommending a whisky to try based on similarity between a small
+      number of tried whiskies. It would be interesting to investigate whether
+      such a system is possible in the specific case of whisky.
+      <!--l. 74-->
+    </p>
+
+    <p class="indent">
+      Many users pointed out that many recommendations were very niche,
+      suggesting an extra filter could be incorporated allowing a user to filter
+      out single-cask/independent bottles. This also could have impacted the
+      accuracy of participant&#8217;s scores.
+      <!--l. 1-->
+    </p>
+
+    <p class="noindent"></p>
+    <hr />
+    <h3 class="sectionHead">
+      <span class="titlemark">7 </span> <a id="x1-390007"></a>Conclusion
+    </h3>
+    <!--l. 2-->
+    <p class="noindent">
+      This project sought to investigate whether NLP could be applied to free
+      text tasting notes to produce an effective Scotch recommender agent.
+      <!--l. 5-->
+    </p>
+
+    <p class="indent">
+      Acting on an environment consisting of a retailers website, an autonomous
+      agent was designed with capacity to maintain an updated language model for
+      Scotch whisky. This model can reflect changes in the Scotch lexicon, and
+      be applied effectively to recommend whisky on the basis of taste. This
+      could have significant positive consequences for whisky buyers.
+      <!--l. 10-->
+    </p>
+
+    <p class="indent">
+      Due to the sparsity of the field, there is a wealth of space for
+      exploration, with a few suggestions listed in
+      <a href="#x1-400007.1"
+        >subsection&#x00A0;7.1<!--tex4ht:ref: fig:avgrec --></a
+      >. Despite promising early results, a more comprehensive study is needed
+      with larger samples and/or industry experts.
+      <!--l. 14-->
+    </p>
+
+    <p class="noindent"></p>
+    <h4 class="subsectionHead">
+      <span class="titlemark">7.1 </span> <a id="x1-400007.1"></a>Suggestions
+      for Future Work
+    </h4>
+    <!--l. 16-->
+    <p class="noindent">
+      The following suggestions are made for future work and research to build
+      upon this project.
+    </p>
+    <ul class="itemize1">
+      <li class="itemize">Development of a front end UI.</li>
+      <li class="itemize">
+        Further comparisons and research into KE methods for whisky tasting
+        notes.
+      </li>
+      <li class="itemize">
+        Investigations into semantic language models and alternative similarity
+        measures.
+      </li>
+      <li class="itemize">
+        Work on whisky clustering to research flavour profile metrics.
+      </li>
+      <li class="itemize">Further evaluation of the agent.</li>
+      <li class="itemize">
+        Work with industry experts to evaluate and improve the agent.
+      </li>
+    </ul>
+    
+
+    <p class="noindent"></p>
+    <hr />
+    <h3 class="likesectionHead"><a id="x1-420008"></a>References</h3>
+    <!--l. 2-->
+    <p class="noindent"></p>
+    <div class="thebibliography">
+      <p class="bibitem">
+        <span class="biblabel">
+          [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XJacques2003"></a>K.&#x00A0;Jacques, T.&#x00A0;Lyons, and
+        D.&#x00A0;Kelsall,
+        <span class="cmti-10x-x-109">The Alcohol Textbook 4th edition</span>,
+        4th&#x00A0;ed. Nottingham University Press, 2003.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XPyke1965"></a>M.&#x00A0;Pyke, &#8220;THE MANUFACTURE OF SCOTCH
+        GRAIN WHISKY,&#8221; <span class="cmti-10x-x-109">The Distillers</span>
+        <span class="cmti-10x-x-109"
+          >Company Ltd., Glenochil Research Station, Menstrie, Clackmannanshirc,
+          Scotland)</span
+        >, vol.&#x00A0;71, pp. 209&#8211;218, 1965.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xswa2"></a>&#8220;Facts &amp; figures.&#8221; [Online].
+        Available:
+        <a
+          href="https://www.scotch-whisky.org.uk/insights/facts-figures/"
+          class="url"
+          >https://www.scotch-whisky.org.uk/insights/facts-figures/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xswa"></a>&#8220;Scotch whisky export figures 2019.&#8221;
+        [Online]. Available:
+        <a
+          href="https://www.scotch-whisky.org.uk/newsroom/scotch-whisky-exports-surge-amidst-backdrop-of-tariff-uncertainty/"
+          class="url"
+          >https://www.scotch-whisky.org.uk/newsroom/scotch-whisky-exports-surge-amidst-backdrop-of-tariff-uncertainty/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xn_distilleries"></a>&#8220;How many whisky distilleries are in
+        scotland?&#8221; Oct 2020. [Online]. Available:
+        <a
+          href="https://whiskytastingcompany.com/blogs/news/how-many-whisky-distilleries-are-in-scotland"
+          class="url"
+          >https://whiskytastingcompany.com/blogs/news/how-many-whisky-distilleries-are-in-scotland</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [6]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xpowell_2021"></a>T.&#x00A0;Powell, &#8220;The beginner&#8217;s
+        guide to scotch whisky,&#8221; Jan 2021. [Online]. Available:
+        <a
+          href="https://foodism.co.uk/guides/scotch-whisky-regions-guide/"
+          class="url"
+          >https://foodism.co.uk/guides/scotch-whisky-regions-guide/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [7]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XOmidzohoor"></a>A.&#x00A0;Omid-zohoor and A.&#x00A0;Eghtesadi,
+        &#8220;Whisky Recommender.&#8221;
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [8]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XColdevin2005"></a>T.&#x00A0;M. Coldevin, &#8220;Building an
+        Multi-Agent Whisky Recommender System,&#8221; no. February, 2005.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [9]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xlegislation.gov.uk_2009"></a>&#8220;The scotch whisky
+        regulations 2009,&#8221;
+        <span class="cmti-10x-x-109">Legislation.gov.uk</span>, 2009. [Online].
+        Available:
+        <a
+          href="https://www.legislation.gov.uk/uksi/2009/2890/contents/made"
+          class="url"
+          >https://www.legislation.gov.uk/uksi/2009/2890/contents/made</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [10]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XBathgate2019"></a>G.&#x00A0;N. Bathgate, &#8220;The influence
+        of malt and wort processing on spirit character: the lost styles of
+        Scotch malt whisky,&#8221;
+        <span class="cmti-10x-x-109">Journal of the Institute of Brewing</span>,
+        vol. 125, no.&#x00A0;2, pp. 200&#8211;213, 2019.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [11]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XMosedale1998"></a>J.&#x00A0;Mosedale and J.-L. Puech,
+        &#8220;Wood maturation of distilled beverages,&#8221;
+        <span class="cmti-10x-x-109">Trends in</span>
+        <span class="cmti-10x-x-109">Food Science &amp; Technology</span>,
+        vol.&#x00A0;9, no.&#x00A0;3, pp. 95&#8211;101, mar 1998. [Online].
+        Available:
+        <a
+          href="https://linkinghub.elsevier.com/retrieve/pii/S0924224498000247"
+          class="url"
+          >https://linkinghub.elsevier.com/retrieve/pii/S0924224498000247</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [12]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XCambria2014"></a>E.&#x00A0;Cambria and B.&#x00A0;White,
+        &#8220;Jumping NLP Curves: A Review of Natural Language Processing
+        Research [Review Article],&#8221;
+        <span class="cmti-10x-x-109"
+          >IEEE Computational Intelligence Magazine</span
+        >, vol.&#x00A0;9, no.&#x00A0;2, pp. 48&#8211;57, may 2014. [Online].
+        Available:
+        <a href="http://ieeexplore.ieee.org/document/6786458/" class="url"
+          >http://ieeexplore.ieee.org/document/6786458/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [13]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XStevenBirdEwanKlein2009"></a>E.&#x00A0;L. Steven Bird, Ewan
+        Klein,
+        <span class="cmti-10x-x-109"
+          >Natural Language Processing with Python</span
+        >. O&#8217;Reilly Media Inc, 2009.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [14]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XZhang2010"></a>Y.&#x00A0;Zhang, R.&#x00A0;Jin, and Z.&#x00A0;H.
+        Zhou, &#8220;Understanding bag-of-words model: A statistical
+        framework,&#8221;
+        <span class="cmti-10x-x-109"
+          >International Journal of Machine Learning and Cybernetics</span
+        >, vol.&#x00A0;1, no. 1-4, pp. 43&#8211;52, 2010.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [15]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XPorter1980"></a>M.&#x00A0;Porter, &#8220;An algorithm for
+        suffix stripping,&#8221; <span class="cmti-10x-x-109">Program</span>,
+        vol.&#x00A0;14, no.&#x00A0;3, pp. 130&#8211;137, mar 1980. [Online].
+        Available:
+        <a
+          href="https://www.emerald.com/insight/content/doi/10.1108/eb046814/full/html"
+          class="url"
+          >https://www.emerald.com/insight/content/doi/10.1108/eb046814/full/html</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [16]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XJayakodi2016"></a>K.&#x00A0;Jayakodi, M.&#x00A0;Bandara,
+        I.&#x00A0;Perera, and D.&#x00A0;Meedeniya, &#8220;WordNet and cosine
+        similarity based classifier of exam questions using bloom&#8217;s
+        taxonomy,&#8221;
+        <span class="cmti-10x-x-109">International Journal of Emerging</span>
+        <span class="cmti-10x-x-109">Technologies in Learning</span>,
+        vol.&#x00A0;11, no.&#x00A0;4, pp. 142&#8211;149, 2016.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [17]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xprincetonuniversity_2010"></a>&#8220;What is wordnet?&#8221;
+        1.    [Online]. Available:
+        <a href="https://wordnet.princeton.edu/" class="url"
+          >https://wordnet.princeton.edu/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [18]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XBarupal2011"></a>P.&#x00A0;Fabian, G.&#x00A0;Varoquaux,
+        A.&#x00A0;Gramfort, M.&#x00A0;Vincent, B.&#x00A0;Thririon,
+        O.&#x00A0;Grisel, M.&#x00A0;Blondel, P.&#x00A0;Prettenhofer,
+        R.&#x00A0;Weiss, V.&#x00A0;Dubourg, J.&#x00A0;Vanderplas,
+        A.&#x00A0;Passos, D.&#x00A0;Cournapeau, M.&#x00A0;Brucher,
+        M.&#x00A0;Perrot, and E.&#x00A0;Duchesnay, &#8220;Scikit-learn: Machine
+        Learning in Python,&#8221;
+        <span class="cmti-10x-x-109">Journal of Machine Learning Research</span
+        >, vol.&#x00A0;12, no.&#x00A0;85, pp. 2825&#8211;2830, 2011.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [19]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XRamos2003"></a>J.&#x00A0;Ramos, &#8220;Using TF-IDF to
+        Determine Word Relevance in Document Queries,&#8221;
+        <span class="cmti-10x-x-109">Proceedings</span>
+        <span class="cmti-10x-x-109"
+          >of the first instructional conference on machine learning</span
+        >, vol. 242, no.&#x00A0;1, pp. 29&#8211;48, 2003.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [20]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xmuhammad"></a>R.&#x00A0;B. Muhammad, &#8220;Graph theory:
+        Definitions and examples.&#8221; [Online]. Available:
+        <a
+          href="http://personal.kent.edu/~rmuhamma/GraphTheory/MyGraphTheory/defEx.htm"
+          class="url"
+          >http://personal.kent.edu/<span class="cmsy-8">~</span
+          >rmuhamma/GraphTheory/MyGraphTheory/defEx.htm</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [21]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XRose2010"></a>S.&#x00A0;Rose, D.&#x00A0;Engel,
+        N.&#x00A0;Cramer, and W.&#x00A0;Cowley, &#8220;Automatic keyword
+        extraction,&#8221; <span class="cmti-10x-x-109">Text</span>
+        <span class="cmti-10x-x-109">Mining: Applications and Theory</span>, pp.
+        1&#8212;-277, 2010.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [22]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XBeliga2015"></a>S.&#x00A0;Beliga, A.&#x00A0;Mestrovic, and
+        S.&#x00A0;Martincic-Ipsic, &#8220;An Overview of Graph-Based Keyword
+        Extraction Methods and Approaches,&#8221;
+        <span class="cmti-10x-x-109"
+          >Journal of Information and Organizational Sciences</span
+        >, vol.&#x00A0;39, no.&#x00A0;1, 2015. [Online]. Available:
+        <a href="https://hrcak.srce.hr/140857" class="url"
+          >https://hrcak.srce.hr/140857</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [23]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XBonacich2007"></a>P.&#x00A0;Bonacich, &#8220;Some unique
+        properties of eigenvector centrality,&#8221;
+        <span class="cmti-10x-x-109">Social</span>
+        <span class="cmti-10x-x-109">Networks</span>, vol.&#x00A0;29,
+        no.&#x00A0;4, pp. 555&#8211;564, oct 2007. [Online]. Available:
+        <a
+          href="https://linkinghub.elsevier.com/retrieve/pii/S0378873307000342"
+          class="url"
+          >https://linkinghub.elsevier.com/retrieve/pii/S0378873307000342</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [24]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XNewman2010"></a>M.&#x00A0;E.&#x00A0;J. Newman,
+        &#8220;Mathematics of networks,&#8221;
+        <span class="cmti-10x-x-109">Networks</span>, pp. 109&#8211;167, 2010.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [25]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XMikolov2013"></a>T.&#x00A0;Mikolov, K.&#x00A0;Chen,
+        G.&#x00A0;Corrado, and J.&#x00A0;Dean, &#8220;Efficient estimation of
+        word representations in vector space,&#8221; in
+        <span class="cmti-10x-x-109"
+          >1st International Conference on Learning Representations, ICLR 2013
+          -</span
+        >
+        <span class="cmti-10x-x-109">Workshop Track Proceedings</span>, 2013,
+        pp. 1&#8211;12.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [26]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XMcCormick2017"></a>C.&#x00A0;McCormick, &#8220;Word2Vec
+        Tutorial - The Skip-Gram Model,&#8221; pp. 1&#8211;39, 2017.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [27]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XLiu2020"></a>Q.&#x00A0;Liu, M.&#x00A0;J. Kusner, and
+        P.&#x00A0;Blunsom, &#8220;A Survey on Contextual Embeddings,&#8221;
+        1.    [Online]. Available:
+        <a href="http://arxiv.org/abs/2003.07278" class="url"
+          >http://arxiv.org/abs/2003.07278</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [28]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XMelville2010"></a>P.&#x00A0;Melville and V.&#x00A0;Sindhwani,
+        &#8220;Encyclopaedia of Machine Learning: Recommender Systems,&#8221;
+        <span class="cmti-10x-x-109">Encyclopaedia of Machine Learning</span>,
+        pp. 829&#8211;838, 2010. [Online]. Available:
+        <a
+          href="https://link.springer.com/content/pdf/10.1007/978-1-4899-7687-1_964.pdf%0Ahttps://link.springer.com/referenceworkentry/10.1007%2F978-0-387-30164-8_705%0Ahttps://link.springer.com/book/10.1007/978-0-387-30164-8%0A%0Ahttp://vikas.sindhwani.org/recommender.p"
+          class="url"
+          >https://link.springer.com/content/pdf/10.1007/978-1-4899-7687-1_964.pdf%0Ahttps://link.springer.com/referenceworkentry/10.1007%2F978-0-387-30164-8_705%0Ahttps://link.springer.com/book/10.1007/978-0-387-30164-8%0A%0Ahttp://vikas.sindhwani.org/recommender.p</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [29]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XHerlocker2000"></a>J.&#x00A0;Herlocker, J.&#x00A0;Konstan, and
+        J.&#x00A0;Reidl, &#8220;Explaining Collaborative Filtering
+        Recommendations,&#8221; Mineapolis, 2000. [Online]. Available:
+        <a href="http://www.grouplens.org" class="url"
+          >http://www.grouplens.org</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [30]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XMooney2000"></a>R.&#x00A0;J. Mooney and L.&#x00A0;Roy,
+        &#8220;Content-based book recommending using learning for text
+        categorization,&#8221;
+        <span class="cmti-10x-x-109"
+          >Proceedings of the ACM International Conference on Digital
+          Libraries</span
+        >, pp. 195&#8211;204, 2000.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [31]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XWishart2000"></a>D.&#x00A0;Wishart, &#8220;Classification of
+        Single Malt Whiskies,&#8221; 2000, pp. 89&#8211;94. [Online]. Available:
+        <a
+          href="http://link.springer.com/10.1007/978-3-642-59789-3{\_}14"
+          class="url"
+          >http://link.springer.com/10.1007/978-3-642-59789-3<span
+            class="cmsy-10x-x-109"
+            >{\</span
+          ><span class="cmsy-10x-x-109">}</span>14</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [32]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XWishart2009"></a>&#8212;&#8212;, &#8220;The flavour of
+        whisky,&#8221; <span class="cmti-10x-x-109">Significance</span>,
+        vol.&#x00A0;6, no.&#x00A0;1, pp. 20&#8211;26, mar 2009. [Online].
+        Available:
+        <a
+          href="http://doi.wiley.com/10.1111/j.1740-9713.2009.00337.x"
+          class="url"
+          >http://doi.wiley.com/10.1111/j.1740-9713.2009.00337.x</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [33]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xhubbard_2020"></a>M.&#x00A0;Hubbard, &#8220;Lecture: Best
+        approximation (2)/eigenvalues and eigenvectors (1), 17/03/2020,&#8221;
+        <span class="cmti-10x-x-109"
+          >MATH3036-1-UNUK-SPR-1920 Scientific Computation and Numerical
+          Analysis</span
+        >, Mar 2020.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [34]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="X2020NumPy"></a>C.&#x00A0;R. Harris, K.&#x00A0;J. Millman,
+        S.&#x00A0;J. van&#x00A0;der Walt, R.&#x00A0;Gommers, P.&#x00A0;Virtanen,
+        D.&#x00A0;Cournapeau, E.&#x00A0;Wieser, J.&#x00A0;Taylor,
+        S.&#x00A0;Berg, N.&#x00A0;J. Smith, R.&#x00A0;Kern, M.&#x00A0;Picus,
+        S.&#x00A0;Hoyer, M.&#x00A0;H. van Kerkwijk, M.&#x00A0;Brett,
+        A.&#x00A0;Haldane, J.&#x00A0;Fernï¿½ndez&#x00A0;del Rï¿½o, M.&#x00A0;Wiebe,
+        P.&#x00A0;Peterson, P.&#x00A0;Gï¿½rard-Marchant, K.&#x00A0;Sheppard,
+        T.&#x00A0;Reddy, W.&#x00A0;Weckesser, H.&#x00A0;Abbasi,
+        C.&#x00A0;Gohlke, and T.&#x00A0;E. Oliphant, &#8220;Array programming
+        with NumPy,&#8221; <span class="cmti-10x-x-109">Nature</span>, vol. 585,
+        p. 357&#8211;362, 2020.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [35]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="XKluyver2016jupyter"></a>T.&#x00A0;Kluyver,
+        B.&#x00A0;Ragan-Kelley, F.&#x00A0;Pï¿½rez, B.&#x00A0;Granger,
+        M.&#x00A0;Bussonnier, J.&#x00A0;Frederic, K.&#x00A0;Kelley,
+        J.&#x00A0;Hamrick, J.&#x00A0;Grout, S.&#x00A0;Corlay, P.&#x00A0;Ivanov,
+        D.&#x00A0;Avila, S.&#x00A0;Abdalla, and C.&#x00A0;Willing,
+        &#8220;Jupyter notebooks &#8211; a publishing format for reproducible
+        computational workflows,&#8221; in
+        <span class="cmti-10x-x-109">Positioning and</span>
+        <span class="cmti-10x-x-109"
+          >Power in Academic Publishing: Players, Agents and Agendas</span
+        >, F.&#x00A0;Loizides and B.&#x00A0;Schmidt, Eds. IOS Press, 2016, pp.
+        87 &#8211; 90.
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [36]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xold"></a>&#8220;peat,&#8221;
+        <span class="cmti-10x-x-109">Oxford Learners Dictionary</span>.
+        [Online]. Available:
+        <a
+          href="https://www.oxfordlearnersdictionaries.com/definition/english/peat"
+          class="url"
+          >https://www.oxfordlearnersdictionaries.com/definition/english/peat</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [37]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xtf_idf_imp"></a>P.&#x00A0;Prakash, &#8220;Keyword extraction:
+        Keyword extraction in python,&#8221; Dec 2020. [Online]. Available:
+        <a
+          href="https://www.analyticsvidhya.com/blog/2020/11/words-that-matter-a-simple-guide-to-keyword-extraction-in-python/"
+          class="url"
+          >https://www.analyticsvidhya.com/blog/2020/11/words-that-matter-a-simple-guide-to-keyword-extraction-in-python/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [38]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xsharmer_2018"></a>V.&#x00A0;B. Sharmer,
+        &#8220;rake-nltk,&#8221; Jun 2018. [Online]. Available:
+        <a href="https://pypi.org/project/rake-nltk/" class="url"
+          >https://pypi.org/project/rake-nltk/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [39]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xmom_ba"></a>&#8220;Blair athol 12 year old - flora and
+        fauna.&#8221; [Online]. Available:
+        <a
+          href="https://www.masterofmalt.com/whiskies/blair-athol-12-year-old-whisky/"
+          class="url"
+          >https://www.masterofmalt.com/whiskies/blair-athol-12-year-old-whisky/</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [40]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xreback2020pandas"></a>T.&#x00A0;pandas&#x00A0;development team,
+        &#8220;pandas-dev/pandas: Pandas,&#8221; Feb. 2020. [Online]. Available:
+        <a href="https://doi.org/10.5281/zenodo.3509134" class="url"
+          >https://doi.org/10.5281/zenodo.3509134</a
+        >
+      </p>
+      <p class="bibitem">
+        <span class="biblabel">
+          [41]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span
+        ><a id="Xrichardson2007beautiful"></a>L.&#x00A0;Richardson,
+        &#8220;Beautiful soup documentation,&#8221;
+        <span class="cmti-10x-x-109">April</span>, 2007.
+      </p>
+    </div>
+
+  </body>
+</html>
