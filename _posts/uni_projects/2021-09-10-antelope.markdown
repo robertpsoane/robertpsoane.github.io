@@ -3,7 +3,7 @@ layout: project
 title: "Antelope"
 subtitle: "Antelope: An NLP Enhanced Transcript Labelling System for Reflective Practitioners.
 
-This was my MSc Project.  I designed a full stack for labelling dialogue transcript turns using an administrator defined schema.  Antelope uses a machine learning model to recommend labels for transcript turns based on use.
+This was my MSc project and formed the basis of my dissertation.  I designed a full stack for labelling dialogue transcript turns using an administrator defined schema.  Antelope uses a machine learning model to recommend labels for transcript turns based on use.
 " # This forms the basis of a description of the project
 date: 2021-09-10 13:14:13 -0000
 
