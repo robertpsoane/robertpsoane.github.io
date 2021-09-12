@@ -19,6 +19,8 @@ layout: default
             on {{ page.date | date: '%B %d, %Y' }} &middot; {% include read_time.html
             content=page.content %} {% if page.githuburl %}  &middot; <a href="{{page.githuburl}}">View Repo</a> {% endif %} 
              {% if page.liveurl %} &middot; <a href="{{page.liveurl}}">View Live</a> {% endif %}
+             {% if page.reporturl %} &middot; <a href="{{page.reporturl}}">View Report</a> {% endif %}
+
           </span>
           
         </div>

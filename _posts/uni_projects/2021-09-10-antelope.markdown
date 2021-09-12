@@ -1,11 +1,24 @@
 ---
 layout: project
 title: "Antelope"
-subtitle: "An NLP Enhanced Transcript Labelling System for Reflective Practitioners" # This forms the basis of a description of the project
+subtitle: "Antelope: An NLP Enhanced Transcript Labelling System for Reflective Practitioners.
+
+This was my MSc Project.  I designed a full stack for labelling dialogue transcript turns using an administrator defined schema.  Antelope uses a machine learning model to recommend labels for transcript turns based on use.
+" # This forms the basis of a description of the project
 date: 2021-09-10 13:14:13 -0000
 
 githuburl: "https://github.com/robertpsoane/antelope"
 # project-img: "/img/projects/pyfighter/pyfighter.png"
 ---
 
-_Page In Progress_
+# Antelope: Transcript Labelling
+
+Antelope (An NLP Transcript Labelling Program), is an open source system for labelling dialogue transcripts.
+While specifically designed for labelling Psychiatric transcript data, Antelope can be used to label any transcripts
+with classes defined by an administrator. Antelope's machine learning model recommends turn labels based on user inputs.
+
+Antelope was designed as part of my MSc Project.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/msIH9agVkDo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
