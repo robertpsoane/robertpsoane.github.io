@@ -1,0 +1,12 @@
+---
+layout: project
+title: "Antelope"
+subtitle: "An NLP Enhanced Transcript Labelling System for Reflective Practitioners" # This forms the basis of a description of the project
+date: 2021-09-10 13:14:13 -0000
+
+githuburl: "https://github.com/robertpsoane/antelope"
+
+project-img: "/img/projects/pyfighter/pyfighter.png"
+---
+
+_Page In Progress_
