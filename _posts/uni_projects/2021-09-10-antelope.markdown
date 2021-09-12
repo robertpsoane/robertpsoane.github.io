@@ -5,8 +5,7 @@ subtitle: "An NLP Enhanced Transcript Labelling System for Reflective Practition
 date: 2021-09-10 13:14:13 -0000
 
 githuburl: "https://github.com/robertpsoane/antelope"
-
-project-img: "/img/projects/pyfighter/pyfighter.png"
+# project-img: "/img/projects/pyfighter/pyfighter.png"
 ---
 
 _Page In Progress_
