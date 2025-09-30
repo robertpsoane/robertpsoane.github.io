@@ -1,65 +1,64 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you: 
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+###########
+# site.title
 
 title: Robert Soane
-email: rpsoane@gmail.com
-author: Robert
-description: >- # this means to ignore newlines until "baseurl:"
-  I'm a postgraduate student at the University of Nottingham, currently 
-  studying for an MSc in Computer Science.  I graduated with a BSc (Hons)
-  in Mathematics in 2020, having spent three years studying numerical 
-  methods and applied maths.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-default-background: '/img/default-background.png'
-
-linkedin_username: robert-soane
-github_username:  robertpsoane
+description: a minimal, text focused blog theme
+# baseurl: "/jekyllBear" # the subpath of your site, e.g. /blog/
+url: "https://knhash.in/jekyllBear" # the base hostname & protocol for your site
+# host: 0.0.0.0
 
 
-# Build settings
-markdown:           kramdown
-# paginate_multiple:
-#   - paginate:           5
-#     paginate_path: "/posts/page:num/"
-#     sub_dir: "Posts"
-#   - paginate:           5
-#     paginate_path: "/projects/page:num/"
-#     sub_dir: "Projects"
-#   - paginate:           5
-#     paginate_path: "/page:num/"
-#     sub_dir: "Projects"
-
-paginate:           5
-paginate_path: "/projects/page:num/"
-sub_dir: ""
-
+#########################
+# more settings
 
 plugins:
-  - jekyll-feed
-  - jekyll-paginate
-  - jekyll-paginate-multiple
-  - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
+- jekyll-redirect-from
 
+whitelist:
+- jekyll-redirect-from
 
+markdown: kramdown
 
+compress_html:
+  clippings: all
+  comments: [ "" ]
+  endings: [ html, head, body, li, dt, dd, rt, rp, optgroup, option, colgroup, caption, thead, tbody, tfoot, tr, td, th ]
+  profile: false
+  blanklines: false
+  ignore:
+    envs: []
 
+# sass:
+#   sass_dir: css
+#   style:    compressed
 
+collections:
+  my_tags:
+    output: true
+    permalink: /tagged/:slug/
+defaults:
 
+- scope:
+    path: ""
+    type: my_tags
+  values:
+    layout: tagged
+
+# baseurl: ""
+permalink: /blog/:slug
+timezone: Europe/London
+future: false
+
+exclude:
+- README.md
+- LICENSE.md
+- vendor
+
+Blog: /blog
+Life: /life
+
+# Add general links to site pages here
+links: # Resume: /assets/resume.pdf
+
+# Add links for more focus here
+special_links: # "Search": https://duckduckgo.com
