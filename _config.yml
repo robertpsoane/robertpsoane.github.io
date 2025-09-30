@@ -9,6 +9,7 @@ url: "https://soane.io" # the base hostname & protocol for your site
 
 plugins:
 - jekyll-redirect-from
+- jekyll-feed
 
 whitelist:
 - jekyll-redirect-from
