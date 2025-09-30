@@ -5,12 +5,27 @@ layout: compress
 {% include head.html %}
 
     <main>
-        Foo
-
+        
         {% include header.html %}
 
         {{ content }}
 
+            <h3>Recent Posts</h3>
+            <ul class="blog-posts">
+                {% for post in site.posts limit:5 %}
+                <li>
+                    <span>
+                        <i>
+                            <time datetime="{{ post.date | date: '%Y-%m-%d' }}" pubdate="">
+                                {{ post.date | date: "%b %-d, %Y" }}
+                            </time>
+                        </i>
+                    </span>
+                    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                </li>
+                {% endfor %}
+                <li><a href="{{ site.baseurl }}/blog">- more -</a></li>
+            </ul>
     </main>
 
     {% include footer.html %}
