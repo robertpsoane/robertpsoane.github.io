@@ -11,6 +11,7 @@ layout: compress
     {{ content }}
 
     <ul class="blog-posts">
+        {% if site.posts and site.posts.size > 0 %}
         {% assign post_list = '' | split: ',' %}
         {% for post in site.posts %}
         {% for tag in post.tags %}
@@ -37,6 +38,9 @@ layout: compress
         {% endunless %}
         {% assign previous = post %}
         {% endfor %}
+        {% else %}
+        <li><i>There aren't any posts yet... Hopefully there will be at some point!</i></li>
+        {% endif %}
 
     </ul>
 

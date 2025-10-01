@@ -10,6 +10,7 @@ layout: compress
 
     {{ content }}
 
+    {% if site.posts and site.posts.size > 0 %}
     <h3>Recent Posts</h3>
     <ul class="blog-posts">
         {% for post in site.posts limit:5 %}
@@ -26,6 +27,7 @@ layout: compress
         {% endfor %}
         <li><a href="{{ site.baseurl }}/blog">- more -</a></li>
     </ul>
+    {% endif %}
 </main>
 
 {% include footer.html %}
