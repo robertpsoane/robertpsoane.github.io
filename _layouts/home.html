@@ -10,10 +10,10 @@ layout: compress
 
     {{ content }}
 
-    {% if site.posts and site.posts.size > 0 %}
+    {% if site.posts and site.posts.size > 0 and site.home.show_recent_posts %}
     <h3>Recent Posts</h3>
     <ul class="blog-posts">
-        {% for post in site.posts limit:5 %}
+        {% for post in site.posts limit:site.home.recent_posts_limit %}
         <li>
             <span>
                 <i>
@@ -25,7 +25,9 @@ layout: compress
             <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
         </li>
         {% endfor %}
-        <li><a href="{{ site.baseurl }}/blog">- more -</a></li>
+        {% if site.posts.size > site.home.recent_posts_limit %}
+        <li><span></span><a href="{{ site.baseurl }}/blog">- more -</a></li>
+        {% endif %}
     </ul>
     {% endif %}
 </main>

@@ -55,3 +55,7 @@ links:
 # Add links for more focus here
 special_links:
   "Ducker": https://ducker.soane.io
+
+home:
+  show_recent_posts: true
+  recent_posts_limit: 5
