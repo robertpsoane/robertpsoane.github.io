@@ -10,6 +10,9 @@ url: "https://soane.io" # the base hostname & protocol for your site
 plugins:
 - jekyll-redirect-from
 - jekyll-feed
+- jekyll-paginate
+- jekyll-paginate-multiple
+- jekyll-sitemap
 
 whitelist:
 - jekyll-redirect-from
@@ -28,7 +31,7 @@ compress_html:
 collections:
   my_tags:
     output: true
-    permalink: /tagged/:slug/
+    permalink: /tagged/:slug
 defaults:
 
 - scope:
@@ -37,8 +40,8 @@ defaults:
   values:
     layout: tagged
 
-permalink: /blog/:slug
-timezone: Europe/London
+permalink: /blog/:categories/:year/:month/:day/:title/
+
 future: false
 
 exclude:
