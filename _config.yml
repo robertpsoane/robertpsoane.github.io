@@ -59,3 +59,5 @@ special_links:
 home:
   show_recent_posts: true
   recent_posts_limit: 5
+
+paginate: 2
