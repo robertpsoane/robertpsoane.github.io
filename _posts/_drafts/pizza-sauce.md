@@ -1,18 +1,14 @@
 ---
 layout: post
-title: BBQ Sauce
-subtitle: My go-to bbq sauce
-date: 2025-10-01 21:00
+title: Pizza Sauce
+subtitle: My go-to pizza base
+# date: 2025-12-04  19:00
+# image: 
 tags:
-- bbq
 - food
 ---
 
-This is the recipe for my go to bbq sauce. I've written it up mostly for my own benefit, but it does taste good all the same! It is loosely based on a recipe on the Weber website, though I can't find the link for that.
-
-I usually use this sauce on slow cooked/smoked pork, but I'm sure it can be used elsewhere!
-
-The quantities given are enough for ~2kg of St Louis cut ribs, with a little left over to serve at the table.
+This is the recipe for my go-to tomato sauce for a pizza base.  While in reality you only need about 2 tablespoons of sauce per 12" pizza, I tend to cook the quantities given below; the leftovers make a great pasta sauce for the next day!
 
 ### Ingredients
 
@@ -33,5 +29,6 @@ The quantities given are enough for ~2kg of St Louis cut ribs, with a little lef
 4. Add the garlic powder, then deglaze the pan with the rum/whisky. As soon as the spirit is poured into the pan, stir aggressively to lift all onion stuck to the pan; this is where the flavour is! I generally add the garlic powder first to avoid it clumping up.
 5. Add the tomato ketchup, brown sugar, apple cider vinegar and chilli powder. Stir the sauce together and remain on a low to medium heat.
 6. Reduce the sauce to desired consistency. I will usually reduce it until it is slightly _thicker_ than ketchup. Remember that the sauce will appear more runny whn it is warm.
+
 
 
