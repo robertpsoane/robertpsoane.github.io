@@ -17,15 +17,15 @@ body, p, h1, h2, h3, h4, h5, h6 {
 - [Carol: Creator of the Stars of Night](#carol-creator-of-the-stars-of-night)
 - [Second Lesson: Isaiah 9: 2; 6-7](#second-lesson-isaiah-9-2-6-7)
 - [Carol: Lo! He Comes with Coulds Descending](#carol-lo-he-comes-with-coulds-descending)
-- [Third Lesson -:Isaiah 11: 1-3a; 4a; 6-9](#third-lesson--isaiah-11-1-3a-4a-6-9)
+- [Third Lesson: Isaiah 11: 1-3a; 4a; 6-9](#third-lesson-isaiah-11-1-3a-4a-6-9)
 - [Carol: O Come, O Come, Emmanuel](#carol-o-come-o-come-emmanuel)
 - [Fourth Lesson: Luke 1: 26-35; 38](#fourth-lesson-luke-1-26-35-38)
 - [Carol: The Angel Gabriel from Heaven Came](#carol-the-angel-gabriel-from-heaven-came)
-- [Fifth Lesson -:atthew 1: 18-25](#fifth-lesson--atthew-1-18-25)
+- [Fifth Lesson: Matthew 1: 18-25](#fifth-lesson-matthew-1-18-25)
 - [Carol: Silent Night](#carol-silent-night)
 - [Prayers](#prayers)
 - [Carol: Coventry Carol](#carol-coventry-carol)
-- [Sixth Lesson -:uke 2: 8-16](#sixth-lesson--uke-2-8-16)
+- [Sixth Lesson: Luke 2: 8-16](#sixth-lesson-luke-2-8-16)
 - [Carol: Angels, from the Realms of Glory](#carol-angels-from-the-realms-of-glory)
 - [Seventh Lesson: Matthew 2: 1-12](#seventh-lesson-matthew-2-1-12)
 - [Carol: O Come, All Ye Faithful](#carol-o-come-all-ye-faithful)
@@ -221,7 +221,7 @@ Alleluia! Come, Lord, Come!<br/>
 
 ---
 
-## Third Lesson -:Isaiah 11: 1-3a; 4a; 6-9
+## Third Lesson: Isaiah 11: 1-3a; 4a; 6-9
 
 There shall come forth a shoot from the stump of Jesse,  
     and a branch from his roots shall bear fruit.  
@@ -343,7 +343,7 @@ And Christian folk throughout the world will ever say:<br/>
 
 ---
 
-## Fifth Lesson -:atthew 1: 18-25
+## Fifth Lesson: Matthew 1: 18-25
 
 Now the birth of Jesus Christ took place in this way. When his mother Mary had been betrothed to Joseph, before they came together she was found to be with child from the Holy Spirit. And her husband Joseph, being a just man and unwilling to put her to shame, resolved to send her away quietly. But as he considered these things, behold, an angel of the Lord appeared to him in a dream, saying, “Joseph, son of David, do not fear to take Mary as your wife, for that which is conceived in her is from the Holy Spirit. She will bear a son, and you shall call his name Jesus, for he will save his people from their sins.” All this took place to fulfill what the Lord had spoken by the prophet:
 
@@ -464,7 +464,7 @@ Thou little tiny child, by by, lully lullay<br/>
 
 ---
 
-## Sixth Lesson -:uke 2: 8-16
+## Sixth Lesson: Luke 2: 8-16
 
 And in the same region there were shepherds out in the field, keeping watch over their flock by night. And an angel of the Lord appeared to them, and the glory of the Lord shone around them, and they were filled with great fear. And the angel said to them, “Fear not, for behold, I bring you good news of great joy that will be for all the people. For unto you is born this day in the city of David a Savior, who is Christ the Lord. And this will be a sign for you: you will find a baby wrapped in swaddling cloths and lying in a manger.” And suddenly there was with the angel a multitude of the heavenly host praising God and saying,
 
