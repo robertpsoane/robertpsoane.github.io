@@ -16,12 +16,28 @@ layout: compress
     {% endif %}
     {{ page.content }}
 
-    <!-- -------
-    <br />
-    <img
-        src="https://hitscounter.dev/api/hit?url={{ site.url }}{{ page.url }}&label=&icon=person-fill&color=%23198754&message=&style=flat&tz=UTC"> -->
+    <div class="post-navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
 
+        <div class="prev-link">
+            {% if page.previous.url %}
+            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+                data-placement="top" title="{{ page.previous.title }}">
+                &larr; Previous <span class="d-none d-md-inline">Post</span>
+            </a>
+            {% endif %}
+        </div>
 
+        <div class="next-link">
+            {% if page.next.url %}
+            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+                data-placement="top" title="{{ page.next.title }}">
+                Next <span class="d-none d-md-inline">Post</span> &rarr;
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
 </main>
 
 {% include footer-post.html %}
