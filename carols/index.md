@@ -1,7 +1,7 @@
 ---
 layout: no-nav
 title: Festival of Lessons & Carols
-prev_url: ./08-hark
+prev_url: ./18-hark
 next_url: ./01-once-in-royal
 ---
 
