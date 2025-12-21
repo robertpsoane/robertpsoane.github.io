@@ -17,7 +17,7 @@ body, p, h1, h2, h3, h4, h5, h6 {
 - [First Lesson: Genesis 3: 9-15; 17-19](./02-first-lesson)
 - [Carol: Creator of the Stars of Night](./03-creator-of-the-stars-of-night)
 - [Second Lesson: Isaiah 9: 2; 6-7](./04-second-lesson)
-- [Carol: Lo! He Comes with Coulds Descending](./05-lo-he-comes)
+- [Carol: Lo! He Comes with Clouds Descending](./05-lo-he-comes)
 - [Third Lesson: Isaiah 11: 1-3a; 4a; 6-9](./06-third-lesson)
 - [Carol: O Come, O Come, Emmanuel](./07-o-come-o-come)
 - [Fourth Lesson: Luke 1: 26-35; 38](./08-fourth-lesson)
