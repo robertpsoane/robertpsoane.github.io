@@ -12,31 +12,31 @@ body, p, h1, h2, h3, h4, h5, h6 {
 ***21st December 2025, St Vincent de Paul Church; Cambridge***
 
 
-- [Once in Royal David's City](#once-in-royal-davids-city)
-- [First Lesson - Genesis 3: 9-15; 17-19](#first-lesson---genesis-3-9-15-17-19)
-- [Creator of the Stars of Night](#creator-of-the-stars-of-night)
-- [Second Lesson - Isaiah 9: 2; 6-7](#second-lesson---isaiah-9-2-6-7)
-- [Lo! He Comes with Coulds Descending](#lo-he-comes-with-coulds-descending)
-- [Third Lesson -  Isaiah 11: 1-3a; 4a; 6-9](#third-lesson----isaiah-11-1-3a-4a-6-9)
-- [O Come, O Come, Emmanuel](#o-come-o-come-emmanuel)
-- [Fourth Lesson - Luke 1: 26-35; 38](#fourth-lesson---luke-1-26-35-38)
-- [The Angel Gabriel from Heaven Came](#the-angel-gabriel-from-heaven-came)
-- [Fifth Lesson - Matthew 1: 18-25](#fifth-lesson---matthew-1-18-25)
-- [Silent Night](#silent-night)
+- [Carol: Once in Royal David's City](#carol-once-in-royal-davids-city)
+- [First Lesson: Genesis 3: 9-15; 17-19](#first-lesson-genesis-3-9-15-17-19)
+- [Carol: Creator of the Stars of Night](#carol-creator-of-the-stars-of-night)
+- [Second Lesson: Isaiah 9: 2; 6-7](#second-lesson-isaiah-9-2-6-7)
+- [Carol: Lo! He Comes with Coulds Descending](#carol-lo-he-comes-with-coulds-descending)
+- [Third Lesson -:Isaiah 11: 1-3a; 4a; 6-9](#third-lesson--isaiah-11-1-3a-4a-6-9)
+- [Carol: O Come, O Come, Emmanuel](#carol-o-come-o-come-emmanuel)
+- [Fourth Lesson: Luke 1: 26-35; 38](#fourth-lesson-luke-1-26-35-38)
+- [Carol: The Angel Gabriel from Heaven Came](#carol-the-angel-gabriel-from-heaven-came)
+- [Fifth Lesson -:atthew 1: 18-25](#fifth-lesson--atthew-1-18-25)
+- [Carol: Silent Night](#carol-silent-night)
 - [Prayers](#prayers)
-- [Coventry Carol](#coventry-carol)
-- [Sixth Lesson - Luke 2: 8-16](#sixth-lesson---luke-2-8-16)
-- [Angels, from the Realms of Glory](#angels-from-the-realms-of-glory)
-- [Seventh Lesson - Matthew 2: 1-12](#seventh-lesson---matthew-2-1-12)
-- [O Come, All Ye Faithful](#o-come-all-ye-faithful)
-- [Hark! The herald-angels sing](#hark-the-herald-angels-sing)
+- [Carol: Coventry Carol](#carol-coventry-carol)
+- [Sixth Lesson -:uke 2: 8-16](#sixth-lesson--uke-2-8-16)
+- [Carol: Angels, from the Realms of Glory](#carol-angels-from-the-realms-of-glory)
+- [Seventh Lesson: Matthew 2: 1-12](#seventh-lesson-matthew-2-1-12)
+- [Carol: O Come, All Ye Faithful](#carol-o-come-all-ye-faithful)
+- [Carol: Hark! The herald-angels sing](#carol-hark-the-herald-angels-sing)
 - [Voluntary](#voluntary)
 
 <br/>
 
 ---
 
-## Once in Royal David's City
+## Carol: Once in Royal David's City
 
 *Please remain seated while the soloist sings the first verse, then stand, if you are able, to sing*
 
@@ -78,7 +78,7 @@ All in white shall wait around.<br />
 ---
 
 
-## First Lesson - Genesis 3: 9-15; 17-19 
+## First Lesson: Genesis 3: 9-15; 17-19 
 
 The Lord God called to the man and said to him, “Where are you?” And he said, “I heard the sound of you in the garden, and I was afraid, because I was naked, and I hid myself.” He said, “Who told you that you were naked? Have you eaten of the tree of which I commanded you not to eat?” The man said, “The woman whom you gave to be with me, she gave me fruit of the tree, and I ate.” Then the Lord God said to the woman, “What is this that you have done?” The woman said, “The serpent deceived me, and I ate.”
 
@@ -116,7 +116,7 @@ for you are dust,
 
 ---
 
-## Creator of the Stars of Night
+## Carol: Creator of the Stars of Night
 
 *Please remain seated and listen as the choir sing*
 
@@ -149,7 +149,7 @@ From age to age eternally.<br/>
 
 ---
 
-## Second Lesson - Isaiah 9: 2; 6-7
+## Second Lesson: Isaiah 9: 2; 6-7
 
 The people who walked in darkness  
     have seen a great light;  
@@ -173,7 +173,7 @@ The zeal of the Lord of hosts will do this.
 
 ---
 
-## Lo! He Comes with Coulds Descending
+## Carol: Lo! He Comes with Coulds Descending
 
 *Please stand, if you are able, to sing*
 
@@ -221,7 +221,7 @@ Alleluia! Come, Lord, Come!<br/>
 
 ---
 
-## Third Lesson -  Isaiah 11: 1-3a; 4a; 6-9
+## Third Lesson -:Isaiah 11: 1-3a; 4a; 6-9
 
 There shall come forth a shoot from the stump of Jesse,  
     and a branch from his roots shall bear fruit.  
@@ -256,7 +256,7 @@ for the earth shall be full of the knowledge of the Lord
 
 ---
 
-## O Come, O Come, Emmanuel
+## Carol: O Come, O Come, Emmanuel
 
 *Please stand, if you are able, to sing*
 
@@ -304,7 +304,7 @@ Shall come to thee, O Israel.<br/>
 
 ---
 
-## Fourth Lesson - Luke 1: 26-35; 38
+## Fourth Lesson: Luke 1: 26-35; 38
 
 In the sixth month the angel Gabriel was sent from God to a city of Galilee named Nazareth, to a virgin betrothed to a man whose name was Joseph, of the house of David. And the virgin's name was Mary. And he came to her and said, “Greetings, O highly favored one, the Lord is with you!” But she was greatly troubled at the saying, and tried to discern what sort of greeting this might be. And the angel said to her, “Do not be afraid, Mary, for you have found favor with God. And behold, you will conceive in your womb and bear a son, and you shall call his name Jesus. He will be great and will be called the Son of the Most High. And the Lord God will give to him the throne of his father David, and he will reign over the house of Jacob forever, and of his kingdom there will be no end.”
 
@@ -314,7 +314,7 @@ And the angel answered her, “The Holy Spirit will come upon you, and the power
 
 ---
 
-## The Angel Gabriel from Heaven Came
+## Carol: The Angel Gabriel from Heaven Came
 *Please stand, if you are able, to sing*
 
 <div style="text-align: center;">
@@ -343,7 +343,7 @@ And Christian folk throughout the world will ever say:<br/>
 
 ---
 
-## Fifth Lesson - Matthew 1: 18-25
+## Fifth Lesson -:atthew 1: 18-25
 
 Now the birth of Jesus Christ took place in this way. When his mother Mary had been betrothed to Joseph, before they came together she was found to be with child from the Holy Spirit. And her husband Joseph, being a just man and unwilling to put her to shame, resolved to send her away quietly. But as he considered these things, behold, an angel of the Lord appeared to him in a dream, saying, “Joseph, son of David, do not fear to take Mary as your wife, for that which is conceived in her is from the Holy Spirit. She will bear a son, and you shall call his name Jesus, for he will save his people from their sins.” All this took place to fulfill what the Lord had spoken by the prophet:
 
@@ -353,7 +353,7 @@ Now the birth of Jesus Christ took place in this way. When his mother Mary had b
 
 ---
 
-## Silent Night
+## Carol: Silent Night
 
 *Please stand, if you are able, to sing*
 
@@ -435,7 +435,7 @@ that You are Lord of all.
 
 ---
 
-## Coventry Carol
+## Carol: Coventry Carol
 
 *Please remain seated and listen as the choir sing*
 
@@ -464,7 +464,7 @@ Thou little tiny child, by by, lully lullay<br/>
 
 ---
 
-## Sixth Lesson - Luke 2: 8-16
+## Sixth Lesson -:uke 2: 8-16
 
 And in the same region there were shepherds out in the field, keeping watch over their flock by night. And an angel of the Lord appeared to them, and the glory of the Lord shone around them, and they were filled with great fear. And the angel said to them, “Fear not, for behold, I bring you good news of great joy that will be for all the people. For unto you is born this day in the city of David a Savior, who is Christ the Lord. And this will be a sign for you: you will find a baby wrapped in swaddling cloths and lying in a manger.” And suddenly there was with the angel a multitude of the heavenly host praising God and saying,
 
@@ -475,7 +475,7 @@ When the angels went away from them into heaven, the shepherds said to one anoth
 
 ---
 
-## Angels, from the Realms of Glory
+## Carol: Angels, from the Realms of Glory
 
 *Please stand, if you are able, to sing*
 
@@ -514,7 +514,7 @@ Every knee shall then bow down<br/>
 
 ---
 
-## Seventh Lesson - Matthew 2: 1-12
+## Seventh Lesson: Matthew 2: 1-12
 
 Now after Jesus was born in Bethlehem of Judea in the days of Herod the king, behold, wise men from the east came to Jerusalem, saying, “Where is he who has been born king of the Jews? For we saw his star when it rose and have come to worship him.” When Herod the king heard this, he was troubled, and all Jerusalem with him; and assembling all the chief priests and scribes of the people, he inquired of them where the Christ was to be born. They told him, “In Bethlehem of Judea, for so it is written by the prophet:
 
@@ -528,7 +528,7 @@ Then Herod summoned the wise men secretly and ascertained from them what time th
 
 ---
 
-## O Come, All Ye Faithful
+## Carol: O Come, All Ye Faithful
 
 *Please stand, if you are able, to sing*
 
@@ -563,7 +563,7 @@ Please remain standing for the final blessing
 
 ---
 
-## Hark! The herald-angels sing
+## Carol: Hark! The herald-angels sing
 <div style="text-align: center;">
 <strong>
 Hark! The herald-angels sing,<br/>
