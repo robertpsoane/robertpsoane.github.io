@@ -3,6 +3,12 @@ layout: no-nav
 title: Festival of Lessons & Carols
 ---
 
+<style>
+body, p, h1, h2, h3, h4, h5, h6 {
+    font-family: Arial !important;
+}
+</style>
+
 ***21st December 2025, St Vincent de Paul Church; Cambridge***
 
 
