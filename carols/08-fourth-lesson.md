@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: bare
 title: Festival of Lessons & Carols
 prev_url: ../07-o-come-o-come
 next_url: ../09-gabriels-message

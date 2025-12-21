@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: bare
 title: Festival of Lessons & Carols
 prev_url: ../11-silent-night
 next_url: ../13-coventry-carol

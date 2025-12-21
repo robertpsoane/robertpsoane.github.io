@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: bare
 title: Festival of Lessons & Carols
 prev_url: ../09-gabriels-message
 next_url: ../11-silent-night

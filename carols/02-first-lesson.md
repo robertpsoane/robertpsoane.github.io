@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: bare
 title: Festival of Lessons & Carols
 prev_url: ../01-once-in-royal
 next_url: ../03-creator-of-the-stars-of-night

@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: bare
 title: Festival of Lessons & Carols
 prev_url: ../15-angels
 next_url: ../17-o-come-all-ye-faithful

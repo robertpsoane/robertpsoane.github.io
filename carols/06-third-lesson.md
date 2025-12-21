@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: bare
 title: Festival of Lessons & Carols
 prev_url: ../05-lo-he-comes
 next_url: ../07-o-come-o-come

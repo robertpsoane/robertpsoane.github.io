@@ -1,5 +1,5 @@
 ---
-layout: no-nav
+layout: bare
 title: Festival of Lessons & Carols
 prev_url: ../08-fourth-lesson
 next_url: ../10-fifth-lesson
