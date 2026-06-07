@@ -2,7 +2,7 @@
 layout: post
 title: Towards a Universal Standard for Reusable Deodorant
 subtitle: Why have eco-friendly cosmetics adopted the very same vendor lock-in we have come to loathe elsewhere?
-date: 2026-06-07 12:00
+date: 2026-06-07 11:50
 tags:
 - general
 ---
