@@ -1,0 +1,105 @@
+---
+layout: compress
+---
+
+{% include head.html %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Recipe",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.subtitle | default: page.title | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ site.title | jsonify }}
+  },
+  "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
+  "url": "{{ site.url }}{{ page.url }}"
+  {% if page.recipe_yield %},
+  "recipeYield": {{ page.recipe_yield | jsonify }}
+  {% endif %}
+  {% if page.prep_time %},
+  "prepTime": {{ page.prep_time | jsonify }}
+  {% endif %}
+  {% if page.cook_time %},
+  "cookTime": {{ page.cook_time | jsonify }}
+  {% endif %}
+  {% if page.recipe_category %},
+  "recipeCategory": {{ page.recipe_category | jsonify }}
+  {% endif %}
+  {% if page.ingredients %},
+  "recipeIngredient": {{ page.ingredients | jsonify }}
+  {% endif %}
+  {% if page.instructions %},
+  "recipeInstructions": [
+    {% for step in page.instructions %}
+    {
+      "@type": "HowToStep",
+      "text": {{ step | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+  {% endif %}
+}
+</script>
+
+<main>
+
+    {% include header.html %}
+
+    <h1>{{ page.title }}</h1>
+    <i>{{ page.date | date: "%b %d, %Y" }}</i>
+    <h4 class="subtitle">{{ page.subtitle }}</h4>
+    {% if page.image %}
+    <img src="{{ page.image }}" alt="Post image" />
+    {% endif %}
+    {{ page.content }}
+
+    {% if page.ingredients %}
+    <h3>Ingredients</h3>
+    <ul>
+        {% for ingredient in page.ingredients %}
+        <li>{{ ingredient | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if page.instructions %}
+    <h3>Method</h3>
+    <ol>
+        {% for step in page.instructions %}
+        <li>{{ step | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+
+    <div class="post-navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+
+        <div class="prev-link">
+            {% if page.previous.url %}
+            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+                data-placement="top" title="{{ page.previous.title }}">
+                &larr; Previous <span class="d-none d-md-inline">Post</span>
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="next-link">
+            {% if page.next.url %}
+            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+                data-placement="top" title="{{ page.next.title }}">
+                Next <span class="d-none d-md-inline">Post</span> &rarr;
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
+</main>
+
+{% include footer-post.html %}
+
+</body>
+
+</html>
